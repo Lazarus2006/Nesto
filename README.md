@@ -1,4 +1,4 @@
-# 🐧 Nesto Hiiii
+# 🐧 Nesto
 
 > **A community that helps you make a new city feel like home.**
 
@@ -565,4 +565,3 @@ Someone already figured out what you are about to figure out.
 
 > ### **Find your place. Find your people. Feel at home. 🐧**
 
-yes
