@@ -18,82 +18,195 @@
 <body class="bg-[#1a1a1b] text-gray-200 font-sans min-h-screen pt-8">
 
     <div class="max-w-6xl mx-auto px-4 flex justify-center gap-6 items-start">
+        
         <div class="flex-1 max-w-3xl flex flex-col h-[calc(100vh-4rem)]">
             <div class="flex justify-between items-center mb-6 shrink-0">
                 <h1 class="text-2xl font-bold text-white">Community Feed</h1>
-                <button class="bg-[#2a5ee8] hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition">
-                    + Create Post
-                </button>
+                <a href="{% url 'create_post' %}" class="bg-[#3b82f6] hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg text-sm transition">+ Create Post</a>
             </div>
+            
             <div class="flex-1 overflow-y-auto no-scrollbar space-y-4 pb-10">
                 {% for post in posts %}
                 <div class="bg-[#1a1a1b] border border-[#343536] rounded-xl p-4 hover:border-[#878a8c] transition duration-200">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-8 h-8 rounded-full bg-[#2a3c5a] flex items-center justify-center font-bold text-[#8fb3ff] text-sm">
-                            {{ post.author.username|make_list|first|upper }}
+                    
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-[#2a3c5a] flex items-center justify-center font-bold text-[#8fb3ff] text-sm">
+                                {% if post.author %}
+                                    {{ post.author.username|make_list|first|upper }}
+                                {% else %}
+                                    A
+                                {% endif %}
+                            </div>
+                            <div class="text-sm">
+                                <span class="font-bold text-white">
+                                    {% if post.author %}{{ post.author.username }}{% else %}Anonymous{% endif %}
+                                </span>
+                                <div class="text-gray-500 text-xs">{{ post.created_at|timesince }} ago</div>
+                            </div>
                         </div>
-                        <div class="text-sm">
-                            <span class="font-bold text-white">{{ post.author.username }}</span>
-                            <div class="text-gray-500 text-xs">{{ post.created_at|timesince }} ago {{ post.city }}</div>
-                        </div>
-                    </div>
-                    <h2 class="text-lg font-bold text-white mb-2">{{ post.title }}</h2>
-                    <p class="text-gray-400 text-sm mb-4">{{ post.content }}</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        {% for cat in post.categories.all %}
-                            <span class="bg-[#272729] border border-[#343536] text-[#8fb3ff] text-xs px-3 py-1 rounded-full">
-                                {{ cat.name }}
+
+                        {% if post.post_type == 'guide' %}
+                            <span class="bg-[#212b3f] text-[#8fb3ff] text-xs px-2.5 py-1 rounded-full border border-[#3b82f6]/30 font-medium">
+                                🗺️ City Guide
                             </span>
-                        {% endfor %}
-                        {% if post.post_type == 'ENTITY_REVIEW' and post.entity %}
-                            <span class="bg-[#272729] border border-[#343536] text-green-400 text-xs px-3 py-1 rounded-full">
-                                Review: {{ post.entity.name }}
+                        {% else %}
+                            <span class="bg-[#272729] text-gray-400 text-xs px-2.5 py-1 rounded-full border border-[#343536]">
+                                💬 Discussion
                             </span>
                         {% endif %}
                     </div>
+
+                    <h2 class="text-lg font-bold text-white mb-2">{{ post.title }}</h2>
+                    <p class="text-gray-300 text-sm mb-4 whitespace-pre-line">{{ post.content }}</p>
+
+                    {% if post.image %}
+                        <div class="mb-4 rounded-xl overflow-hidden border border-[#343536] bg-[#121212]">
+                            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="w-full max-h-96 object-cover">
+                        </div>
+                    {% endif %}
+
+                    {% if post.category or post.entity %}
+                        <div class="bg-[#212123] border border-[#343536] rounded-lg p-3 mb-4 space-y-1.5 text-xs">
+                            {% if post.category %}
+                                <div class="text-gray-400">
+                                    <strong class="text-[#8fb3ff]">Category:</strong> {{ post.category.name }}
+                                </div>
+                            {% endif %}
+                            {% if post.entity %}
+                                <a href="{% url 'entity_detail' post.entity.id %}" class="block hover:underline text-gray-300 font-semibold text-sm">
+                                    📍 {{ post.entity.name }}
+                                </a>
+                                {% if post.entity.location %}
+                                    <div class="text-gray-400">Address: {{ post.entity.location }}</div>
+                                {% endif %}
+                                {% if post.entity.price %}
+                                    <div class="text-green-400 font-medium">Price: {{ post.entity.price }}</div>
+                                {% endif %}
+
+                                {% if post.entity.attributes %}
+                                    <div class="flex flex-wrap gap-1.5 pt-2 mt-2 border-t border-[#343536]">
+                                        {% for key, val in post.entity.attributes.items %}
+                                            <span class="bg-[#1a1a1b] border border-[#343536] text-gray-300 px-2 py-0.5 rounded text-[11px]">
+                                                <strong class="text-gray-400">{{ key }}:</strong> {{ val }}
+                                            </span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
                     <div class="flex gap-4 text-gray-500 text-sm border-t border-[#343536] pt-3">
-                        <button class="hover:bg-[#272729] px-2 py-1 rounded flex items-center gap-1 transition">
-                            👍 {{ post.upvotes }}
+                        <button class="hover:bg-[#272729] px-2 py-1 rounded flex items-center gap-1 transition text-xs">
+                            👍 Upvote
                         </button>
-                        <button class="hover:bg-[#272729] px-2 py-1 rounded flex items-center gap-1 transition">
-                            💬 {{ post.comments_count }}
-                        </button>
-                        <button class="hover:bg-[#272729] px-2 py-1 rounded flex items-center gap-1 transition">
-                            share
+                        <button class="hover:bg-[#272729] px-2 py-1 rounded flex items-center gap-1 transition text-xs">
+                            💬 Comment
                         </button>
                     </div>
                 </div>
                 {% empty %}
-                <div class="text-center text-gray-500 py-10">
-                    No posts yet. Be the first to start a discussion!
+                <div class="text-center text-gray-500 py-16 bg-[#1a1a1b] border border-[#343536] rounded-xl">
+                    <p class="text-base mb-1">No posts yet.</p>
+                    <p class="text-xs">Be the first to start a discussion or add a city guide!</p>
                 </div>
                 {% endfor %}
             </div>
         </div>
+
         <div class="w-80 hidden lg:block sticky top-8">
             <div class="bg-[#1a1a1b] border border-[#343536] rounded-xl p-4">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-[#272729] border border-[#343536]"></div>
+                <div class="flex items-center gap-3 mb-4 pb-3 border-b border-[#343536]">
+                    <div class="w-10 h-10 rounded-full bg-[#212b3f] border border-[#3b82f6]/30 flex items-center justify-center text-lg">
+                        🗺️
+                    </div>
                     <div>
-                        <h2 class="font-bold text-white text-lg leading-tight">city guide</h2>
-                        <p class="text-gray-500 text-xs">explore what your city has to offer</p>
+                        <h2 class="font-bold text-white text-base leading-tight">City Guide</h2>
+                        <p class="text-gray-500 text-xs">Explore local places & spots</p>
                     </div>
                 </div>
                 
-                <nav class="space-y-1">
+                <div class="space-y-2">
                     {% for category in categories %}
-                        <a href="#" class="block px-4 py-2.5 rounded-lg hover:bg-[#272729] transition text-sm 
-                            {% if forloop.first %}bg-[#212b3f] text-[#8fb3ff] font-medium{% else %}text-gray-300{% endif %}">
-                            {{ category.name }}
-                        </a>
+                        <div class="border border-[#2d2d30] rounded-lg overflow-hidden bg-[#212123]">
+                            
+                            <button type="button" 
+                                    onclick="toggleCategory('cat-{{ category.id }}', 'arrow-{{ category.id }}')" 
+                                    class="w-full flex items-center justify-between px-3.5 py-2.5 text-left text-sm font-medium text-gray-200 hover:bg-[#272729] transition">
+                                <span class="flex items-center gap-2">
+                                    <span class="text-xs">📁</span>
+                                    <span>{{ category.name }}</span>
+                                </span>
+                                <span class="flex items-center gap-2">
+                                    <span class="text-[10px] bg-[#1a1a1b] px-2 py-0.5 rounded-full text-gray-400 font-normal border border-[#343536]">
+                                        {{ category.entities.all|length }}
+                                    </span>
+                                    <svg id="arrow-{{ category.id }}" class="w-4 h-4 transform transition-transform duration-200 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </span>
+                            </button>
+
+                            <div id="cat-{{ category.id }}" class="hidden px-2.5 py-2 space-y-2 bg-[#121212] border-t border-[#2d2d30]">
+                                {% for entity in category.entities.all %}
+                                    {% if entity.is_approved %}
+                                        <a href="{% url 'entity_detail' entity.id %}" class="block bg-[#1a1a1b] border border-[#343536] rounded-lg p-2.5 hover:border-[#8fb3ff] transition group">
+                                            
+                                            <div class="flex justify-between items-start gap-1 mb-1">
+                                                <h4 class="font-bold text-white text-xs group-hover:text-[#8fb3ff] transition">{{ entity.name }}</h4>
+                                                {% if entity.price %}
+                                                    <span class="text-[#8fb3ff] text-[10px] bg-[#212b3f] px-1.5 py-0.5 rounded font-semibold whitespace-nowrap">
+                                                        {{ entity.price }}
+                                                    </span>
+                                                {% endif %}
+                                            </div>
+
+                                            {% if entity.location %}
+                                                <div class="text-gray-400 text-[11px] flex items-center gap-1 mb-1.5">
+                                                    <span>📍</span>
+                                                    <span class="truncate">{{ entity.location }}</span>
+                                                </div>
+                                            {% endif %}
+
+                                            {% if entity.attributes %}
+                                                <div class="flex flex-wrap gap-1 mt-2 pt-1.5 border-t border-[#2d2d30]">
+                                                    {% for key, val in entity.attributes.items %}
+                                                        <span class="bg-[#272729] text-gray-300 text-[10px] px-1.5 py-0.5 rounded border border-[#343536]">
+                                                            <strong class="text-gray-400">{{ key }}:</strong> {{ val }}
+                                                        </span>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+
+                                        </a>
+                                    {% endif %}
+                                {% empty %}
+                                    <p class="text-gray-500 text-xs py-1 px-1 italic">No places added to this category yet.</p>
+                                {% endfor %}
+                            </div>
+
+                        </div>
                     {% empty %}
-                        <p class="text-gray-500 text-xs px-4">No categories created yet.</p>
+                        <p class="text-gray-500 text-xs py-4 text-center">No categories created yet.</p>
                     {% endfor %}
-                </nav>
+                </div>
+
             </div>
         </div>
 
     </div>
 
+    <script>
+        function toggleCategory(catId, arrowId) {
+            const content = document.getElementById(catId);
+            const arrow = document.getElementById(arrowId);
+            
+            if (content && arrow) {
+                content.classList.toggle('hidden');
+                arrow.classList.toggle('rotate-180');
+            }
+        }
+    </script>
 </body>
 </html>

@@ -1,6 +1,9 @@
 from django.urls import path
-from .views import home
+from . import views
+
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('', views.home, name='home'),
+    path('create-post/', views.create_post, name='create_post'),
+    path('entity/<int:pk>/', views.entity_detail, name='entity_detail'),
 ]

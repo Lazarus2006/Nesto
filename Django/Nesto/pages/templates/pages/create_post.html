@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post - Nesto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#121212] text-gray-200 font-sans min-h-screen py-10 px-4">
+
+    <div class="max-w-2xl mx-auto bg-[#1a1a1b] border border-[#343536] rounded-xl p-6 shadow-2xl">
+        
+        <div class="flex justify-between items-center mb-6 border-b border-[#343536] pb-4">
+            <h1 class="text-xl font-bold text-white">Create a Post</h1>
+            <a href="{% url 'home' %}" class="text-sm text-gray-400 hover:text-white transition">✕ Cancel</a>
+        </div>
+
+        <div class="flex bg-[#272729] rounded-lg p-1 mb-6">
+            <button id="tab-community" type="button" onclick="switchTab('community')" 
+                class="flex-1 py-2 text-sm font-semibold rounded-md bg-[#3b82f6] text-white transition">
+                💬 Community Discussion
+            </button>
+            <button id="tab-guide" type="button" onclick="switchTab('guide')" 
+                class="flex-1 py-2 text-sm font-semibold rounded-md text-gray-400 hover:text-white transition">
+                🗺️ City Guide Entry
+            </button>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" class="space-y-5">
+            {% csrf_token %}
+            <input type="hidden" name="post_type" id="post_type_input" value="community">
+
+            <div>
+                <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Title *</label>
+                <input type="text" name="title" required placeholder="Give your post a descriptive title..." 
+                    class="w-full bg-[#272729] border border-[#343536] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#3b82f6]">
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Content / Body *</label>
+                <textarea name="content" rows="4" required placeholder="Write details here..." 
+                    class="w-full bg-[#272729] border border-[#343536] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#3b82f6]"></textarea>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Attachment / Photo</label>
+                <input type="file" name="image" accept="image/*"
+                    class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#272729] file:text-[#8fb3ff] hover:file:bg-[#343536]">
+            </div>
+
+            <div id="guide-fields" class="hidden space-y-5 pt-4 border-t border-[#343536]">
+                <h3 class="text-sm font-bold text-[#8fb3ff] uppercase tracking-wider">City Guide Settings</h3>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Category *</label>
+                    <select name="category" id="category_select" onchange="handleCategoryChange()" 
+                        class="w-full bg-[#272729] border border-[#343536] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#3b82f6]">
+                        <option value="">-- Select a Category --</option>
+                        {% for cat in categories %}
+                            <option value="{{ cat.id }}">{{ cat.name }}</option>
+                        {% endfor %}
+                        <option value="new" class="text-[#3b82f6] font-bold">+ Create New Category</option>
+                    </select>
+                </div>
+
+                <div id="new_category_box" class="hidden">
+                    <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">New Category Name *</label>
+                    <input type="text" name="new_category" id="new_category_input" placeholder="e.g. Parks, PG & Homes, Cafes" 
+                        class="w-full bg-[#272729] border border-[#343536] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#3b82f6]">
+                </div>
+
+                <div id="entity_box" class="hidden">
+                    <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Entity / Spot *</label>
+                    <select name="entity" id="entity_select" onchange="handleEntityChange()" 
+                        class="w-full bg-[#272729] border border-[#343536] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-[#3b82f6]">
+                        <option value="">-- Select an Entity --</option>
+                        <option value="new" class="text-[#3b82f6] font-bold">+ Add New Entity</option>
+                    </select>
+                </div>
+
+                <div id="entity_details_box" class="hidden space-y-4 bg-[#212123] p-4 rounded-xl border border-[#343536]">
+                    
+                    <div id="new_entity_name_box" class="hidden">
+                        <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Entity Name *</label>
+                        <input type="text" name="new_entity" id="new_entity_input" placeholder="e.g. Room 101, Central Park, Blue Tokai Cafe" 
+                            class="w-full bg-[#272729] border border-[#343536] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#3b82f6]">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Price / Fee</label>
+                            <input type="text" name="price" id="price_input" placeholder="e.g. ₹8,000/mo or Free" 
+                                class="w-full bg-[#272729] border border-[#343536] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#3b82f6]">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Location / Address</label>
+                            <input type="text" name="location" id="location_input" placeholder="e.g. Sector 62, Noida" 
+                                class="w-full bg-[#272729] border border-[#343536] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#3b82f6]">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs font-semibold uppercase text-gray-400">Custom Attributes</label>
+                            <button type="button" onclick="addAttributeRow('', '')" 
+                                class="text-xs text-[#3b82f6] hover:underline font-semibold">+ Add Attribute</button>
+                        </div>
+                        <p class="text-xs text-gray-500 mb-3">Add details like Opening Hours, Wifi, Parking, Sharing, etc.</p>
+                        
+                        <div id="attributes_container" class="space-y-2"></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <button type="submit" class="w-full py-3 bg-[#3b82f6] hover:bg-blue-600 font-bold rounded-lg text-white transition">
+                Publish Post
+            </button>
+        </form>
+
+    </div>
+
+    <script>
+        const categoriesData = {{ categories_json|safe }};
+
+        function switchTab(type) {
+            document.getElementById('post_type_input').value = type;
+            const tabComm = document.getElementById('tab-community');
+            const tabGuide = document.getElementById('tab-guide');
+            const guideFields = document.getElementById('guide-fields');
+
+            if (type === 'community') {
+                tabComm.className = "flex-1 py-2 text-sm font-semibold rounded-md bg-[#3b82f6] text-white transition";
+                tabGuide.className = "flex-1 py-2 text-sm font-semibold rounded-md text-gray-400 hover:text-white transition";
+                guideFields.classList.add('hidden');
+            } else {
+                tabGuide.className = "flex-1 py-2 text-sm font-semibold rounded-md bg-[#3b82f6] text-white transition";
+                tabComm.className = "flex-1 py-2 text-sm font-semibold rounded-md text-gray-400 hover:text-white transition";
+                guideFields.classList.remove('hidden');
+            }
+        }
+
+        function handleCategoryChange() {
+            const catSelect = document.getElementById('category_select');
+            const catId = catSelect.value;
+            const newCatBox = document.getElementById('new_category_box');
+            const entityBox = document.getElementById('entity_box');
+            const entitySelect = document.getElementById('entity_select');
+            const container = document.getElementById('attributes_container');
+
+            container.innerHTML = ''; 
+
+            if (catId === 'new') {
+                newCatBox.classList.remove('hidden');
+                entityBox.classList.remove('hidden');
+                entitySelect.innerHTML = `<option value="new" selected>+ Add New Entity</option>`;
+                handleEntityChange();
+            } else if (catId !== '') {
+                newCatBox.classList.add('hidden');
+                entityBox.classList.remove('hidden');
+                
+                const catData = categoriesData[catId];
+                let options = `<option value="">-- Select an Entity --</option>`;
+                if (catData && catData.entities) {
+                    catData.entities.forEach(ent => {
+                        options += `<option value="${ent.id}">${ent.name}</option>`;
+                    });
+                }
+                options += `<option value="new" class="text-[#3b82f6] font-bold">+ Add New Entity</option>`;
+                entitySelect.innerHTML = options;
+
+                if (catData && catData.default_attributes) {
+                    catData.default_attributes.forEach(attrName => {
+                        addAttributeRow(attrName, '');
+                    });
+                }
+                handleEntityChange();
+            } else {
+                newCatBox.classList.add('hidden');
+                entityBox.classList.add('hidden');
+                document.getElementById('entity_details_box').classList.add('hidden');
+            }
+        }
+
+        function handleEntityChange() {
+            const entitySelect = document.getElementById('entity_select');
+            const entityVal = entitySelect.value;
+            const detailsBox = document.getElementById('entity_details_box');
+            const newEntityNameBox = document.getElementById('new_entity_name_box');
+            const catId = document.getElementById('category_select').value;
+            const container = document.getElementById('attributes_container');
+
+            if (!entityVal) {
+                detailsBox.classList.add('hidden');
+                return;
+            }
+
+            detailsBox.classList.remove('hidden');
+
+            if (entityVal === 'new') {
+                newEntityNameBox.classList.remove('hidden');
+                document.getElementById('price_input').value = '';
+                document.getElementById('location_input').value = '';
+            } else {
+                newEntityNameBox.classList.add('hidden');
+                
+                const catData = categoriesData[catId];
+                if (catData) {
+                    const entity = catData.entities.find(e => e.id == entityVal);
+                    if (entity) {
+                        document.getElementById('price_input').value = entity.price || '';
+                        document.getElementById('location_input').value = entity.location || '';
+                        
+                        container.innerHTML = '';
+                        if (entity.attributes) {
+                            Object.entries(entity.attributes).forEach(([k, v]) => {
+                                addAttributeRow(k, v);
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
+        function addAttributeRow(key = '', val = '') {
+            const container = document.getElementById('attributes_container');
+            const row = document.createElement('div');
+            row.className = 'flex gap-2 items-center';
+            row.innerHTML = `
+                <input type="text" name="attr_keys[]" value="${key}" placeholder="Attribute (e.g. Timings)" 
+                    class="w-1/2 bg-[#272729] border border-[#343536] rounded px-3 py-1.5 text-sm text-white focus:outline-none focus:border-[#3b82f6]">
+                <input type="text" name="attr_values[]" value="${val}" placeholder="Value (e.g. 9 AM - 10 PM)" 
+                    class="w-1/2 bg-[#272729] border border-[#343536] rounded px-3 py-1.5 text-sm text-white focus:outline-none focus:border-[#3b82f6]">
+                <button type="button" onclick="this.parentElement.remove()" class="text-red-400 hover:text-red-500 font-bold text-sm px-1">✕</button>
+            `;
+            container.appendChild(row);
+        }
+    </script>
+</body>
+</html>
