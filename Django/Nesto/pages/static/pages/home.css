@@ -1,28 +1,271 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f8;
+* {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    box-sizing: border-box;
 }
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    color: #17233c;
+}
+
+/* MAIN LAYOUT */
 
 .container {
-    text-align: center;
-    background: #ffffff;
-    padding: 2.5rem 3rem;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 30px;
+}
+
+
+/* ================= FEED ================= */
+
+.feed-section {
+    min-width: 0;
+}
+
+.feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.feed-header h1 {
+    font-size: 30px;
+}
+
+.create-btn {
+    border: none;
+    background: #2563eb;
+    color: white;
+    padding: 11px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.create-btn:hover {
+    background: #1d4ed8;
+}
+
+
+/* POST */
+
+.post-card {
+    background: white;
+    border: 1px solid #e3e8ef;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 22px;
+    margin-bottom: 18px;
 }
 
-h1 {
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
+.post-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
-p {
-    color: #666666;
-    font-size: 1.1rem;
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #dbeafe;
+    color: #2563eb;
+
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.post-user h3 {
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.post-user span {
+    font-size: 13px;
+    color: #718096;
+}
+
+.post-card h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.post-card p {
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+
+/* TAGS */
+
+.tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.tags span {
+    background: #eef5ff;
+    color: #2563eb;
+    padding: 6px 11px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+
+/* ACTIONS */
+
+.post-actions {
+    border-top: 1px solid #edf0f4;
+    padding-top: 15px;
+
+    display: flex;
+    gap: 25px;
+}
+
+.post-actions button {
+    background: none;
+    border: none;
+    color: #526174;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.post-actions button:hover {
+    color: #2563eb;
+}
+
+
+/* ================= CITY GUIDE ================= */
+
+.city-guide {
+    background: white;
+    border: 1px solid #e3e8ef;
+    border-radius: 14px;
+    padding: 22px;
+
+    height: fit-content;
+
+    position: sticky;
+    top: 20px;
+}
+
+.guide-header {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.location-icon {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+    background: #eaf2ff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+.guide-header h2 {
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.guide-header p {
+    font-size: 12px;
+    color: #718096;
+}
+
+
+/* GUIDE OPTIONS */
+
+.guide-menu a {
+    display: grid;
+    grid-template-columns: 35px 1fr 20px;
+
+    align-items: center;
+
+    padding: 13px 10px;
+
+    text-decoration: none;
+    color: #34445a;
+
+    border-radius: 8px;
+    margin-bottom: 4px;
+}
+
+.guide-menu a:hover {
+    background: #f1f6ff;
+    color: #2563eb;
+}
+
+.guide-menu a.active {
+    background: #eaf2ff;
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.guide-menu a span:first-child {
+    font-size: 18px;
+}
+
+.arrow {
+    font-size: 22px;
+    color: #718096;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 800px) {
+
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .city-guide {
+        position: static;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .container {
+        margin: 20px auto;
+        padding: 0 12px;
+    }
+
+    .feed-header h1 {
+        font-size: 24px;
+    }
+
+    .create-btn {
+        padding: 9px 12px;
+    }
+
+    .post-card {
+        padding: 16px;
+    }
+
 }
