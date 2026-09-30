@@ -1,33 +1,91 @@
 from django.contrib import messages
-from .models import Post, Category, Entity
+from .models import Post, Category, Entity , City
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PostForm
 import json
+from django.contrib.auth.decorators import login_required
+from django.db.models import Prefetch
 
+@login_required
 def home(request):
-    posts = Post.objects.all().order_by('-created_at')
-    categories = Category.objects.filter(is_approved=True).prefetch_related('entities')
+    profile = request.user.profile
+    if not profile.city:
+        return redirect("choose_city")
     
+    city = profile.city
+    posts = (
+        Post.objects
+        .filter(city=city)
+        .select_related("author", "category", "entity")
+        .order_by("-created_at"))
+    categories = (
+        Category.objects
+        .filter(
+            city=city.name,
+            is_approved=True,
+        )
+        .prefetch_related("entities")
+    )
+
     context = {
-        'posts': posts,
-        'categories': categories,
+        "posts": posts,
+        "categories": categories,
+        "city": city,
     }
-    return render(request, 'pages/home.html', context)
+
+    return render(
+        request,
+        "pages/home.html",
+        context
+    )
 
 
+@login_required
 def entity_detail(request, pk):
-    entity = get_object_or_404(Entity, pk=pk, is_approved=True)
-    posts = Post.objects.filter(entity=entity).order_by('-created_at')
-    categories = Category.objects.filter(is_approved=True).prefetch_related('entities')
-
+    city = request.user.profile.city
+    if not city:
+        return redirect("choose_city")
+    
+    entity = get_object_or_404(
+        Entity,
+        pk=pk,
+        city=city,
+        status="approved",
+    )
+    posts = Post.objects.filter(
+        entity=entity,
+        city=city,
+    ).order_by("-created_at")
+    categories = Category.objects.filter(
+        city=city,
+        status="approved",
+    ).prefetch_related(
+        Prefetch(
+            "entities",
+            queryset=Entity.objects.filter(
+                city=city,
+                status="approved",
+            )
+        )
+    )
     context = {
-        'entity': entity,
-        'posts': posts,
-        'categories': categories,
+        "entity": entity,
+        "posts": posts,
+        "categories": categories,
+        "city": city,
     }
-    return render(request, 'pages/entity_detail.html', context)
+    return render(
+        request,
+        "pages/entity_detail.html",
+        context
+    )
 
+@login_required
 def create_post(request):
+    profile = request.user.profile
+    if not profile.city:
+        return redirect("choose_city")
+    city = profile.city
     if request.method == 'POST':
         post_type = request.POST.get('post_type', 'community')
         title = request.POST.get('title')
@@ -36,16 +94,18 @@ def create_post(request):
 
         if post_type == 'community':
             Post.objects.create(
-                post_type='community',
+                post_type="community",
                 title=title,
                 content=content,
                 image=image,
-                author=request.user if request.user.is_authenticated else None
+                author=request.user,
+                city=city,
             )
             messages.success(request, "Community post created successfully!")
             return redirect('home')
 
         elif post_type == 'guide':
+            city = city,
             category_id = request.POST.get('category')
             new_category_name = request.POST.get('new_category')
             entity_id = request.POST.get('entity')
@@ -130,3 +190,20 @@ def create_post(request):
         'categories_json': json.dumps(categories_json),
     }
     return render(request, 'pages/create_post.html', context)
+
+
+@login_required
+def choose_city(request):
+    cities = City.objects.all().order_by("name")
+    if request.method == "POST":
+        city_id = request.POST.get("city")
+        city = get_object_or_404(City,id=city_id)
+
+        request.user.profile.city = city
+        request.user.profile.save(update_fields=["city"])
+
+        return redirect("home")
+
+    return render(request, "pages/choose_city.html", {
+        "cities": cities,
+    })

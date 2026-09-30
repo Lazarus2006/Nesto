@@ -1,10 +1,25 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class City(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True)
+    def __str__(self):
+        return self.name
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name="profile",)
+    city = models.ForeignKey(City,on_delete=models.SET_NULL,null=True,blank=True,related_name="residents",)
+    display_name = models.CharField(max_length=100,)
+    joined_at = models.DateTimeField(auto_now_add=True,)
+
+    def __str__(self):
+        return self.display_name
+
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     city = models.CharField(max_length=100, default="General")
-    # Stores default suggested attribute keys for this category e.g. ["Opening Time", "Rules"]
     default_attributes = models.JSONField(default=list, blank=True)
     is_approved = models.BooleanField(default=True) 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -22,7 +37,6 @@ class Entity(models.Model):
     location = models.CharField(max_length=255, blank=True, null=True)
     price = models.CharField(max_length=100, blank=True, null=True)
     image = models.ImageField(upload_to='entity_images/', blank=True, null=True)
-    # Stores key-value attributes filled by users e.g. {"Opening Time": "9 AM", "Closing Time": "10 PM"}
     attributes = models.JSONField(default=dict, blank=True)
     is_approved = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -39,7 +53,7 @@ class Post(models.Model):
         ('community', 'Community Discussion'),
         ('guide', 'City Guide Entry'),
     )
-
+    city = models.ForeignKey(City,on_delete=models.CASCADE,related_name="posts",null=True,blank=True,)
     post_type = models.CharField(max_length=20, choices=POST_TYPES, default='community')
     title = models.CharField(max_length=255)
     content = models.TextField()
@@ -48,7 +62,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='posts')
     entity = models.ForeignKey(Entity, on_delete=models.SET_NULL, null=True, blank=True, related_name='posts')
     
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    author = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True,related_name="posts")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

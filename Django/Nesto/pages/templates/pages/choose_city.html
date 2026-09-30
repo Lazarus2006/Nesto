@@ -1,0 +1,171 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Choose City - Nesto</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#1a1a1b] text-gray-200 font-sans min-h-screen">
+
+    <main class="min-h-screen flex items-center justify-center px-5 py-10">
+
+        <div class="w-full max-w-md">
+
+            <div class="text-center mb-8">
+
+                <a href="{% url 'home' %}"
+                   class="text-3xl font-bold text-white tracking-tight">
+                    Nesto
+                </a>
+
+                <p class="text-gray-500 text-sm mt-3">
+                    A community that helps you make a new city feel like home.
+                </p>
+
+            </div>
+
+            <div class="bg-[#1f1f20] border border-[#343536] rounded-2xl p-6 sm:p-8">
+
+                <div class="mb-6">
+
+                    <h1 class="text-2xl font-bold text-white">
+                        Choose your city
+                    </h1>
+
+                    <p class="text-sm text-gray-500 mt-2">
+                        Select the city you want to explore on Nesto.
+                    </p>
+
+                </div>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="space-y-3">
+
+                        {% for city in cities %}
+
+                        <label class="block cursor-pointer">
+
+                            <input
+                                type="radio"
+                                name="city"
+                                value="{{ city.id }}"
+                                class="peer hidden"
+                                required>
+
+                            <div class="flex items-center justify-between
+                                        px-4 py-4
+                                        rounded-xl
+                                        border border-[#343536]
+                                        bg-[#181819]
+                                        text-gray-300
+                                        transition
+                                        peer-checked:border-[#3b82f6]
+                                        peer-checked:bg-[#212b3f]
+                                        peer-checked:text-white
+                                        hover:border-[#555557]">
+
+                                <div class="flex items-center gap-3">
+
+                                    <div class="w-10 h-10 rounded-lg
+                                                bg-[#272729]
+                                                flex items-center justify-center
+                                                text-lg">
+                                        📍
+                                    </div>
+
+                                    <div>
+
+                                        <p class="text-sm font-semibold">
+                                            {{ city.name }}
+                                        </p>
+
+                                        <p class="text-xs text-gray-500 mt-0.5">
+                                            Explore the community
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="w-5 h-5 rounded-full
+                                            border border-[#555557]
+                                            flex items-center justify-center
+                                            peer-checked:border-[#3b82f6]">
+
+                                    <div class="w-2.5 h-2.5 rounded-full
+                                                bg-transparent
+                                                peer-checked:bg-[#3b82f6]">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </label>
+
+                        {% empty %}
+
+                        <div class="text-center py-8">
+
+                            <div class="text-4xl mb-3">
+                                🏙️
+                            </div>
+
+                            <p class="text-sm text-gray-400">
+                                No cities are available yet.
+                            </p>
+
+                            <p class="text-xs text-gray-600 mt-1">
+                                Cities will appear here once they are added.
+                            </p>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    {% if cities %}
+
+                    <button
+                        type="submit"
+                        class="w-full mt-6
+                               bg-[#3b82f6]
+                               hover:bg-blue-600
+                               text-white
+                               font-semibold
+                               text-sm
+                               py-3
+                               rounded-xl
+                               transition">
+
+                        Continue to Nesto
+
+                    </button>
+
+                    {% endif %}
+
+                </form>
+
+            </div>
+
+            <p class="text-center text-xs text-gray-600 mt-5">
+                You can change your city later from the navigation bar.
+            </p>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
