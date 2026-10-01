@@ -18,14 +18,19 @@ class Profile(models.Model):
         return self.display_name
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     city = models.CharField(max_length=100, default="General")
     default_attributes = models.JSONField(default=list, blank=True)
-    is_approved = models.BooleanField(default=True) 
+    is_approved = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural = "Categories"
+        constraints = [models.UniqueConstraint(
+                        fields=["name", "city"],
+                        name="unique_category_per_city",
+                        )
+        ]
 
     def __str__(self):
         return f"{self.name} ({self.city})"

@@ -15,14 +15,14 @@ def home(request):
     city = profile.city
     posts = (
         Post.objects
-        .filter(city=city)
+        .filter(city = city)
         .select_related("author", "category", "entity")
         .order_by("-created_at"))
     categories = (
         Category.objects
         .filter(
-            city=city.name,
-            is_approved=True,
+            city = city.name,
+            is_approved = True,
         )
         .prefetch_related("entities")
     )
@@ -45,35 +45,31 @@ def entity_detail(request, pk):
     city = request.user.profile.city
     if not city:
         return redirect("choose_city")
-    
+
     entity = get_object_or_404(
         Entity,
         pk=pk,
-        city=city,
-        status="approved",
+        is_approved=True,
+        category__city=city.name,
     )
+
     posts = Post.objects.filter(
-        entity=entity,
-        city=city,
+        entity = entity,
+        city = city,
     ).order_by("-created_at")
+
     categories = Category.objects.filter(
-        city=city,
-        status="approved",
-    ).prefetch_related(
-        Prefetch(
-            "entities",
-            queryset=Entity.objects.filter(
-                city=city,
-                status="approved",
-            )
-        )
-    )
+        city = city.name,
+        is_approved = True,
+    ).prefetch_related("entities")
+
     context = {
         "entity": entity,
         "posts": posts,
         "categories": categories,
         "city": city,
     }
+
     return render(
         request,
         "pages/entity_detail.html",
@@ -94,18 +90,17 @@ def create_post(request):
 
         if post_type == 'community':
             Post.objects.create(
-                post_type="community",
-                title=title,
-                content=content,
-                image=image,
-                author=request.user,
-                city=city,
+                post_type = "community",
+                title = title,
+                content = content,
+                image = image,
+                author = request.user,
+                city = city,
             )
             messages.success(request, "Community post created successfully!")
             return redirect('home')
 
         elif post_type == 'guide':
-            city = city,
             category_id = request.POST.get('category')
             new_category_name = request.POST.get('new_category')
             entity_id = request.POST.get('entity')
@@ -115,9 +110,15 @@ def create_post(request):
 
             category = None
             if category_id == 'new' and new_category_name:
-                category, _ = Category.objects.get_or_create(name=new_category_name.strip())
+                category, _ = Category.objects.get_or_create(
+                    name = new_category_name.strip(),
+                    city = city.name,)
             elif category_id and category_id != 'new':
-                category = Category.objects.filter(id=category_id).first()
+                category = Category.objects.filter(
+                    id = category_id,
+                    city = city.name,
+                    is_approved = True,
+                ).first()
 
             attr_keys = request.POST.getlist('attr_keys[]')
             attr_values = request.POST.getlist('attr_values[]')
@@ -139,12 +140,12 @@ def create_post(request):
             if category:
                 if entity_id == 'new' and new_entity_name:
                     entity = Entity.objects.create(
-                        category=category,
-                        name=new_entity_name.strip(),
-                        location=location,
-                        price=price,
-                        image=image,
-                        attributes=custom_attributes
+                        category = category,
+                        name = new_entity_name.strip(),
+                        location = location,
+                        price = price,
+                        image = image,
+                        attributes = custom_attributes
                     )
                 elif entity_id and entity_id != 'new':
                     entity = Entity.objects.filter(id=entity_id).first()
@@ -155,18 +156,21 @@ def create_post(request):
                         entity.save()
 
             Post.objects.create(
-                post_type='guide',
-                title=title,
-                content=content,
-                category=category,
-                entity=entity,
-                image=image,
-                author=request.user if request.user.is_authenticated else None
+                post_type = 'guide',
+                title = title,
+                content = content,
+                category = category,
+                entity = entity,
+                image = image,
+                author = request.user,
+                city = city,
             )
             messages.success(request, "City Guide post published successfully!")
             return redirect('home')
 
-    categories = Category.objects.filter(is_approved=True).prefetch_related('entities')
+    categories = Category.objects.filter(
+        city = city.name,
+        is_approved = True).prefetch_related('entities')
     
     categories_json = {}
     for cat in categories:
