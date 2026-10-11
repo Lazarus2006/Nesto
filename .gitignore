@@ -1,5 +1,10 @@
 .venv/
 .env/
+.env.*
+!.env.example
+nesto_data_backup.json
+staticfiles/
 __pycache__/
 *.pyc
-entity_images/
+Django/Nesto/entity_images/
+Django/Nesto/post_images/
