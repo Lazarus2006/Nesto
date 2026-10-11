@@ -1,7 +1,7 @@
 from django.contrib import messages
-from .models import Post, Category, Entity , City
+from .models import Post, Category, Entity , City , Comment
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import PostForm
+from .forms import PostForm , CommentForm
 import json
 from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch
@@ -210,4 +210,34 @@ def choose_city(request):
 
     return render(request, "pages/choose_city.html", {
         "cities": cities,
+    })
+
+
+@login_required
+def add_comment(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.author = request.user
+            comment.save()
+            messages.success(request, "Comment added!")
+        else:
+            messages.error(request, "Please enter a valid comment.")
+
+    return redirect("post_detail", pk=post.pk)
+
+
+@login_required
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    comments = post.comments.select_related("author").all()
+
+    return render(request, "pages/post_detail.html", {
+        "post": post,
+        "comments": comments,
+        "comment_form": CommentForm(),
     })
