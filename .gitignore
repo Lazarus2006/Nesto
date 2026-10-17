@@ -8,3 +8,6 @@ __pycache__/
 *.pyc
 Django/Nesto/entity_images/
 Django/Nesto/post_images/
+
+# Local environment secrets
+.env
