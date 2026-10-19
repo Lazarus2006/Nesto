@@ -49,6 +49,8 @@ class Entity(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='entities')
     name = models.CharField(max_length=200)
     location = models.CharField(max_length=255, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=9,decimal_places=6,null=True,blank=True,)
+    longitude = models.DecimalField(max_digits=9,decimal_places=6,null=True,blank=True,)
     price = models.CharField(max_length=100, blank=True, null=True)
     image = models.ImageField(upload_to='entity_images/', blank=True, null=True)
     attributes = models.JSONField(default=dict, blank=True)

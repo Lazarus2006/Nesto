@@ -45,24 +45,30 @@
 
             <div class="input-group">
                 <label for="id_password1">Password</label>
-                <input
-                    type="password"
-                    name="password1"
-                    id="id_password1"
-                    placeholder="Create a password"
-                    required
-                >
+                <div class="password-field">
+                    <input
+                        type="password"
+                        name="password1"
+                        id="id_password1"
+                        placeholder="Create a password"
+                        required
+                    >
+                    <button type="button" class="password-toggle" data-toggle-password="id_password1" aria-controls="id_password1" aria-pressed="false">Show</button>
+                </div>
             </div>
 
             <div class="input-group">
                 <label for="id_password2">Confirm Password</label>
-                <input
-                    type="password"
-                    name="password2"
-                    id="id_password2"
-                    placeholder="Confirm your password"
-                    required
-                >
+                <div class="password-field">
+                    <input
+                        type="password"
+                        name="password2"
+                        id="id_password2"
+                        placeholder="Confirm your password"
+                        required
+                    >
+                    <button type="button" class="password-toggle" data-toggle-password="id_password2" aria-controls="id_password2" aria-pressed="false">Show</button>
+                </div>
             </div>
 
             {% if form.errors %}
@@ -83,6 +89,18 @@
         </p>
 
     </div>
+
+    <script>
+        document.querySelectorAll("[data-toggle-password]").forEach((button) => {
+            button.addEventListener("click", () => {
+                const input = document.getElementById(button.dataset.togglePassword);
+                const isVisible = input.type === "text";
+                input.type = isVisible ? "password" : "text";
+                button.textContent = isVisible ? "Show" : "Hide";
+                button.setAttribute("aria-pressed", String(!isVisible));
+            });
+        });
+    </script>
 
 </body>
 </html>

@@ -110,8 +110,8 @@
 
         <div class="flex min-w-0 items-center gap-1 sm:gap-2">
             <a href="{% url 'choose_city' %}"
-               title="Change city"
-               class="flex max-w-[140px] items-center gap-1.5 rounded-xl px-2.5 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 sm:max-w-none sm:px-3">
+            title="Change city"
+            class="flex max-w-[140px] items-center gap-1.5 rounded-xl px-2.5 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 sm:max-w-none sm:px-3">
                 <svg class="h-4 w-4 shrink-0 text-teal-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                     <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/>
                     <circle cx="12" cy="10" r="2.5"/>
@@ -120,7 +120,7 @@
             </a>
 
             <a href="{% url 'create_post' %}"
-               class="flex h-10 items-center gap-2 rounded-xl bg-teal-600 px-3 text-sm font-bold text-white transition hover:bg-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 sm:px-4">
+            class="flex h-10 items-center gap-2 rounded-xl bg-teal-600 px-3 text-sm font-bold text-white transition hover:bg-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 sm:px-4">
                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 5v14M5 12h14"/>
                 </svg>
@@ -129,8 +129,8 @@
             </a>
 
             <a href="{% url 'profile' %}"
-               aria-label="Your profile"
-               class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white font-bold text-teal-800 transition hover:bg-teal-50">
+                aria-label="Your profile"
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white font-bold text-teal-800 transition hover:bg-teal-50">
                 {{ user.profile.display_name|first|upper }}
             </a>
         </div>
@@ -154,7 +154,7 @@
         </div>
 
         <div role="tablist" aria-label="Nesto sections"
-             class="flex w-full rounded-2xl border border-slate-200 bg-white p-1 shadow-sm sm:w-auto">
+            class="flex w-full rounded-2xl border border-slate-200 bg-white p-1 shadow-sm sm:w-auto">
 
             <button type="button" role="tab" id="explore-tab"
                     aria-selected="true" aria-controls="explore-view"
@@ -278,7 +278,7 @@
                 <p class="mt-1 text-sm leading-6 text-slate-600">Help another student settle in by sharing what you know.</p>
             </div>
             <a href="{% url 'create_post' %}"
-               class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-teal-700 px-4 py-3 text-sm font-bold text-white transition hover:bg-teal-800">
+                class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-teal-700 px-4 py-3 text-sm font-bold text-white transition hover:bg-teal-800">
                 Share with the community
                 <span aria-hidden="true">→</span>
             </a>
@@ -288,23 +288,6 @@
 
     <!-- COMMUNITY VIEW -->
     <section id="community-view" role="tabpanel" aria-labelledby="community-tab" hidden>
-
-        <div class="mb-5 flex items-end justify-between gap-3">
-            <div>
-                <h2 class="text-xl font-extrabold tracking-tight text-slate-900 sm:text-2xl">
-                    Your community
-                </h2>
-                <p class="mt-1 text-sm text-slate-500">
-                    Local questions, experiences, and recommendations.
-                </p>
-            </div>
-
-            <a href="{% url 'create_post' %}"
-               class="hidden shrink-0 items-center gap-2 rounded-xl bg-teal-600 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-teal-700 sm:inline-flex">
-                <span>+</span> Create post
-            </a>
-        </div>
-
         <div class="mx-auto max-w-3xl space-y-4">
 
             {% for post in posts %}
@@ -380,17 +363,8 @@
                 <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-2xl">💬</div>
                 <h3 class="text-lg font-extrabold text-slate-900">It's quiet around here</h3>
                 <p class="mt-2 text-sm leading-6 text-slate-500">Start a conversation and help your city's community grow.</p>
-                <a href="{% url 'create_post' %}" class="mt-5 inline-flex items-center gap-2 rounded-xl bg-teal-600 px-5 py-3 text-sm font-bold text-white hover:bg-teal-700">
-                    Create the first post
-                </a>
             </div>
             {% endfor %}
-        </div>
-
-        <div class="mt-5 sm:hidden">
-            <a href="{% url 'create_post' %}" class="flex w-full items-center justify-center gap-2 rounded-xl bg-teal-600 px-4 py-3.5 text-sm font-bold text-white">
-                + Create post
-            </a>
         </div>
     </section>
 
@@ -399,8 +373,8 @@
 
 <!-- CATEGORY / ENTITY DISCOVERY MODAL -->
 <div id="discovery-modal"
-     class="fixed inset-0 z-[60] hidden items-center justify-center bg-slate-950/55 p-0 backdrop-blur-sm sm:p-5"
-     role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    class="fixed inset-0 z-[60] hidden items-center justify-center bg-slate-950/55 p-0 backdrop-blur-sm sm:p-5"
+    role="dialog" aria-modal="true" aria-labelledby="modal-title">
 
     <div class="modal-shell flex h-full w-full flex-col overflow-hidden bg-white shadow-2xl sm:h-[min(88vh,850px)] sm:max-w-5xl sm:rounded-3xl">
 
@@ -585,7 +559,7 @@
                     </div>
 
                     <a id="directions-link" href="#" target="_blank" rel="noopener noreferrer"
-                       class="mt-4 hidden w-full items-center justify-center gap-2 rounded-xl bg-teal-700 px-4 py-3 text-sm font-bold text-white transition hover:bg-teal-800">
+                        class="mt-4 hidden w-full items-center justify-center gap-2 rounded-xl bg-teal-700 px-4 py-3 text-sm font-bold text-white transition hover:bg-teal-800">
                         Open directions in Google Maps
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M14 3h7v7m0-7L10 14"/>
@@ -660,7 +634,7 @@
         communityTab.setAttribute("aria-selected", String(!explore));
 
         document.getElementById("page-heading").textContent =
-            explore ? "Find your place." : "Your community";
+            explore ? "Find your Nest." : "Your community";
 
         document.getElementById("page-subheading").textContent =
             explore

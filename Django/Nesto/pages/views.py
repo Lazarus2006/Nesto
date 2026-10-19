@@ -107,6 +107,8 @@ def create_post(request):
             new_entity_name = request.POST.get('new_entity')
             location = request.POST.get('location')
             price = request.POST.get('price')
+            latitude = request.POST.get('latitude')
+            longitude = request.POST.get('longitude')
 
             category = None
             if category_id == 'new' and new_category_name:

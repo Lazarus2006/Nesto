@@ -50,6 +50,30 @@ input {
     border: 1px solid #ccc;
 }
 
+.password-field {
+    position: relative;
+    margin-top: 15px;
+}
+
+.password-field input {
+    margin-top: 0;
+    padding-right: 70px;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    width: auto;
+    margin: 0;
+    padding: 4px;
+    border: 0;
+    background: transparent;
+    color: #444;
+    font-size: 14px;
+    transform: translateY(-50%);
+}
+
 .divider {
     margin: 25px 0;
     color: #777;
