@@ -1,5 +1,5 @@
 from django.contrib import messages
-from .models import Post, Category, Entity , City , Comment
+from .models import Post, Category, Entity, City, Comment, get_or_create_profile
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PostForm , CommentForm
 import json
@@ -8,7 +8,7 @@ from django.db.models import Prefetch
 
 @login_required
 def home(request):
-    profile = request.user.profile
+    profile = get_or_create_profile(request.user)
     if not profile.city:
         return redirect("choose_city")
     
@@ -42,7 +42,7 @@ def home(request):
 
 @login_required
 def entity_detail(request, pk):
-    city = request.user.profile.city
+    city = get_or_create_profile(request.user).city
     if not city:
         return redirect("choose_city")
 
@@ -78,7 +78,7 @@ def entity_detail(request, pk):
 
 @login_required
 def create_post(request):
-    profile = request.user.profile
+    profile = get_or_create_profile(request.user)
     if not profile.city:
         return redirect("choose_city")
     city = profile.city
@@ -198,13 +198,14 @@ def create_post(request):
 
 @login_required
 def choose_city(request):
+    profile = get_or_create_profile(request.user)
     cities = City.objects.all().order_by("name")
     if request.method == "POST":
         city_id = request.POST.get("city")
         city = get_object_or_404(City,id=city_id)
 
-        request.user.profile.city = city
-        request.user.profile.save(update_fields=["city"])
+        profile.city = city
+        profile.save(update_fields=["city"])
 
         return redirect("home")
 

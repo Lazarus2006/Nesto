@@ -17,6 +17,15 @@ class Profile(models.Model):
     def __str__(self):
         return self.display_name
 
+
+def get_or_create_profile(user):
+    profile, _ = Profile.objects.get_or_create(
+        user=user,
+        defaults={"display_name": user.username},
+    )
+    return profile
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     city = models.CharField(max_length=100, default="General")

@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login , authenticate , logout
 from .forms import SignUpForm
-from pages.models import Profile
+from pages.models import get_or_create_profile
 from django.contrib.auth.decorators import login_required
 
 
 @login_required
 def profile(request):
     return render(request, "core/profile.html", {
-        "profile": request.user.profile,
+        "profile": get_or_create_profile(request.user),
         "posts": request.user.posts.all().order_by("-created_at"),
     })
 
@@ -17,10 +17,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            Profile.objects.create(
-                user=user,
-                display_name=user.username
-            )
+            get_or_create_profile(user)
             login(request, user)
             return redirect("home")
     else:
@@ -57,4 +54,3 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect("login")
-
