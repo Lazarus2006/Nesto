@@ -10,14 +10,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="stylesheet"
-          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet">
+        rel="stylesheet">
 
     <style>
         body {
@@ -47,7 +47,7 @@
             Create a Post
         </h1>
         <a href="{% url 'home' %}"
-           class="text-sm font-medium text-slate-500 hover:text-slate-900 transition">
+        class="text-sm font-medium text-slate-500 hover:text-slate-900 transition">
             ✕ Cancel
         </a>
     </div>
@@ -75,8 +75,8 @@
                 Title *
             </label>
             <input type="text" name="title" required
-                   placeholder="Give your post a descriptive title..."
-                   class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
+                placeholder="Give your post a descriptive title..."
+                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
         </div>
 
         <div>
@@ -84,8 +84,8 @@
                 Content / Body *
             </label>
             <textarea name="content" rows="4" required
-                      placeholder="Write details here..."
-                      class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition"></textarea>
+                    placeholder="Write details here..."
+                    class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition"></textarea>
         </div>
 
         <div>
@@ -93,7 +93,7 @@
                 Attachment / Photo
             </label>
             <input type="file" name="image" accept="image/*"
-                   class="w-full text-sm text-slate-500 border border-dashed border-slate-300 rounded-xl p-2.5 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100">
+                class="w-full text-sm text-slate-500 border border-dashed border-slate-300 rounded-xl p-2.5 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100">
         </div>
 
         <div id="guide-fields" class="hidden space-y-5 pt-5 border-t border-slate-100">
@@ -123,9 +123,9 @@
                     New Category Name *
                 </label>
                 <input type="text" name="new_category" id="new_category_input"
-                       placeholder="e.g. Parks, PG & Homes, Cafes"
-                       disabled
-                       class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
+                        placeholder="e.g. Parks, PG & Homes, Cafes"
+                        disabled
+                        class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
             </div>
 
             <div id="entity_box" class="hidden">
@@ -142,16 +142,16 @@
             </div>
 
             <div id="entity_details_box"
-                 class="hidden space-y-4 bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200">
+                class="hidden space-y-4 bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200">
 
                 <div id="new_entity_name_box" class="hidden">
                     <label class="block text-sm font-semibold text-slate-700 mb-1.5">
                         Entity Name *
                     </label>
                     <input type="text" name="new_entity" id="new_entity_input"
-                           placeholder="e.g. Room 101, Central Park, Blue Tokai Cafe"
-                           disabled
-                           class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
+                        placeholder="e.g. Room 101, Central Park, Blue Tokai Cafe"
+                        disabled
+                        class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
                 </div>
 
                 <div id="map_picker_box" class="hidden space-y-2">
@@ -165,11 +165,11 @@
                     </div>
 
                     <div id="location-map"
-                         class="rounded-xl border border-slate-300 overflow-hidden">
+                        class="rounded-xl border border-slate-300 overflow-hidden">
                     </div>
 
                     <p id="map-status" role="status"
-                       class="text-xs text-slate-500">
+                        class="text-xs text-slate-500">
                         Loading map...
                     </p>
 
@@ -187,8 +187,8 @@
                             Price / Fee
                         </label>
                         <input type="text" name="price" id="price_input"
-                               placeholder="e.g. ₹8,000/mo or Free"
-                               class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
+                            placeholder="e.g. ₹8,000/mo or Free"
+                            class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
                     </div>
 
                     <div>
@@ -196,8 +196,8 @@
                             Location / Address
                         </label>
                         <input type="text" name="location" id="location_input"
-                               placeholder="e.g. Sector 62, Noida"
-                               class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
+                            placeholder="e.g. Sector 62, Noida"
+                            class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
                     </div>
                 </div>
 

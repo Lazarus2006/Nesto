@@ -1,0 +1,4195 @@
+[
+{
+  "model": "pages.category",
+  "pk": 5,
+  "fields": {
+    "name": "Food & Markets",
+    "city": "Indore",
+    "default_attributes": [
+      "price_range",
+      "food_types",
+      "opening_hours",
+      "payment_methods",
+      "popular_for"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:35:17.441Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 6,
+  "fields": {
+    "name": "Parks & Outdoors",
+    "city": "Indore",
+    "default_attributes": [
+      "entry_fee",
+      "opening_hours",
+      "activities",
+      "shade_available",
+      "accessibility"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:38:11.296Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 7,
+  "fields": {
+    "name": "Historic Places",
+    "city": "Indore",
+    "default_attributes": [
+      "entry_fee",
+      "opening_hours",
+      "historical_significance",
+      "guided_tours",
+      "accessibility"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:38:35.712Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 8,
+  "fields": {
+    "name": "Food & Markets",
+    "city": "Kota",
+    "default_attributes": [
+      "price_range",
+      "food_types",
+      "opening_hours",
+      "payment_methods",
+      "popular_for"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:39:02.092Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 9,
+  "fields": {
+    "name": "Parks & Outdoors",
+    "city": "Kota",
+    "default_attributes": [
+      "entry_fee",
+      "opening_hours",
+      "activities",
+      "shade_available",
+      "accessibility"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:39:13.089Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 10,
+  "fields": {
+    "name": "Student Essentials",
+    "city": "Kota",
+    "default_attributes": [
+      "item_or_service",
+      "price_range",
+      "student_discount",
+      "opening_hours",
+      "location",
+      "contact_method"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:39:27.639Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 11,
+  "fields": {
+    "name": "Food & Markets",
+    "city": "New Delhi",
+    "default_attributes": [
+      "price_range",
+      "food_types",
+      "opening_hours",
+      "payment_methods",
+      "popular_for"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:39:52.609Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 12,
+  "fields": {
+    "name": "Parks & Outdoors",
+    "city": "New Delhi",
+    "default_attributes": [
+      "entry_fee",
+      "opening_hours",
+      "activities",
+      "shade_available",
+      "accessibility"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:40:32.026Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 13,
+  "fields": {
+    "name": "Historic Places",
+    "city": "New Delhi",
+    "default_attributes": [
+      "entry_fee",
+      "opening_hours",
+      "historical_significance",
+      "guided_tours",
+      "accessibility"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:40:41.466Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 14,
+  "fields": {
+    "name": "Food & Markets",
+    "city": "Rewa",
+    "default_attributes": [
+      "price_range",
+      "food_types",
+      "opening_hours",
+      "payment_methods",
+      "popular_for"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:41:08.142Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 15,
+  "fields": {
+    "name": "Parks & Outdoors",
+    "city": "Rewa",
+    "default_attributes": [
+      "entry_fee",
+      "opening_hours",
+      "activities",
+      "shade_available",
+      "accessibility"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:41:28.838Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 16,
+  "fields": {
+    "name": "Historic Places",
+    "city": "Rewa",
+    "default_attributes": [
+      "entry_fee",
+      "opening_hours",
+      "historical_significance",
+      "guided_tours",
+      "accessibility"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:41:45.612Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 17,
+  "fields": {
+    "name": "Tiffin Services",
+    "city": "Indore",
+    "default_attributes": [
+      "monthly_price",
+      "meals_per_day",
+      "vegetarian_options",
+      "delivery_available",
+      "trial_available",
+      "contact_method"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:44:19.084Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 18,
+  "fields": {
+    "name": "Sunset Points",
+    "city": "Indore",
+    "default_attributes": [
+      "best_time",
+      "view_type",
+      "accessibility",
+      "crowd_level",
+      "lighting_after_sunset",
+      "safety_notes"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:44:31.108Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 19,
+  "fields": {
+    "name": "Study Spots",
+    "city": "Indore",
+    "default_attributes": [
+      "quietness",
+      "wifi_available",
+      "power_outlets",
+      "seating_type",
+      "entry_fee",
+      "opening_hours"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:44:44.410Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 20,
+  "fields": {
+    "name": "Rooms & Apartments",
+    "city": "Indore",
+    "default_attributes": [
+      "monthly_rent",
+      "deposit",
+      "furnished",
+      "room_type",
+      "electricity_included",
+      "water_availability",
+      "contact_method"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:44:54.296Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 21,
+  "fields": {
+    "name": "Rooms & Apartments",
+    "city": "Kota",
+    "default_attributes": [
+      "monthly_rent",
+      "deposit",
+      "furnished",
+      "room_type",
+      "electricity_included",
+      "water_availability",
+      "contact_method"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:45:10.311Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 22,
+  "fields": {
+    "name": "Coaching-Area Essentials",
+    "city": "Kota",
+    "default_attributes": [
+      "service_type",
+      "price_range",
+      "distance_to_coaching",
+      "opening_hours",
+      "student_friendly",
+      "contact_method"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:45:24.693Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 23,
+  "fields": {
+    "name": "Tiffin Services",
+    "city": "Kota",
+    "default_attributes": [
+      "monthly_price",
+      "meals_per_day",
+      "vegetarian_options",
+      "delivery_available",
+      "trial_available",
+      "contact_method"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:45:34.116Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 24,
+  "fields": {
+    "name": "Study Spots",
+    "city": "Kota",
+    "default_attributes": [
+      "quietness",
+      "wifi_available",
+      "power_outlets",
+      "seating_type",
+      "entry_fee",
+      "opening_hours"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:45:46.883Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 25,
+  "fields": {
+    "name": "Cycling Routes",
+    "city": "Kota",
+    "default_attributes": [
+      "route_length_km",
+      "surface_type",
+      "traffic_level",
+      "difficulty",
+      "best_time",
+      "safety_notes"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:45:59.169Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 26,
+  "fields": {
+    "name": "Rooms & Apartments",
+    "city": "New Delhi",
+    "default_attributes": [
+      "monthly_rent",
+      "deposit",
+      "furnished",
+      "room_type",
+      "electricity_included",
+      "water_availability",
+      "contact_method"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:46:11.190Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 27,
+  "fields": {
+    "name": "Metro & Transport Tips",
+    "city": "New Delhi",
+    "default_attributes": [
+      "transport_type",
+      "route_or_area",
+      "fare_range",
+      "operating_hours",
+      "frequency",
+      "accessibility"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:46:30.366Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 28,
+  "fields": {
+    "name": "Local Markets",
+    "city": "New Delhi",
+    "default_attributes": [
+      "market_type",
+      "products_sold",
+      "opening_hours",
+      "bargaining_common",
+      "best_time_to_visit"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:46:43.825Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 29,
+  "fields": {
+    "name": "Study Spots",
+    "city": "New Delhi",
+    "default_attributes": [
+      "quietness",
+      "wifi_available",
+      "power_outlets",
+      "seating_type",
+      "entry_fee",
+      "opening_hours"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:47:02.228Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 30,
+  "fields": {
+    "name": "Parks & Wind-Down Spots",
+    "city": "New Delhi",
+    "default_attributes": [
+      "ambience",
+      "crowd_level",
+      "entry_fee",
+      "opening_hours",
+      "seating_available",
+      "safety_notes"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:47:15.286Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 31,
+  "fields": {
+    "name": "Rooms & Apartments",
+    "city": "Rewa",
+    "default_attributes": [
+      "monthly_rent",
+      "deposit",
+      "furnished",
+      "room_type",
+      "electricity_included",
+      "water_availability",
+      "contact_method"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:47:27.252Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 32,
+  "fields": {
+    "name": "Tiffin Services",
+    "city": "Rewa",
+    "default_attributes": [
+      "monthly_price",
+      "meals_per_day",
+      "vegetarian_options",
+      "delivery_available",
+      "trial_available",
+      "contact_method"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:47:37.361Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 33,
+  "fields": {
+    "name": "Local Markets",
+    "city": "Rewa",
+    "default_attributes": [
+      "market_type",
+      "products_sold",
+      "opening_hours",
+      "bargaining_common",
+      "best_time_to_visit"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:48:51.645Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 34,
+  "fields": {
+    "name": "Evening Places",
+    "city": "Rewa",
+    "default_attributes": [
+      "best_time",
+      "ambience",
+      "price_range",
+      "crowd_level",
+      "lighting",
+      "safety_notes"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:51:31.056Z"
+  }
+},
+{
+  "model": "pages.category",
+  "pk": 35,
+  "fields": {
+    "name": "Student Essentials",
+    "city": "Rewa",
+    "default_attributes": [
+      "item_or_service",
+      "price_range",
+      "student_discount",
+      "opening_hours",
+      "location",
+      "contact_method"
+    ],
+    "is_approved": true,
+    "created_at": "2026-10-11T11:51:44.303Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 4,
+  "fields": {
+    "category": 7,
+    "name": "Rajwada Palace",
+    "location": "Rajwada Square, Indore",
+    "latitude": "22.719600",
+    "longitude": "75.857700",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "historical_significance": "Historic Holkar-era palace"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.679Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 5,
+  "fields": {
+    "category": 7,
+    "name": "Lal Bagh Palace",
+    "location": "Indore",
+    "latitude": "22.702200",
+    "longitude": "75.845000",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "historical_significance": "Historic palace and museum"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.689Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 6,
+  "fields": {
+    "category": 7,
+    "name": "Kanch Mandir",
+    "location": "Itwaria Bazaar area, Indore",
+    "latitude": "22.718600",
+    "longitude": "75.848800",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "historical_significance": "Jain temple known for glass and mirror work"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.696Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 7,
+  "fields": {
+    "category": 5,
+    "name": "Sarafa Bazaar",
+    "location": "Sarafa area, Indore",
+    "latitude": "22.716600",
+    "longitude": "75.854600",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "food_types": "Street food and local snacks",
+      "popular_for": "Evening food market"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.703Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 8,
+  "fields": {
+    "category": 5,
+    "name": "Chhappan Dukan",
+    "location": "New Palasia, Indore",
+    "latitude": "22.724500",
+    "longitude": "75.882100",
+    "price": "Affordable",
+    "image": "",
+    "attributes": {
+      "food_types": "Snacks, sweets and street food"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.709Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 9,
+  "fields": {
+    "category": 6,
+    "name": "Meghdoot Garden",
+    "location": "Vijay Nagar area, Indore",
+    "latitude": "22.753000",
+    "longitude": "75.888000",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "activities": "Walking and relaxing"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.716Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 10,
+  "fields": {
+    "category": 6,
+    "name": "Ralamandal Wildlife Sanctuary",
+    "location": "Ralamandal area, near Indore",
+    "latitude": "22.645000",
+    "longitude": "75.884500",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "activities": "Nature and wildlife"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.722Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 11,
+  "fields": {
+    "category": 18,
+    "name": "Patalpani Waterfall",
+    "location": "Patalpani area, near Indore",
+    "latitude": "22.545000",
+    "longitude": "75.795000",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "view_type": "Waterfall and natural landscape",
+      "safety_notes": "Sunset"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.728Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 12,
+  "fields": {
+    "category": 9,
+    "name": "Chambal Garden",
+    "location": "Kota",
+    "latitude": "25.160000",
+    "longitude": "75.820000",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "activities": "Garden walks and outdoor recreation"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.738Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 13,
+  "fields": {
+    "category": 9,
+    "name": "Seven Wonders Park",
+    "location": "Vallabh Bari, Kota",
+    "latitude": "25.173700",
+    "longitude": "75.857400",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "activities": "Walking and viewing monument replicas"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.748Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 14,
+  "fields": {
+    "category": 9,
+    "name": "City Park",
+    "location": "Jhalawar Road area, Kota",
+    "latitude": "25.165000",
+    "longitude": "75.830000",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "activities": "Garden walks and outdoor recreation"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.757Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 15,
+  "fields": {
+    "category": 9,
+    "name": "Chambal Riverfront",
+    "location": "Along the Chambal River, Kota",
+    "latitude": "25.190000",
+    "longitude": "75.850000",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "activities": "Riverside walks and public spaces"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.763Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 16,
+  "fields": {
+    "category": 8,
+    "name": "Kishore Sagar Lake area",
+    "location": "Kishore Sagar Lake, Kota",
+    "latitude": "25.180000",
+    "longitude": "75.850000",
+    "price": "₹50 - ₹200",
+    "image": "",
+    "attributes": {
+      "popular_for": "Lakeside area and nearby visitor amenities"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.770Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 17,
+  "fields": {
+    "category": 13,
+    "name": "India Gate",
+    "location": "Kartavya Path area, New Delhi",
+    "latitude": "28.612900",
+    "longitude": "77.229500",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "historical_significance": "War memorial"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.776Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 18,
+  "fields": {
+    "category": 13,
+    "name": "Qutub Minar",
+    "location": "Mehrauli, New Delhi",
+    "latitude": "28.524400",
+    "longitude": "77.185500",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "historical_significance": "Historic minaret and archaeological complex"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.783Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 19,
+  "fields": {
+    "category": 13,
+    "name": "Humayun's Tomb",
+    "location": "Nizamuddin East, New Delhi",
+    "latitude": "28.593300",
+    "longitude": "77.250700",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "historical_significance": "Historic garden-tomb"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.789Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 20,
+  "fields": {
+    "category": 13,
+    "name": "Red Fort",
+    "location": "Netaji Subhash Marg, Old Delhi",
+    "latitude": "28.656200",
+    "longitude": "77.241000",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "historical_significance": "Historic Mughal fort complex"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.811Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 21,
+  "fields": {
+    "category": 12,
+    "name": "Lodhi Garden",
+    "location": "Lodhi Road area, New Delhi",
+    "latitude": "28.593100",
+    "longitude": "77.219700",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "activities": "Walking and relaxing among gardens and monuments"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.826Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 22,
+  "fields": {
+    "category": 30,
+    "name": "Sunder Nursery",
+    "location": "Nizamuddin area, New Delhi",
+    "latitude": "28.594700",
+    "longitude": "77.246400",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "ambience": "Heritage garden and landscaped green space"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.844Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 23,
+  "fields": {
+    "category": 28,
+    "name": "Dilli Haat INA",
+    "location": "INA, New Delhi",
+    "latitude": "28.573100",
+    "longitude": "77.207800",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "market_type": "Crafts, regional food and cultural market",
+      "products_sold": "Handicrafts, textiles and regional goods"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.858Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 24,
+  "fields": {
+    "category": 27,
+    "name": "Central Secretariat Metro Station",
+    "location": "Central Secretariat, New Delhi",
+    "latitude": "28.614300",
+    "longitude": "77.211400",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "route_or_area": "Central Secretariat station",
+      "transport_type": "Delhi Metro"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.868Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 25,
+  "fields": {
+    "category": 16,
+    "name": "Rewa Fort",
+    "location": "Rewa city",
+    "latitude": "24.537000",
+    "longitude": "81.304000",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "historical_significance": "Historic fort complex"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.879Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 26,
+  "fields": {
+    "category": 16,
+    "name": "Deur Kothar",
+    "location": "Deur Kothar archaeological site, Rewa district",
+    "latitude": "24.910000",
+    "longitude": "81.650000",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "historical_significance": "Archaeological site known for Buddhist stupas"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.898Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 27,
+  "fields": {
+    "category": 15,
+    "name": "Purwa Waterfall",
+    "location": "Purwa area, Rewa district",
+    "latitude": "24.780000",
+    "longitude": "81.270000",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "activities": "Nature and waterfall viewing"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.920Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 28,
+  "fields": {
+    "category": 15,
+    "name": "Keoti Waterfall",
+    "location": "Keoti area, Rewa district",
+    "latitude": "24.820000",
+    "longitude": "81.450000",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "activities": "Waterfall and natural scenery"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.937Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 29,
+  "fields": {
+    "category": 15,
+    "name": "Rani Talab",
+    "location": "Rewa city",
+    "latitude": "24.520000",
+    "longitude": "81.300000",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "activities": "Visit the historic water body and surrounding area"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.946Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 30,
+  "fields": {
+    "category": 15,
+    "name": "Govindgarh Palace and Lake",
+    "location": "Govindgarh, near Rewa",
+    "latitude": "24.370000",
+    "longitude": "81.290000",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "activities": "Historic palace and lake area"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T12:46:15.956Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 31,
+  "fields": {
+    "category": 5,
+    "name": "Local Breakfast Corner",
+    "location": "Central area, Indore",
+    "latitude": "22.748226",
+    "longitude": "75.862779",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹50 - ₹150",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "payment_methods": "UPI, Cards, Cash"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.214Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 32,
+  "fields": {
+    "category": 7,
+    "name": "Old City Heritage Area",
+    "location": "Central area, Indore",
+    "latitude": "22.699832",
+    "longitude": "75.866505",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Historic Places",
+      "entry_fee": "₹100",
+      "guided_tours": "High",
+      "accessibility": "High",
+      "opening_hours": "₹50",
+      "historical_significance": "Local heritage site"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.217Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 33,
+  "fields": {
+    "category": 6,
+    "name": "Community Green Park",
+    "location": "Central area, Indore",
+    "latitude": "22.716671",
+    "longitude": "75.876839",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Parks & Outdoors",
+      "entry_fee": "Free Entry",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "Available",
+      "opening_hours": "Free Entry",
+      "shade_available": "Moderate shade"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.219Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 34,
+  "fields": {
+    "category": 20,
+    "name": "Shanti Residency",
+    "location": "Central area, Indore",
+    "latitude": "22.748724",
+    "longitude": "75.837273",
+    "price": "₹5000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 91234 56789",
+      "water_availability": "Yes",
+      "electricity_included": "Included"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.221Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 35,
+  "fields": {
+    "category": 19,
+    "name": "Quiet Study Centre",
+    "location": "Central area, Indore",
+    "latitude": "22.749666",
+    "longitude": "75.865028",
+    "price": "₹50 - ₹200",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Study Spots",
+      "entry_fee": "08:00 AM - 10:00 PM",
+      "quietness": "Generally quiet",
+      "seating_type": "Indoor seating",
+      "opening_hours": "08:00 AM - 10:00 PM",
+      "power_outlets": "24 Hours",
+      "wifi_available": "24 Hours"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.223Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 36,
+  "fields": {
+    "category": 18,
+    "name": "Hillside Viewpoint",
+    "location": "Central area, Indore",
+    "latitude": "22.728875",
+    "longitude": "75.828614",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Sunset Points",
+      "best_time": "Early Morning",
+      "view_type": "Outdoor landscape",
+      "crowd_level": "Moderate",
+      "safety_notes": "Safe during daytime",
+      "accessibility": "Moderate",
+      "lighting_after_sunset": "Available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.225Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 37,
+  "fields": {
+    "category": 17,
+    "name": "Ghar Ka Khana Tiffin",
+    "location": "Central area, Indore",
+    "latitude": "22.738537",
+    "longitude": "75.885656",
+    "price": "₹2000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Tiffin Services",
+      "meals_per_day": "2",
+      "monthly_price": "₹2,000–₹3,000",
+      "contact_method": "+91 99887 76655",
+      "trial_available": "Borewell Water",
+      "delivery_available": "Borewell Water",
+      "vegetarian_options": "Available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.227Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 38,
+  "fields": {
+    "category": 5,
+    "name": "City Street Food Area",
+    "location": "Central area, Indore",
+    "latitude": "22.724912",
+    "longitude": "75.828873",
+    "price": "Affordable",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹20 - ₹80",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "payment_methods": "UPI & Cash"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.231Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 39,
+  "fields": {
+    "category": 7,
+    "name": "Historic Market Quarter",
+    "location": "Central area, Indore",
+    "latitude": "22.689498",
+    "longitude": "75.837765",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Historic Places",
+      "entry_fee": "₹50",
+      "guided_tours": "Moderate",
+      "accessibility": "Available",
+      "opening_hours": "₹20 (Student Discount)",
+      "historical_significance": "Local heritage site"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.234Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 40,
+  "fields": {
+    "category": 6,
+    "name": "City Garden",
+    "location": "Central area, Indore",
+    "latitude": "22.731421",
+    "longitude": "75.868870",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Parks & Outdoors",
+      "entry_fee": "₹20",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "Moderate",
+      "opening_hours": "Open to Public",
+      "shade_available": "Moderate shade"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.236Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 41,
+  "fields": {
+    "category": 20,
+    "name": "Student Comfort Rooms",
+    "location": "Central area, Indore",
+    "latitude": "22.693144",
+    "longitude": "75.842354",
+    "price": "₹8000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 99887 76655",
+      "water_availability": "Included",
+      "electricity_included": "Fixed ₹500/month"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.238Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 42,
+  "fields": {
+    "category": 19,
+    "name": "Student Reading Room",
+    "location": "Central area, Indore",
+    "latitude": "22.710566",
+    "longitude": "75.828836",
+    "price": "Affordable",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Study Spots",
+      "entry_fee": "09:00 AM - 08:00 PM",
+      "quietness": "Generally quiet",
+      "seating_type": "Indoor seating",
+      "opening_hours": "24 Hours",
+      "power_outlets": "08:00 AM - 10:00 PM",
+      "wifi_available": "24 Hours"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.240Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 43,
+  "fields": {
+    "category": 18,
+    "name": "Lakeside Evening View",
+    "location": "Central area, Indore",
+    "latitude": "22.712260",
+    "longitude": "75.887650",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Sunset Points",
+      "best_time": "Sunset",
+      "view_type": "Outdoor landscape",
+      "crowd_level": "Quiet during weekdays",
+      "safety_notes": "Avoid late nights",
+      "accessibility": "Available",
+      "lighting_after_sunset": "High"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.243Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 44,
+  "fields": {
+    "category": 17,
+    "name": "Daily Fresh Meals",
+    "location": "Central area, Indore",
+    "latitude": "22.753169",
+    "longitude": "75.832855",
+    "price": "₹2500/mo",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Tiffin Services",
+      "meals_per_day": "2",
+      "monthly_price": "₹2,000–₹3,000",
+      "contact_method": "+91 99887 76655",
+      "trial_available": "Borewell Water",
+      "delivery_available": "Yes",
+      "vegetarian_options": "Available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.245Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 45,
+  "fields": {
+    "category": 5,
+    "name": "Traditional Snacks Market",
+    "location": "Central area, Indore",
+    "latitude": "22.708821",
+    "longitude": "75.883823",
+    "price": "Affordable",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹100 - ₹300",
+      "opening_hours": "24 Hours",
+      "payment_methods": "UPI & Cash"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.247Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 46,
+  "fields": {
+    "category": 7,
+    "name": "Heritage Architecture Walk",
+    "location": "Central area, Indore",
+    "latitude": "22.699835",
+    "longitude": "75.876456",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Historic Places",
+      "entry_fee": "Free Entry",
+      "guided_tours": "High",
+      "accessibility": "Wheelchair Accessible",
+      "opening_hours": "Free Entry",
+      "historical_significance": "Local heritage site"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.249Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 47,
+  "fields": {
+    "category": 6,
+    "name": "Neighbourhood Recreation Park",
+    "location": "Central area, Indore",
+    "latitude": "22.704662",
+    "longitude": "75.881218",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Parks & Outdoors",
+      "entry_fee": "Open to Public",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "Excellent",
+      "opening_hours": "Free Entry",
+      "shade_available": "Good seating available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.251Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 48,
+  "fields": {
+    "category": 20,
+    "name": "Green View Residency",
+    "location": "Central area, Indore",
+    "latitude": "22.753155",
+    "longitude": "75.863867",
+    "price": "₹5000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 87654 32109",
+      "water_availability": "24/7 RO Water",
+      "electricity_included": "Included"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.253Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 49,
+  "fields": {
+    "category": 19,
+    "name": "Focus Study Space",
+    "location": "Central area, Indore",
+    "latitude": "22.720926",
+    "longitude": "75.875304",
+    "price": "Affordable",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Study Spots",
+      "entry_fee": "08:00 AM - 10:00 PM",
+      "quietness": "Generally quiet",
+      "seating_type": "Indoor seating",
+      "opening_hours": "09:00 AM - 08:00 PM",
+      "power_outlets": "24 Hours",
+      "wifi_available": "10:00 AM - 11:00 PM"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.256Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 50,
+  "fields": {
+    "category": 18,
+    "name": "Open Landscape Viewpoint",
+    "location": "Central area, Indore",
+    "latitude": "22.715933",
+    "longitude": "75.857658",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Sunset Points",
+      "best_time": "Anytime",
+      "view_type": "Outdoor landscape",
+      "crowd_level": "Quiet during weekdays",
+      "safety_notes": "Well lit",
+      "accessibility": "Excellent",
+      "lighting_after_sunset": "Well-maintained"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.258Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 51,
+  "fields": {
+    "category": 17,
+    "name": "Maa Annapurna Tiffin",
+    "location": "Central area, Indore",
+    "latitude": "22.693595",
+    "longitude": "75.872898",
+    "price": "₹3000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Tiffin Services",
+      "meals_per_day": "2",
+      "monthly_price": "₹2,000–₹3,000",
+      "contact_method": "+91 99887 76655",
+      "trial_available": "24/7 RO Water",
+      "delivery_available": "Yes",
+      "vegetarian_options": "Available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.260Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 52,
+  "fields": {
+    "category": 5,
+    "name": "Evening Food Street",
+    "location": "Central area, Indore",
+    "latitude": "22.689476",
+    "longitude": "75.884776",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹100 - ₹300",
+      "opening_hours": "24 Hours",
+      "payment_methods": "UPI, Cards, Cash"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.262Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 53,
+  "fields": {
+    "category": 7,
+    "name": "Old Town Landmark",
+    "location": "Central area, Indore",
+    "latitude": "22.700913",
+    "longitude": "75.856222",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Historic Places",
+      "entry_fee": "₹20 (Student Discount)",
+      "guided_tours": "Wheelchair Accessible",
+      "accessibility": "Excellent",
+      "opening_hours": "₹20 (Student Discount)",
+      "historical_significance": "Local heritage site"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.265Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 54,
+  "fields": {
+    "category": 6,
+    "name": "Riverside Green Space",
+    "location": "Central area, Indore",
+    "latitude": "22.729997",
+    "longitude": "75.876462",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Parks & Outdoors",
+      "entry_fee": "₹20",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "High",
+      "opening_hours": "Open to Public",
+      "shade_available": "Moderate shade"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.266Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 55,
+  "fields": {
+    "category": 20,
+    "name": "City Stay Rooms",
+    "location": "Central area, Indore",
+    "latitude": "22.722187",
+    "longitude": "75.851708",
+    "price": "₹5000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 98765 43210",
+      "water_availability": "Included",
+      "electricity_included": "Fixed ₹500/month"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.269Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 56,
+  "fields": {
+    "category": 19,
+    "name": "Community Reading Hall",
+    "location": "Central area, Indore",
+    "latitude": "22.699949",
+    "longitude": "75.884971",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Study Spots",
+      "entry_fee": "08:00 AM - 10:00 PM",
+      "quietness": "Generally quiet",
+      "seating_type": "Indoor seating",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "power_outlets": "09:00 AM - 08:00 PM",
+      "wifi_available": "24 Hours"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.271Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 57,
+  "fields": {
+    "category": 18,
+    "name": "Riverside Evening View",
+    "location": "Central area, Indore",
+    "latitude": "22.708747",
+    "longitude": "75.830130",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Sunset Points",
+      "best_time": "Sunset",
+      "view_type": "Outdoor landscape",
+      "crowd_level": "Quiet during weekdays",
+      "safety_notes": "Safe during daytime",
+      "accessibility": "Moderate",
+      "lighting_after_sunset": "Well-maintained"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.273Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 58,
+  "fields": {
+    "category": 17,
+    "name": "Student Meal Service",
+    "location": "Central area, Indore",
+    "latitude": "22.734170",
+    "longitude": "75.874028",
+    "price": "₹2000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Tiffin Services",
+      "meals_per_day": "2",
+      "monthly_price": "₹2,000–₹3,000",
+      "contact_method": "+91 98765 43210",
+      "trial_available": "24/7 RO Water",
+      "delivery_available": "Included",
+      "vegetarian_options": "Available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.275Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 59,
+  "fields": {
+    "category": 5,
+    "name": "Local Sweets and Snacks",
+    "location": "Central area, Indore",
+    "latitude": "22.746652",
+    "longitude": "75.853469",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹20 - ₹80",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "payment_methods": "UPI, Cards, Cash"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.277Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 60,
+  "fields": {
+    "category": 7,
+    "name": "Historic Civic Building",
+    "location": "Central area, Indore",
+    "latitude": "22.705367",
+    "longitude": "75.886940",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Historic Places",
+      "entry_fee": "₹20 (Student Discount)",
+      "guided_tours": "Well-maintained",
+      "accessibility": "Well-maintained",
+      "opening_hours": "₹50",
+      "historical_significance": "Local heritage site"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.280Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 61,
+  "fields": {
+    "category": 6,
+    "name": "Public Walking Garden",
+    "location": "Central area, Indore",
+    "latitude": "22.699395",
+    "longitude": "75.883558",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "category": "Parks & Outdoors",
+      "entry_fee": "₹20",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "Excellent",
+      "opening_hours": "Open to Public",
+      "shade_available": "Moderate shade"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.282Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 62,
+  "fields": {
+    "category": 20,
+    "name": "Campus Corner Rooms",
+    "location": "Central area, Indore",
+    "latitude": "22.700138",
+    "longitude": "75.891893",
+    "price": "₹8000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Indore",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 87654 32109",
+      "water_availability": "24/7 RO Water",
+      "electricity_included": "Fixed ₹500/month"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.284Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 63,
+  "fields": {
+    "category": 22,
+    "name": "Student Print and Copy Centre",
+    "location": "Central area, Kota",
+    "latitude": "25.177465",
+    "longitude": "75.858879",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Coaching-Area Essentials",
+      "price_range": "₹200 - ₹500",
+      "service_type": "Student convenience service",
+      "opening_hours": "09:00 AM - 08:00 PM",
+      "contact_method": "+91 98765 43210",
+      "student_friendly": "Student-oriented service",
+      "distance_to_coaching": "24 Hours"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.288Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 64,
+  "fields": {
+    "category": 25,
+    "name": "Morning Riverside Route",
+    "location": "Central area, Kota",
+    "latitude": "25.169586",
+    "longitude": "75.848847",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Cycling Routes",
+      "best_time": "Early morning, subject to local conditions",
+      "difficulty": "Depends on route",
+      "safety_notes": "Check traffic, route access and weather",
+      "surface_type": "Mixed gravel and paved",
+      "traffic_level": "Wheelchair Accessible",
+      "route_length_km": "5 - 8 km"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.290Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 65,
+  "fields": {
+    "category": 8,
+    "name": "Local Breakfast Corner",
+    "location": "Central area, Kota",
+    "latitude": "25.181155",
+    "longitude": "75.846194",
+    "price": "Affordable",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹100 - ₹300",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "payment_methods": "Cash Only"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.292Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 66,
+  "fields": {
+    "category": 9,
+    "name": "Community Green Park",
+    "location": "Central area, Kota",
+    "latitude": "25.206137",
+    "longitude": "75.809791",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Parks & Outdoors",
+      "entry_fee": "Free Entry",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "Well-maintained",
+      "opening_hours": "Open to Public",
+      "shade_available": "Lots of trees"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.294Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 67,
+  "fields": {
+    "category": 21,
+    "name": "Shanti Residency",
+    "location": "Central area, Kota",
+    "latitude": "25.213733",
+    "longitude": "75.851046",
+    "price": "₹8000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 87654 32109",
+      "water_availability": "Borewell Water",
+      "electricity_included": "Included"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.296Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 68,
+  "fields": {
+    "category": 10,
+    "name": "Student Stationery Corner",
+    "location": "Central area, Kota",
+    "latitude": "25.189746",
+    "longitude": "75.834387",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Student Essentials",
+      "price_range": "Affordable",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "contact_method": "+91 91234 56789",
+      "item_or_service": "Stationery and daily student supplies",
+      "student_discount": "15% off with Student ID"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.299Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 69,
+  "fields": {
+    "category": 24,
+    "name": "Quiet Study Centre",
+    "location": "Central area, Kota",
+    "latitude": "25.187693",
+    "longitude": "75.826968",
+    "price": "Affordable",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Study Spots",
+      "entry_fee": "08:00 AM - 10:00 PM",
+      "quietness": "Generally quiet",
+      "seating_type": "Indoor seating",
+      "opening_hours": "08:00 AM - 10:00 PM",
+      "power_outlets": "09:00 AM - 08:00 PM",
+      "wifi_available": "10:00 AM - 11:00 PM"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.301Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 70,
+  "fields": {
+    "category": 23,
+    "name": "Ghar Ka Khana Tiffin",
+    "location": "Central area, Kota",
+    "latitude": "25.195812",
+    "longitude": "75.854196",
+    "price": "₹3000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Tiffin Services",
+      "meals_per_day": "2",
+      "monthly_price": "₹2,000–₹3,000",
+      "contact_method": "+91 91234 56789",
+      "trial_available": "24/7 RO Water",
+      "delivery_available": "Included",
+      "vegetarian_options": "Available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.303Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 71,
+  "fields": {
+    "category": 22,
+    "name": "Books and Notes Corner",
+    "location": "Central area, Kota",
+    "latitude": "25.167691",
+    "longitude": "75.862361",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Coaching-Area Essentials",
+      "price_range": "₹50 - ₹200",
+      "service_type": "Student convenience service",
+      "opening_hours": "09:00 AM - 08:00 PM",
+      "contact_method": "+91 98765 43210",
+      "student_friendly": "Student-oriented service",
+      "distance_to_coaching": "24 Hours"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.305Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 72,
+  "fields": {
+    "category": 25,
+    "name": "City Greenway Route",
+    "location": "Central area, Kota",
+    "latitude": "25.204789",
+    "longitude": "75.851440",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Cycling Routes",
+      "best_time": "Early morning, subject to local conditions",
+      "difficulty": "Depends on route",
+      "safety_notes": "Check traffic, route access and weather",
+      "surface_type": "Paved",
+      "traffic_level": "Moderate",
+      "route_length_km": "7.5 km"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.307Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 73,
+  "fields": {
+    "category": 8,
+    "name": "City Street Food Area",
+    "location": "Central area, Kota",
+    "latitude": "25.183658",
+    "longitude": "75.853610",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹50 - ₹150",
+      "opening_hours": "08:00 AM - 10:00 PM",
+      "payment_methods": "UPI & Cash"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.309Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 74,
+  "fields": {
+    "category": 9,
+    "name": "City Garden",
+    "location": "Central area, Kota",
+    "latitude": "25.167428",
+    "longitude": "75.859237",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Parks & Outdoors",
+      "entry_fee": "Open to Public",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "Excellent",
+      "opening_hours": "Open to Public",
+      "shade_available": "Moderate shade"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.311Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 75,
+  "fields": {
+    "category": 21,
+    "name": "Student Comfort Rooms",
+    "location": "Central area, Kota",
+    "latitude": "25.206560",
+    "longitude": "75.837063",
+    "price": "₹6500/mo",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 87654 32109",
+      "water_availability": "Borewell Water",
+      "electricity_included": "Metered Extra"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.314Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 76,
+  "fields": {
+    "category": 10,
+    "name": "Daily Needs Store",
+    "location": "Central area, Kota",
+    "latitude": "25.204145",
+    "longitude": "75.864041",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Student Essentials",
+      "price_range": "Affordable",
+      "opening_hours": "08:00 AM - 10:00 PM",
+      "contact_method": "+91 87654 32109",
+      "item_or_service": "Stationery and daily student supplies",
+      "student_discount": "No discount"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.316Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 77,
+  "fields": {
+    "category": 24,
+    "name": "Student Reading Room",
+    "location": "Central area, Kota",
+    "latitude": "25.212213",
+    "longitude": "75.815389",
+    "price": "Affordable",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Study Spots",
+      "entry_fee": "08:00 AM - 10:00 PM",
+      "quietness": "Generally quiet",
+      "seating_type": "Indoor seating",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "power_outlets": "08:00 AM - 10:00 PM",
+      "wifi_available": "10:00 AM - 11:00 PM"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.318Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 78,
+  "fields": {
+    "category": 23,
+    "name": "Daily Fresh Meals",
+    "location": "Central area, Kota",
+    "latitude": "25.206235",
+    "longitude": "75.816376",
+    "price": "₹2000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Tiffin Services",
+      "meals_per_day": "2",
+      "monthly_price": "₹2,000–₹3,000",
+      "contact_method": "+91 91234 56789",
+      "trial_available": "Borewell Water",
+      "delivery_available": "Yes",
+      "vegetarian_options": "Available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.320Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 79,
+  "fields": {
+    "category": 22,
+    "name": "Exam Supplies Shop",
+    "location": "Central area, Kota",
+    "latitude": "25.165409",
+    "longitude": "75.809434",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Coaching-Area Essentials",
+      "price_range": "₹10 - ₹100",
+      "service_type": "Student convenience service",
+      "opening_hours": "09:00 AM - 08:00 PM",
+      "contact_method": "+91 98765 43210",
+      "student_friendly": "Student-oriented service",
+      "distance_to_coaching": "10:00 AM - 11:00 PM"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.322Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 80,
+  "fields": {
+    "category": 25,
+    "name": "Lake Loop Route",
+    "location": "Central area, Kota",
+    "latitude": "25.153823",
+    "longitude": "75.806897",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Cycling Routes",
+      "best_time": "Early morning, subject to local conditions",
+      "difficulty": "Depends on route",
+      "safety_notes": "Check traffic, route access and weather",
+      "surface_type": "Paved",
+      "traffic_level": "High",
+      "route_length_km": "10 - 15 km"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.324Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 81,
+  "fields": {
+    "category": 8,
+    "name": "Traditional Snacks Market",
+    "location": "Central area, Kota",
+    "latitude": "25.207734",
+    "longitude": "75.831243",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹20 - ₹80",
+      "opening_hours": "24 Hours",
+      "payment_methods": "UPI & Cash"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.327Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 82,
+  "fields": {
+    "category": 9,
+    "name": "Neighbourhood Recreation Park",
+    "location": "Central area, Kota",
+    "latitude": "25.177810",
+    "longitude": "75.808070",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Parks & Outdoors",
+      "entry_fee": "Open to Public",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "Excellent",
+      "opening_hours": "Free Entry",
+      "shade_available": "Moderate shade"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.329Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 83,
+  "fields": {
+    "category": 21,
+    "name": "Green View Residency",
+    "location": "Central area, Kota",
+    "latitude": "25.200967",
+    "longitude": "75.869092",
+    "price": "₹8000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 98765 43210",
+      "water_availability": "Borewell Water",
+      "electricity_included": "Metered Extra"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.331Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 84,
+  "fields": {
+    "category": 10,
+    "name": "Campus Supplies Shop",
+    "location": "Central area, Kota",
+    "latitude": "25.160797",
+    "longitude": "75.832868",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Student Essentials",
+      "price_range": "₹10 - ₹500",
+      "opening_hours": "08:00 AM - 10:00 PM",
+      "contact_method": "+91 99887 76655",
+      "item_or_service": "Stationery and daily student supplies",
+      "student_discount": "15% off with Student ID"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.333Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 85,
+  "fields": {
+    "category": 24,
+    "name": "Focus Study Space",
+    "location": "Central area, Kota",
+    "latitude": "25.158935",
+    "longitude": "75.814918",
+    "price": "₹50 - ₹200",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Study Spots",
+      "entry_fee": "24 Hours",
+      "quietness": "Generally quiet",
+      "seating_type": "Indoor seating",
+      "opening_hours": "08:00 AM - 10:00 PM",
+      "power_outlets": "10:00 AM - 11:00 PM",
+      "wifi_available": "09:00 AM - 08:00 PM"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.335Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 86,
+  "fields": {
+    "category": 23,
+    "name": "Maa Annapurna Tiffin",
+    "location": "Central area, Kota",
+    "latitude": "25.208392",
+    "longitude": "75.813713",
+    "price": "₹2000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Tiffin Services",
+      "meals_per_day": "2",
+      "monthly_price": "₹2,000–₹3,000",
+      "contact_method": "+91 87654 32109",
+      "trial_available": "24/7 RO Water",
+      "delivery_available": "24/7 RO Water",
+      "vegetarian_options": "Available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.337Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 87,
+  "fields": {
+    "category": 22,
+    "name": "Student Laundry Service",
+    "location": "Central area, Kota",
+    "latitude": "25.190402",
+    "longitude": "75.816242",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Coaching-Area Essentials",
+      "price_range": "₹10 - ₹100",
+      "service_type": "Student convenience service",
+      "opening_hours": "09:00 AM - 08:00 PM",
+      "contact_method": "+91 91234 56789",
+      "student_friendly": "Student-oriented service",
+      "distance_to_coaching": "08:00 AM - 10:00 PM"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.339Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 88,
+  "fields": {
+    "category": 25,
+    "name": "Quiet Morning Cycling Route",
+    "location": "Central area, Kota",
+    "latitude": "25.163709",
+    "longitude": "75.827718",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Cycling Routes",
+      "best_time": "Early morning, subject to local conditions",
+      "difficulty": "Depends on route",
+      "safety_notes": "Check traffic, route access and weather",
+      "surface_type": "Smooth tarmac",
+      "traffic_level": "Wheelchair Accessible",
+      "route_length_km": "7.5 km"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.341Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 89,
+  "fields": {
+    "category": 8,
+    "name": "Evening Food Street",
+    "location": "Central area, Kota",
+    "latitude": "25.149969",
+    "longitude": "75.837492",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹50 - ₹150",
+      "opening_hours": "09:00 AM - 08:00 PM",
+      "payment_methods": "UPI & Cash"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.344Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 90,
+  "fields": {
+    "category": 9,
+    "name": "Riverside Green Space",
+    "location": "Central area, Kota",
+    "latitude": "25.174255",
+    "longitude": "75.819218",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Parks & Outdoors",
+      "entry_fee": "Free Entry",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "Available",
+      "opening_hours": "Open to Public",
+      "shade_available": "Plentiful"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.346Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 91,
+  "fields": {
+    "category": 21,
+    "name": "City Stay Rooms",
+    "location": "Central area, Kota",
+    "latitude": "25.156953",
+    "longitude": "75.861017",
+    "price": "₹6500/mo",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 98765 43210",
+      "water_availability": "24/7 RO Water",
+      "electricity_included": "Fixed ₹500/month"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.348Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 92,
+  "fields": {
+    "category": 10,
+    "name": "Budget Book Store",
+    "location": "Central area, Kota",
+    "latitude": "25.159427",
+    "longitude": "75.815247",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Student Essentials",
+      "price_range": "₹10 - ₹500",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "contact_method": "+91 98765 43210",
+      "item_or_service": "Stationery and daily student supplies",
+      "student_discount": "No discount"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.350Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 93,
+  "fields": {
+    "category": 24,
+    "name": "Community Reading Hall",
+    "location": "Central area, Kota",
+    "latitude": "25.160380",
+    "longitude": "75.866022",
+    "price": "₹50 - ₹200",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Study Spots",
+      "entry_fee": "24 Hours",
+      "quietness": "Generally quiet",
+      "seating_type": "Indoor seating",
+      "opening_hours": "08:00 AM - 10:00 PM",
+      "power_outlets": "08:00 AM - 10:00 PM",
+      "wifi_available": "08:00 AM - 10:00 PM"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.353Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 94,
+  "fields": {
+    "category": 23,
+    "name": "Student Meal Service",
+    "location": "Central area, Kota",
+    "latitude": "25.173777",
+    "longitude": "75.872118",
+    "price": "₹3000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Tiffin Services",
+      "meals_per_day": "2",
+      "monthly_price": "₹2,000–₹3,000",
+      "contact_method": "+91 99887 76655",
+      "trial_available": "Borewell Water",
+      "delivery_available": "Included",
+      "vegetarian_options": "Available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.355Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 95,
+  "fields": {
+    "category": 22,
+    "name": "Photocopy and Stationery Centre",
+    "location": "Central area, Kota",
+    "latitude": "25.149100",
+    "longitude": "75.869137",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "Kota",
+      "category": "Coaching-Area Essentials",
+      "price_range": "₹10 - ₹100",
+      "service_type": "Student convenience service",
+      "opening_hours": "24 Hours",
+      "contact_method": "+91 87654 32109",
+      "student_friendly": "Student-oriented service",
+      "distance_to_coaching": "08:00 AM - 10:00 PM"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.357Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 96,
+  "fields": {
+    "category": 11,
+    "name": "Local Breakfast Corner",
+    "location": "Central area, New Delhi",
+    "latitude": "28.624066",
+    "longitude": "77.209222",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹50 - ₹150",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "payment_methods": "UPI, Cards, Cash"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.361Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 97,
+  "fields": {
+    "category": 13,
+    "name": "Old City Heritage Area",
+    "location": "Central area, New Delhi",
+    "latitude": "28.585352",
+    "longitude": "77.223698",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Historic Places",
+      "entry_fee": "₹50",
+      "guided_tours": "High",
+      "accessibility": "High",
+      "opening_hours": "₹100",
+      "historical_significance": "Local heritage site"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.363Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 98,
+  "fields": {
+    "category": 28,
+    "name": "Traditional Goods Market",
+    "location": "Central area, New Delhi",
+    "latitude": "28.604091",
+    "longitude": "77.187266",
+    "price": "₹50 - ₹200",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Local Markets",
+      "market_type": "Local shopping market",
+      "opening_hours": "09:00 AM - 08:00 PM",
+      "products_sold": "Varies by seller",
+      "bargaining_common": "Not common (Fixed Price)",
+      "best_time_to_visit": "Weekends"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.365Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 99,
+  "fields": {
+    "category": 27,
+    "name": "City Metro Interchange",
+    "location": "Central area, New Delhi",
+    "latitude": "28.612930",
+    "longitude": "77.184694",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Metro & Transport Tips",
+      "frequency": "06:00 AM - 11:30 PM",
+      "fare_range": "Well-connected",
+      "accessibility": "Escalators available",
+      "route_or_area": "06:00 AM - 11:30 PM",
+      "transport_type": "Public transport",
+      "operating_hours": "06:00 AM - 11:30 PM"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.368Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 100,
+  "fields": {
+    "category": 12,
+    "name": "Community Green Park",
+    "location": "Central area, New Delhi",
+    "latitude": "28.596441",
+    "longitude": "77.176707",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Parks & Outdoors",
+      "entry_fee": "Free Entry",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "Available",
+      "opening_hours": "Open to Public",
+      "shade_available": "Good seating available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.370Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 101,
+  "fields": {
+    "category": 30,
+    "name": "Peaceful Garden Space",
+    "location": "Central area, New Delhi",
+    "latitude": "28.609707",
+    "longitude": "77.218944",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "ambience": "Relaxed outdoor setting",
+      "category": "Parks & Wind-Down Spots",
+      "entry_fee": "Open to Public",
+      "crowd_level": "Quiet during weekdays",
+      "safety_notes": "Well lit",
+      "opening_hours": "₹20",
+      "seating_available": "Available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.372Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 102,
+  "fields": {
+    "category": 26,
+    "name": "Shanti Residency",
+    "location": "Central area, New Delhi",
+    "latitude": "28.641384",
+    "longitude": "77.204607",
+    "price": "₹6500/mo",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 87654 32109",
+      "water_availability": "24/7 RO Water",
+      "electricity_included": "Fixed ₹500/month"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.374Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 103,
+  "fields": {
+    "category": 29,
+    "name": "Quiet Study Centre",
+    "location": "Central area, New Delhi",
+    "latitude": "28.636386",
+    "longitude": "77.238986",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Study Spots",
+      "entry_fee": "09:00 AM - 08:00 PM",
+      "quietness": "Generally quiet",
+      "seating_type": "Indoor seating",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "power_outlets": "08:00 AM - 10:00 PM",
+      "wifi_available": "08:00 AM - 10:00 PM"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.376Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 104,
+  "fields": {
+    "category": 11,
+    "name": "City Street Food Area",
+    "location": "Central area, New Delhi",
+    "latitude": "28.616552",
+    "longitude": "77.190477",
+    "price": "Affordable",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹20 - ₹80",
+      "opening_hours": "24 Hours",
+      "payment_methods": "UPI, Cards, Cash"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.378Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 105,
+  "fields": {
+    "category": 13,
+    "name": "Historic Market Quarter",
+    "location": "Central area, New Delhi",
+    "latitude": "28.600097",
+    "longitude": "77.210214",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Historic Places",
+      "entry_fee": "₹50",
+      "guided_tours": "Well-maintained",
+      "accessibility": "High",
+      "opening_hours": "₹50",
+      "historical_significance": "Local heritage site"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.380Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 106,
+  "fields": {
+    "category": 28,
+    "name": "Local Handicrafts Market",
+    "location": "Central area, New Delhi",
+    "latitude": "28.614076",
+    "longitude": "77.221794",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Local Markets",
+      "market_type": "Local shopping market",
+      "opening_hours": "09:00 AM - 08:00 PM",
+      "products_sold": "Varies by seller",
+      "bargaining_common": "Moderate",
+      "best_time_to_visit": "Weekends"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.382Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 107,
+  "fields": {
+    "category": 27,
+    "name": "Central Transit Connection",
+    "location": "Central area, New Delhi",
+    "latitude": "28.635046",
+    "longitude": "77.209879",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Metro & Transport Tips",
+      "frequency": "Well-connected",
+      "fare_range": "06:00 AM - 11:30 PM",
+      "accessibility": "Fully accessible",
+      "route_or_area": "Well-connected",
+      "transport_type": "Public transport",
+      "operating_hours": "₹10 - ₹60"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.385Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 108,
+  "fields": {
+    "category": 12,
+    "name": "City Garden",
+    "location": "Central area, New Delhi",
+    "latitude": "28.586904",
+    "longitude": "77.228258",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Parks & Outdoors",
+      "entry_fee": "Open to Public",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "Well-maintained",
+      "opening_hours": "₹20",
+      "shade_available": "Moderate shade"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.387Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 109,
+  "fields": {
+    "category": 30,
+    "name": "Community Relaxation Garden",
+    "location": "Central area, New Delhi",
+    "latitude": "28.592939",
+    "longitude": "77.235257",
+    "price": "₹50 - ₹200",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "ambience": "Relaxed outdoor setting",
+      "category": "Parks & Wind-Down Spots",
+      "entry_fee": "₹20",
+      "crowd_level": "High on weekends",
+      "safety_notes": "Well lit",
+      "opening_hours": "Open to Public",
+      "seating_available": "Well-maintained"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.389Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 110,
+  "fields": {
+    "category": 26,
+    "name": "Student Comfort Rooms",
+    "location": "Central area, New Delhi",
+    "latitude": "28.620619",
+    "longitude": "77.195835",
+    "price": "₹8000/mo",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 87654 32109",
+      "water_availability": "Included",
+      "electricity_included": "Fixed ₹500/month"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.391Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 111,
+  "fields": {
+    "category": 29,
+    "name": "Student Reading Room",
+    "location": "Central area, New Delhi",
+    "latitude": "28.582644",
+    "longitude": "77.229884",
+    "price": "Affordable",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Study Spots",
+      "entry_fee": "09:00 AM - 08:00 PM",
+      "quietness": "Generally quiet",
+      "seating_type": "Indoor seating",
+      "opening_hours": "24 Hours",
+      "power_outlets": "09:00 AM - 08:00 PM",
+      "wifi_available": "24 Hours"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.393Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 112,
+  "fields": {
+    "category": 11,
+    "name": "Traditional Snacks Market",
+    "location": "Central area, New Delhi",
+    "latitude": "28.580605",
+    "longitude": "77.184060",
+    "price": "Affordable",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹20 - ₹80",
+      "opening_hours": "24 Hours",
+      "payment_methods": "Cash Only"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.395Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 113,
+  "fields": {
+    "category": 13,
+    "name": "Heritage Architecture Walk",
+    "location": "Central area, New Delhi",
+    "latitude": "28.588427",
+    "longitude": "77.216885",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Historic Places",
+      "entry_fee": "₹20 (Student Discount)",
+      "guided_tours": "Moderate",
+      "accessibility": "Moderate",
+      "opening_hours": "₹50",
+      "historical_significance": "Local heritage site"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.397Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 114,
+  "fields": {
+    "category": 28,
+    "name": "Daily Needs Bazaar",
+    "location": "Central area, New Delhi",
+    "latitude": "28.631216",
+    "longitude": "77.243118",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Local Markets",
+      "market_type": "Local shopping market",
+      "opening_hours": "08:00 AM - 10:00 PM",
+      "products_sold": "Varies by seller",
+      "bargaining_common": "Moderate",
+      "best_time_to_visit": "Evenings (4 PM - 9 PM)"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.399Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 115,
+  "fields": {
+    "category": 27,
+    "name": "Railway and Metro Connection",
+    "location": "Central area, New Delhi",
+    "latitude": "28.593227",
+    "longitude": "77.198965",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Metro & Transport Tips",
+      "frequency": "Every 5 mins",
+      "fare_range": "06:00 AM - 11:30 PM",
+      "accessibility": "Escalators available",
+      "route_or_area": "Every 5 mins",
+      "transport_type": "Public transport",
+      "operating_hours": "₹10 - ₹60"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.402Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 116,
+  "fields": {
+    "category": 12,
+    "name": "Neighbourhood Recreation Park",
+    "location": "Central area, New Delhi",
+    "latitude": "28.636093",
+    "longitude": "77.243798",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Parks & Outdoors",
+      "entry_fee": "₹20",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "High",
+      "opening_hours": "Free Entry",
+      "shade_available": "Good seating available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.404Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 117,
+  "fields": {
+    "category": 30,
+    "name": "Green Escape Park",
+    "location": "Central area, New Delhi",
+    "latitude": "28.592340",
+    "longitude": "77.214484",
+    "price": "₹50 - ₹200",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "ambience": "Relaxed outdoor setting",
+      "category": "Parks & Wind-Down Spots",
+      "entry_fee": "Free Entry",
+      "crowd_level": "Quiet during weekdays",
+      "safety_notes": "Safe during daytime",
+      "opening_hours": "Open to Public",
+      "seating_available": "Well-maintained"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.406Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 118,
+  "fields": {
+    "category": 26,
+    "name": "Green View Residency",
+    "location": "Central area, New Delhi",
+    "latitude": "28.635916",
+    "longitude": "77.181898",
+    "price": "₹5000/mo",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 87654 32109",
+      "water_availability": "Borewell Water",
+      "electricity_included": "Fixed ₹500/month"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.408Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 119,
+  "fields": {
+    "category": 29,
+    "name": "Focus Study Space",
+    "location": "Central area, New Delhi",
+    "latitude": "28.596600",
+    "longitude": "77.239310",
+    "price": "₹50 - ₹200",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Study Spots",
+      "entry_fee": "08:00 AM - 10:00 PM",
+      "quietness": "Generally quiet",
+      "seating_type": "Indoor seating",
+      "opening_hours": "24 Hours",
+      "power_outlets": "10:00 AM - 11:00 PM",
+      "wifi_available": "09:00 AM - 08:00 PM"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.410Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 120,
+  "fields": {
+    "category": 11,
+    "name": "Evening Food Street",
+    "location": "Central area, New Delhi",
+    "latitude": "28.628659",
+    "longitude": "77.190830",
+    "price": "₹50 - ₹200",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹100 - ₹300",
+      "opening_hours": "08:00 AM - 10:00 PM",
+      "payment_methods": "UPI & Cash"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.413Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 121,
+  "fields": {
+    "category": 13,
+    "name": "Old Town Landmark",
+    "location": "Central area, New Delhi",
+    "latitude": "28.635770",
+    "longitude": "77.181474",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Historic Places",
+      "entry_fee": "₹20 (Student Discount)",
+      "guided_tours": "Moderate",
+      "accessibility": "Available",
+      "opening_hours": "Free Entry",
+      "historical_significance": "Local heritage site"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.415Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 122,
+  "fields": {
+    "category": 28,
+    "name": "Textile and Clothing Market",
+    "location": "Central area, New Delhi",
+    "latitude": "28.581750",
+    "longitude": "77.193094",
+    "price": "Affordable",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Local Markets",
+      "market_type": "Local shopping market",
+      "opening_hours": "09:00 AM - 08:00 PM",
+      "products_sold": "Varies by seller",
+      "bargaining_common": "Not common (Fixed Price)",
+      "best_time_to_visit": "Weekends"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.417Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 123,
+  "fields": {
+    "category": 27,
+    "name": "Main City Transit Hub",
+    "location": "Central area, New Delhi",
+    "latitude": "28.646020",
+    "longitude": "77.190829",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Metro & Transport Tips",
+      "frequency": "Every 5 mins",
+      "fare_range": "₹10 - ₹60",
+      "accessibility": "Fully accessible",
+      "route_or_area": "Well-connected",
+      "transport_type": "Public transport",
+      "operating_hours": "₹10 - ₹60"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.419Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 124,
+  "fields": {
+    "category": 12,
+    "name": "Riverside Green Space",
+    "location": "Central area, New Delhi",
+    "latitude": "28.586164",
+    "longitude": "77.174839",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Parks & Outdoors",
+      "entry_fee": "Open to Public",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "High",
+      "opening_hours": "₹20",
+      "shade_available": "Lots of trees"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.421Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 125,
+  "fields": {
+    "category": 30,
+    "name": "Quiet Riverside Space",
+    "location": "Central area, New Delhi",
+    "latitude": "28.582955",
+    "longitude": "77.187012",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "ambience": "Relaxed outdoor setting",
+      "category": "Parks & Wind-Down Spots",
+      "entry_fee": "Free Entry",
+      "crowd_level": "Moderate",
+      "safety_notes": "Safe during daytime",
+      "opening_hours": "₹20",
+      "seating_available": "Available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.423Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 126,
+  "fields": {
+    "category": 26,
+    "name": "City Stay Rooms",
+    "location": "Central area, New Delhi",
+    "latitude": "28.615870",
+    "longitude": "77.204635",
+    "price": "₹6500/mo",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 98765 43210",
+      "water_availability": "24/7 RO Water",
+      "electricity_included": "Fixed ₹500/month"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.425Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 127,
+  "fields": {
+    "category": 29,
+    "name": "Community Reading Hall",
+    "location": "Central area, New Delhi",
+    "latitude": "28.604658",
+    "longitude": "77.186928",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "New Delhi",
+      "category": "Study Spots",
+      "entry_fee": "10:00 AM - 11:00 PM",
+      "quietness": "Generally quiet",
+      "seating_type": "Indoor seating",
+      "opening_hours": "09:00 AM - 08:00 PM",
+      "power_outlets": "10:00 AM - 11:00 PM",
+      "wifi_available": "09:00 AM - 08:00 PM"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.427Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 128,
+  "fields": {
+    "category": 34,
+    "name": "City Evening Walk Area",
+    "location": "Central area, Rewa",
+    "latitude": "24.552388",
+    "longitude": "81.283382",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "ambience": "Public outdoor area",
+      "category": "Evening Places",
+      "lighting": "Available",
+      "best_time": "Anytime",
+      "crowd_level": "High on weekends",
+      "price_range": "Depends on nearby facilities",
+      "safety_notes": "Anytime"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.431Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 129,
+  "fields": {
+    "category": 14,
+    "name": "Local Breakfast Corner",
+    "location": "Central area, Rewa",
+    "latitude": "24.547923",
+    "longitude": "81.335311",
+    "price": "₹50 - ₹200",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹50 - ₹150",
+      "opening_hours": "24 Hours",
+      "payment_methods": "UPI & Cash"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.433Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 130,
+  "fields": {
+    "category": 16,
+    "name": "Old City Heritage Area",
+    "location": "Central area, Rewa",
+    "latitude": "24.551197",
+    "longitude": "81.290217",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Historic Places",
+      "entry_fee": "₹50",
+      "guided_tours": "Excellent",
+      "accessibility": "Available",
+      "opening_hours": "Free Entry",
+      "historical_significance": "Local heritage site"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.435Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 131,
+  "fields": {
+    "category": 33,
+    "name": "Traditional Goods Market",
+    "location": "Central area, Rewa",
+    "latitude": "24.538434",
+    "longitude": "81.328923",
+    "price": "₹50 - ₹200",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Local Markets",
+      "market_type": "Local shopping market",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "products_sold": "Varies by seller",
+      "bargaining_common": "Moderate",
+      "best_time_to_visit": "Evenings (4 PM - 9 PM)"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.438Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 132,
+  "fields": {
+    "category": 15,
+    "name": "Community Green Park",
+    "location": "Central area, Rewa",
+    "latitude": "24.512154",
+    "longitude": "81.324291",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Parks & Outdoors",
+      "entry_fee": "Open to Public",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "Wheelchair Accessible",
+      "opening_hours": "₹20",
+      "shade_available": "Moderate shade"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.440Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 133,
+  "fields": {
+    "category": 31,
+    "name": "Shanti Residency",
+    "location": "Central area, Rewa",
+    "latitude": "24.533246",
+    "longitude": "81.313924",
+    "price": "₹5000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 98765 43210",
+      "water_availability": "Borewell Water",
+      "electricity_included": "Included"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.442Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 134,
+  "fields": {
+    "category": 35,
+    "name": "Student Stationery Corner",
+    "location": "Central area, Rewa",
+    "latitude": "24.531507",
+    "longitude": "81.305901",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Student Essentials",
+      "price_range": "₹10 - ₹500",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "contact_method": "+91 98765 43210",
+      "item_or_service": "Stationery and daily student supplies",
+      "student_discount": "15% off with Student ID"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.444Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 135,
+  "fields": {
+    "category": 32,
+    "name": "Ghar Ka Khana Tiffin",
+    "location": "Central area, Rewa",
+    "latitude": "24.512916",
+    "longitude": "81.305427",
+    "price": "₹3000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Tiffin Services",
+      "meals_per_day": "2",
+      "monthly_price": "₹2,000–₹3,000",
+      "contact_method": "+91 91234 56789",
+      "trial_available": "24/7 RO Water",
+      "delivery_available": "Included",
+      "vegetarian_options": "Available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.446Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 136,
+  "fields": {
+    "category": 34,
+    "name": "Community Evening Garden",
+    "location": "Central area, Rewa",
+    "latitude": "24.514806",
+    "longitude": "81.336054",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "ambience": "Public outdoor area",
+      "category": "Evening Places",
+      "lighting": "Wheelchair Accessible",
+      "best_time": "Evening",
+      "crowd_level": "Quiet during weekdays",
+      "price_range": "Depends on nearby facilities",
+      "safety_notes": "Early Morning"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.448Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 137,
+  "fields": {
+    "category": 14,
+    "name": "City Street Food Area",
+    "location": "Central area, Rewa",
+    "latitude": "24.546591",
+    "longitude": "81.332315",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹20 - ₹80",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "payment_methods": "UPI & Cash"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.451Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 138,
+  "fields": {
+    "category": 16,
+    "name": "Historic Market Quarter",
+    "location": "Central area, Rewa",
+    "latitude": "24.536631",
+    "longitude": "81.300858",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Historic Places",
+      "entry_fee": "₹50",
+      "guided_tours": "Well-maintained",
+      "accessibility": "Well-maintained",
+      "opening_hours": "₹50",
+      "historical_significance": "Local heritage site"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.453Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 139,
+  "fields": {
+    "category": 33,
+    "name": "Local Handicrafts Market",
+    "location": "Central area, Rewa",
+    "latitude": "24.538740",
+    "longitude": "81.311662",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Local Markets",
+      "market_type": "Local shopping market",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "products_sold": "Varies by seller",
+      "bargaining_common": "Moderate",
+      "best_time_to_visit": "Weekends"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.455Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 140,
+  "fields": {
+    "category": 15,
+    "name": "City Garden",
+    "location": "Central area, Rewa",
+    "latitude": "24.541545",
+    "longitude": "81.301862",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Parks & Outdoors",
+      "entry_fee": "Open to Public",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "Moderate",
+      "opening_hours": "₹20",
+      "shade_available": "Moderate shade"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.457Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 141,
+  "fields": {
+    "category": 31,
+    "name": "Student Comfort Rooms",
+    "location": "Central area, Rewa",
+    "latitude": "24.514861",
+    "longitude": "81.287473",
+    "price": "₹5000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 98765 43210",
+      "water_availability": "24/7 RO Water",
+      "electricity_included": "Fixed ₹500/month"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.459Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 142,
+  "fields": {
+    "category": 35,
+    "name": "Daily Needs Store",
+    "location": "Central area, Rewa",
+    "latitude": "24.536752",
+    "longitude": "81.315184",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Student Essentials",
+      "price_range": "₹10 - ₹500",
+      "opening_hours": "09:00 AM - 08:00 PM",
+      "contact_method": "+91 98765 43210",
+      "item_or_service": "Stationery and daily student supplies",
+      "student_discount": "No discount"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.462Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 143,
+  "fields": {
+    "category": 32,
+    "name": "Daily Fresh Meals",
+    "location": "Central area, Rewa",
+    "latitude": "24.555295",
+    "longitude": "81.284463",
+    "price": "₹3000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Tiffin Services",
+      "meals_per_day": "2",
+      "monthly_price": "₹2,000–₹3,000",
+      "contact_method": "+91 99887 76655",
+      "trial_available": "Borewell Water",
+      "delivery_available": "24/7 RO Water",
+      "vegetarian_options": "Available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.464Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 144,
+  "fields": {
+    "category": 34,
+    "name": "Central Evening Promenade",
+    "location": "Central area, Rewa",
+    "latitude": "24.532906",
+    "longitude": "81.303570",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "ambience": "Public outdoor area",
+      "category": "Evening Places",
+      "lighting": "Wheelchair Accessible",
+      "best_time": "Evening",
+      "crowd_level": "Moderate",
+      "price_range": "Depends on nearby facilities",
+      "safety_notes": "Sunset"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.466Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 145,
+  "fields": {
+    "category": 14,
+    "name": "Traditional Snacks Market",
+    "location": "Central area, Rewa",
+    "latitude": "24.560768",
+    "longitude": "81.305987",
+    "price": "₹50 - ₹200",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹50 - ₹150",
+      "opening_hours": "09:00 AM - 08:00 PM",
+      "payment_methods": "UPI & Cash"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.468Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 146,
+  "fields": {
+    "category": 16,
+    "name": "Heritage Architecture Walk",
+    "location": "Central area, Rewa",
+    "latitude": "24.566961",
+    "longitude": "81.301089",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Historic Places",
+      "entry_fee": "₹20 (Student Discount)",
+      "guided_tours": "Wheelchair Accessible",
+      "accessibility": "Wheelchair Accessible",
+      "opening_hours": "Free Entry",
+      "historical_significance": "Local heritage site"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.470Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 147,
+  "fields": {
+    "category": 33,
+    "name": "Daily Needs Bazaar",
+    "location": "Central area, Rewa",
+    "latitude": "24.540355",
+    "longitude": "81.285306",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Local Markets",
+      "market_type": "Local shopping market",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "products_sold": "Varies by seller",
+      "bargaining_common": "Moderate",
+      "best_time_to_visit": "Early Mornings"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.472Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 148,
+  "fields": {
+    "category": 15,
+    "name": "Neighbourhood Recreation Park",
+    "location": "Central area, Rewa",
+    "latitude": "24.569164",
+    "longitude": "81.271031",
+    "price": "Free",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Parks & Outdoors",
+      "entry_fee": "Open to Public",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "Moderate",
+      "opening_hours": "Free Entry",
+      "shade_available": "Good seating available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.474Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 149,
+  "fields": {
+    "category": 31,
+    "name": "Green View Residency",
+    "location": "Central area, Rewa",
+    "latitude": "24.528813",
+    "longitude": "81.280542",
+    "price": "₹5000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 87654 32109",
+      "water_availability": "Included",
+      "electricity_included": "Fixed ₹500/month"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.476Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 150,
+  "fields": {
+    "category": 35,
+    "name": "Campus Supplies Shop",
+    "location": "Central area, Rewa",
+    "latitude": "24.510832",
+    "longitude": "81.322289",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Student Essentials",
+      "price_range": "Affordable",
+      "opening_hours": "10:00 AM - 11:00 PM",
+      "contact_method": "+91 91234 56789",
+      "item_or_service": "Stationery and daily student supplies",
+      "student_discount": "No discount"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.478Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 151,
+  "fields": {
+    "category": 32,
+    "name": "Maa Annapurna Tiffin",
+    "location": "Central area, Rewa",
+    "latitude": "24.554630",
+    "longitude": "81.294370",
+    "price": "₹2000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Tiffin Services",
+      "meals_per_day": "2",
+      "monthly_price": "₹2,000–₹3,000",
+      "contact_method": "+91 87654 32109",
+      "trial_available": "Included",
+      "delivery_available": "24/7 RO Water",
+      "vegetarian_options": "Available"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.480Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 152,
+  "fields": {
+    "category": 34,
+    "name": "Neighbourhood Walking Space",
+    "location": "Central area, Rewa",
+    "latitude": "24.560293",
+    "longitude": "81.284358",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "ambience": "Public outdoor area",
+      "category": "Evening Places",
+      "lighting": "Well-maintained",
+      "best_time": "Evening",
+      "crowd_level": "Quiet during weekdays",
+      "price_range": "Depends on nearby facilities",
+      "safety_notes": "Evening"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.482Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 153,
+  "fields": {
+    "category": 14,
+    "name": "Evening Food Street",
+    "location": "Central area, Rewa",
+    "latitude": "24.509251",
+    "longitude": "81.322192",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Food & Markets",
+      "food_types": "Local food and snacks",
+      "popular_for": "Local food and shopping",
+      "price_range": "₹50 - ₹150",
+      "opening_hours": "24 Hours",
+      "payment_methods": "Cash Only"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.484Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 154,
+  "fields": {
+    "category": 16,
+    "name": "Old Town Landmark",
+    "location": "Central area, Rewa",
+    "latitude": "24.541326",
+    "longitude": "81.334941",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Historic Places",
+      "entry_fee": "₹20 (Student Discount)",
+      "guided_tours": "Well-maintained",
+      "accessibility": "Wheelchair Accessible",
+      "opening_hours": "₹50",
+      "historical_significance": "Local heritage site"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.486Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 155,
+  "fields": {
+    "category": 33,
+    "name": "Textile and Clothing Market",
+    "location": "Central area, Rewa",
+    "latitude": "24.531169",
+    "longitude": "81.277743",
+    "price": "₹100 - ₹300",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Local Markets",
+      "market_type": "Local shopping market",
+      "opening_hours": "08:00 AM - 10:00 PM",
+      "products_sold": "Varies by seller",
+      "bargaining_common": "Yes, very common",
+      "best_time_to_visit": "Weekends"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.488Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 156,
+  "fields": {
+    "category": 15,
+    "name": "Riverside Green Space",
+    "location": "Central area, Rewa",
+    "latitude": "24.559970",
+    "longitude": "81.323260",
+    "price": "₹50 Entry",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Parks & Outdoors",
+      "entry_fee": "Free Entry",
+      "activities": "Walking and outdoor recreation",
+      "accessibility": "High",
+      "opening_hours": "₹20",
+      "shade_available": "Lots of trees"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.490Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 157,
+  "fields": {
+    "category": 31,
+    "name": "City Stay Rooms",
+    "location": "Central area, Rewa",
+    "latitude": "24.567815",
+    "longitude": "81.324500",
+    "price": "₹5000/mo",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "deposit": "One month's rent",
+      "category": "Rooms & Apartments",
+      "furnished": "Partly furnished",
+      "room_type": "Shared room",
+      "monthly_rent": "₹5,000–₹8,000",
+      "contact_method": "+91 91234 56789",
+      "water_availability": "Borewell Water",
+      "electricity_included": "Metered Extra"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.492Z"
+  }
+},
+{
+  "model": "pages.entity",
+  "pk": 158,
+  "fields": {
+    "category": 35,
+    "name": "Budget Book Store",
+    "location": "Central area, Rewa",
+    "latitude": "24.504516",
+    "longitude": "81.279468",
+    "price": "Varies",
+    "image": "",
+    "attributes": {
+      "city": "Rewa",
+      "category": "Student Essentials",
+      "price_range": "₹10 - ₹500",
+      "opening_hours": "09:00 AM - 08:00 PM",
+      "contact_method": "+91 87654 32109",
+      "item_or_service": "Stationery and daily student supplies",
+      "student_discount": "10% off"
+    },
+    "is_approved": true,
+    "created_at": "2026-10-11T14:30:46.495Z"
+  }
+}
+]
