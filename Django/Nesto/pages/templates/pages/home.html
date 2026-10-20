@@ -13,9 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Leaflet provides interactive maps without requiring an API key. -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 
     <style>
         :root {
@@ -71,8 +70,6 @@
         }
 
         .nesto-map {
-            min-height: 220px;
-            height: clamp(220px, 42vh, 390px);
             width: 100%;
             overflow: hidden;
             border-radius: 1rem;
@@ -111,7 +108,6 @@
 
 <body class="min-h-screen antialiased">
 
-<!-- NAVIGATION -->
 <nav class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
     <div class="mx-auto flex min-h-[68px] max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
 
@@ -151,14 +147,13 @@
 
 <main class="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10">
 
-    <!-- VIEW SWITCH -->
     <div class="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
             <p class="mb-2 text-xs font-extrabold uppercase tracking-[.18em] text-teal-700">
                 Your city, made easier
             </p>
             <h1 id="page-heading" class="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-                Find your place.
+                Find your Nest.
             </h1>
             <p id="page-subheading" class="mt-2 max-w-xl text-sm leading-6 text-slate-500 sm:text-base">
                 Discover places, everyday services, and local knowledge in {{ city.name }}.
@@ -191,8 +186,6 @@
         </div>
     </div>
 
-
-    <!-- EXPLORE VIEW -->
     <section id="explore-view" role="tabpanel" aria-labelledby="explore-tab">
 
         <div class="mb-5 flex items-end justify-between gap-3">
@@ -298,7 +291,6 @@
     </section>
 
 
-    <!-- COMMUNITY VIEW -->
     <section id="community-view" role="tabpanel" aria-labelledby="community-tab" hidden>
 
         <div class="mx-auto max-w-3xl space-y-4">
@@ -388,14 +380,12 @@
 </main>
 
 
-<!-- CATEGORY / ENTITY DISCOVERY MODAL -->
 <div id="discovery-modal"
     class="fixed inset-0 z-[60] hidden items-center justify-center bg-slate-950/55 p-0 backdrop-blur-sm sm:p-5"
     role="dialog" aria-modal="true" aria-labelledby="modal-title">
 
     <div class="modal-shell flex h-full w-full flex-col overflow-hidden bg-white shadow-2xl sm:h-[min(88vh,850px)] sm:max-w-5xl sm:rounded-3xl">
 
-        <!-- MODAL HEADER -->
         <header class="flex shrink-0 items-center gap-3 border-b border-slate-200 px-4 py-4 sm:px-6">
             <button id="modal-back" type="button" onclick="showCategoryState()"
                     class="hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition hover:bg-slate-100"
@@ -421,23 +411,18 @@
         </header>
 
 
-        <!-- CATEGORY STATE -->
-        <div id="category-state" class="min-h-0 flex-1 overflow-y-auto">
-            <div class="grid min-h-full grid-cols-1 lg:grid-cols-[1.1fr_.9fr]">
-
-                <!-- INTERACTIVE CATEGORY MAP -->
-                <section class="border-b border-slate-200 p-4 sm:p-6 lg:border-b-0 lg:border-r">
-                    <div class="mb-3 flex items-center justify-between gap-3">
+        <div id="category-state" class="min-h-0 flex-1 flex-col flex overflow-y-auto lg:overflow-hidden">
+            <div class="grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-[1.1fr_.9fr]">
+                <section class="border-b border-slate-200 p-4 sm:p-6 lg:border-b-0 lg:border-r flex flex-col">
+                    <div class="mb-3 flex items-center justify-between gap-3 shrink-0">
                         <div>
                             <h3 class="text-sm font-extrabold text-slate-900">Explore on the map</h3>
                             <p class="mt-1 text-xs text-slate-500">Listings with coordinates appear as pins.</p>
                         </div>
                         <span class="rounded-full bg-teal-50 px-2.5 py-1 text-[10px] font-bold text-teal-800">LIVE MAP</span>
                     </div>
-
-                    <div id="category-map" class="nesto-map" role="region" aria-label="Map of listings in this category"></div>
-                    <p id="category-map-status" class="map-status">Loading map…</p>
-
+                        <div id="category-map" class="nesto-map flex-1 min-h-[220px]" role="region" aria-label="Map of listings in this category"></div>
+                        <p id="category-map-status" class="map-status shrink-0">Loading map…</p>
                     <div class="mt-3 flex items-start gap-2 text-xs leading-5 text-slate-500">
                         <svg class="mt-0.5 h-4 w-4 shrink-0 text-teal-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
                             <circle cx="12" cy="12" r="9"/>
@@ -448,7 +433,6 @@
                 </section>
 
 
-                <!-- CATEGORY ENTITY LIST -->
                 <section class="flex min-h-[300px] min-w-0 flex-col p-4 sm:p-6">
                     <div class="mb-4 flex items-end justify-between gap-3">
                         <div>
@@ -533,23 +517,14 @@
         </div>
 
 
-        <!-- ENTITY DETAIL STATE -->
-        <div id="entity-state" class="hidden min-h-0 flex-1 overflow-y-auto">
-            <div class="grid min-h-full grid-cols-1 lg:grid-cols-[1.1fr_.9fr]">
-
-                <!-- INTERACTIVE SELECTED ENTITY MAP -->
-                <section class="border-b border-slate-200 p-4 sm:p-6 lg:border-b-0 lg:border-r">
-                    <div class="mb-3 flex items-center justify-between gap-3">
-                        <div>
-                            <h3 class="text-sm font-extrabold text-slate-900">Location</h3>
-                            <p class="mt-1 text-xs text-slate-500">Map pin shown when coordinates exist.</p>
-                        </div>
-                        <span class="rounded-full bg-teal-50 px-2.5 py-1 text-[10px] font-bold text-teal-800">LIVE MAP</span>
+        <div id="entity-state" class="hidden min-h-0 flex-1 flex-col overflow-y-auto lg:overflow-hidden">
+            <div class="grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-[1.1fr_.9fr]">
+                <section class="border-b border-slate-200 p-4 sm:p-6 lg:border-b-0 lg:border-r flex flex-col">
+                    <div class="mb-3 flex items-center justify-between gap-3 shrink-0">
                     </div>
-
-                    <div id="entity-map" class="nesto-map" role="region" aria-label="Map of the selected listing"></div>
-                    <p id="entity-map-status" class="map-status">Select a listing to view its location.</p>
-
+                
+                    <div id="entity-map" class="nesto-map flex-1 min-h-[220px]" role="region" aria-label="Map of the selected listing"></div>
+                    <p id="entity-map-status" class="map-status shrink-0">Select a listing to view its location.</p>
                     <a id="directions-link" href="#" target="_blank" rel="noopener noreferrer"
                         class="mt-4 hidden w-full items-center justify-center gap-2 rounded-xl bg-teal-700 px-4 py-3 text-sm font-bold text-white transition hover:bg-teal-800">
                         Open directions in Google Maps
@@ -560,8 +535,6 @@
                     </a>
                 </section>
 
-
-                <!-- ENTITY DETAILS -->
                 <section class="min-w-0 p-4 sm:p-6">
                     <div id="detail-image-wrap" class="mb-5 hidden overflow-hidden rounded-2xl border border-slate-100">
                         <img id="detail-image" src="" alt="" class="max-h-64 w-full object-cover">
@@ -604,343 +577,12 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
 <script>
-    const modal = document.getElementById("discovery-modal");
-    const categoryState = document.getElementById("category-state");
-    const entityState = document.getElementById("entity-state");
-    const modalTitle = document.getElementById("modal-title");
-    const modalSubtitle = document.getElementById("modal-subtitle");
-    const modalEyebrow = document.getElementById("modal-eyebrow");
-    const modalBack = document.getElementById("modal-back");
-    const entityCount = document.getElementById("entity-count");
-    const noEntities = document.getElementById("no-entities");
-
     const cityName = "{{ city.name|escapejs }}";
-
-    let activeCategoryId = null;
-    let lastFocusedElement = null;
-    let categoryMap = null;
-    let categoryMarkers = null;
-    let entityMap = null;
-    let entityMarker = null;
-
-    // ---------- MAP HELPERS (Leaflet + OpenStreetMap) ----------
-    function validCoordinates(latitude, longitude) {
-        if (latitude === "" || longitude === "" || latitude == null || longitude == null) return false;
-        const lat = Number(latitude);
-        const lng = Number(longitude);
-        return Number.isFinite(lat) && Number.isFinite(lng) &&
-            lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
-    }
-
-    function escapeHtml(value) {
-        return String(value).replace(/[&<>"']/g, character => ({
-            "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-        })[character]);
-    }
-
-    function setStatus(id, text) {
-        const element = document.getElementById(id);
-        if (element) element.textContent = text;
-    }
-
-    function createMap(elementId) {
-        const map = L.map(elementId).setView([20, 0], 2);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            maxZoom: 19,
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'
-        }).addTo(map);
-        return map;
-    }
-
-    // Maps are created lazily, only once their container is visible,
-    // so Leaflet never measures a hidden (zero-size) element.
-    function updateCategoryMap() {
-        if (typeof L === "undefined") {
-            setStatus("category-map-status", "The map library could not load. Check your internet connection and try again.");
-            return;
-        }
-
-        if (!categoryMap) {
-            categoryMap = createMap("category-map");
-            categoryMarkers = L.featureGroup().addTo(categoryMap);
-        }
-
-        categoryMap.invalidateSize();
-        categoryMarkers.clearLayers();
-
-        const bounds = [];
-        document.querySelectorAll("#entity-list .entity-card").forEach(card => {
-            if (card.dataset.categoryId !== activeCategoryId) return;
-
-            const latitude = card.dataset.entityLatitude;
-            const longitude = card.dataset.entityLongitude;
-            if (!validCoordinates(latitude, longitude)) return;
-
-            const point = [Number(latitude), Number(longitude)];
-            L.marker(point)
-                .bindPopup(`<strong>${escapeHtml(card.dataset.entityName || "Listing")}</strong>`)
-                .addTo(categoryMarkers);
-            bounds.push(point);
-        });
-
-        if (bounds.length === 1) {
-            categoryMap.setView(bounds[0], 15);
-        } else if (bounds.length > 1) {
-            categoryMap.fitBounds(bounds, { padding: [24, 24], maxZoom: 15 });
-        } else {
-            categoryMap.setView([20, 0], 2);
-        }
-
-        setStatus("category-map-status",
-            bounds.length
-                ? `${bounds.length} mapped ${bounds.length === 1 ? "listing" : "listings"} in this category.`
-                : "No listings in this category have valid coordinates yet. You can still browse the list.");
-
-        setTimeout(() => categoryMap && categoryMap.invalidateSize(), 150);
-    }
-
-    function updateEntityMap(button) {
-        if (typeof L === "undefined") {
-            setStatus("entity-map-status", "The map library could not load. Check your internet connection and try again.");
-            return;
-        }
-
-        if (!entityMap) entityMap = createMap("entity-map");
-
-        entityMap.invalidateSize();
-
-        if (entityMarker) {
-            entityMap.removeLayer(entityMarker);
-            entityMarker = null;
-        }
-
-        const latitude = button.dataset.entityLatitude;
-        const longitude = button.dataset.entityLongitude;
-        const directionsLink = document.getElementById("directions-link");
-
-        if (validCoordinates(latitude, longitude)) {
-            const point = [Number(latitude), Number(longitude)];
-            entityMap.setView(point, 16);
-            entityMarker = L.marker(point).addTo(entityMap)
-                .bindPopup(`<strong>${escapeHtml(button.dataset.entityName || "Listing")}</strong>`)
-                .openPopup();
-
-            directionsLink.href =
-                "https://www.google.com/maps/dir/?api=1&destination=" +
-                encodeURIComponent(latitude + "," + longitude);
-            directionsLink.classList.remove("hidden");
-            directionsLink.classList.add("flex");
-            setStatus("entity-map-status", "Showing the saved coordinates for this listing.");
-        } else {
-            entityMap.setView([20, 0], 2);
-            setStatus("entity-map-status",
-                button.dataset.entityLocation
-                    ? "No coordinates are saved, so the map cannot show an exact pin. You can search this address in Google Maps."
-                    : "No valid coordinates are saved for this listing.");
-        }
-
-        setTimeout(() => entityMap && entityMap.invalidateSize(), 150);
-    }
-
-    function switchView(view) {
-        const explore = view === "explore";
-        const explorePanel = document.getElementById("explore-view");
-        const communityPanel = document.getElementById("community-view");
-        const exploreTab = document.getElementById("explore-tab");
-        const communityTab = document.getElementById("community-tab");
-
-        explorePanel.hidden = !explore;
-        communityPanel.hidden = explore;
-
-        exploreTab.setAttribute("aria-selected", String(explore));
-        communityTab.setAttribute("aria-selected", String(!explore));
-
-        document.getElementById("page-heading").textContent =
-            explore ? "Find your place." : "Your community";
-
-        document.getElementById("page-subheading").textContent =
-            explore
-                ? `Discover places, everyday services, and local knowledge in {{ city.name|escapejs }}.`
-                : "Local questions, experiences, and recommendations.";
-    }
-
-    function openCategory(categoryId) {
-        const categoryButton = document.querySelector(
-            `.category-card[data-category-id="${categoryId}"]`
-        );
-
-        if (!categoryButton) return;
-
-        lastFocusedElement = document.activeElement;
-        activeCategoryId = String(categoryId);
-
-        modalTitle.textContent = categoryButton.dataset.categoryName;
-        modalSubtitle.textContent = "Discover places and services in {{ city.name|escapejs }}";
-        modalEyebrow.textContent = "CITY GUIDE";
-
-        showCategoryState();
-
-        let count = 0;
-        document.querySelectorAll("#entity-list .entity-card").forEach(card => {
-            const matches = card.dataset.categoryId === activeCategoryId;
-            card.classList.toggle("hidden", !matches);
-            if (matches) count++;
-        });
-
-        entityCount.textContent = `${count} ${count === 1 ? "place" : "places"}`;
-        noEntities.classList.toggle("hidden", count > 0);
-
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-        document.body.classList.add("modal-open");
-
-        try { updateCategoryMap(); } catch (error) { console.error("Category map error:", error); }
-
-        document.getElementById("modal-close").focus();
-    }
-
-    function showCategoryState() {
-        categoryState.classList.remove("hidden");
-        entityState.classList.add("hidden");
-        modalBack.classList.add("hidden");
-
-        if (activeCategoryId !== null) {
-            const categoryButton = document.querySelector(
-                `.category-card[data-category-id="${activeCategoryId}"]`
-            );
-
-            if (categoryButton) {
-                modalTitle.textContent = categoryButton.dataset.categoryName;
-            }
-        }
-
-        modalEyebrow.textContent = "CITY GUIDE";
-        modalSubtitle.textContent = "Discover places and services in {{ city.name|escapejs }}";
-    }
-
-    function showEntityState(button) {
-        const name = button.dataset.entityName || "Untitled listing";
-        const location = button.dataset.entityLocation || "";
-        const price = button.dataset.entityPrice || "";
-        const image = button.dataset.entityImage || "";
-
-        // Set the full-listing link first, using the real Django URL, so nothing below can prevent it.
-        const fullEntityLink = document.getElementById("full-entity-link");
-        fullEntityLink.href = button.dataset.entityUrl || "#";
-
-        categoryState.classList.add("hidden");
-        entityState.classList.remove("hidden");
-        modalBack.classList.remove("hidden");
-
-        modalEyebrow.textContent = "PLACE DETAILS";
-        modalTitle.textContent = name;
-        modalSubtitle.textContent = location || "Location not provided";
-
-        document.getElementById("detail-name").textContent = name;
-
-        const priceElement = document.getElementById("detail-price");
-        priceElement.textContent = price;
-        priceElement.classList.toggle("hidden", !price);
-
-        const locationWrap = document.getElementById("detail-location-wrap");
-        document.getElementById("detail-location").textContent = location;
-        locationWrap.classList.toggle("hidden", !location);
-
-        // Text-address fallback; updateEntityMap() overrides it when exact coordinates exist.
-        const directionsLink = document.getElementById("directions-link");
-
-        if (location) {
-            directionsLink.href =
-                "https://www.google.com/maps/search/?api=1&query=" +
-                encodeURIComponent(location + ", " + cityName);
-            directionsLink.classList.remove("hidden");
-            directionsLink.classList.add("flex");
-        } else {
-            directionsLink.classList.add("hidden");
-            directionsLink.classList.remove("flex");
-            directionsLink.removeAttribute("href");
-        }
-
-        const imageWrap = document.getElementById("detail-image-wrap");
-        const imageElement = document.getElementById("detail-image");
-
-        if (image) {
-            imageElement.src = image;
-            imageElement.alt = name;
-            imageWrap.classList.remove("hidden");
-        } else {
-            imageElement.removeAttribute("src");
-            imageElement.alt = "";
-            imageWrap.classList.add("hidden");
-        }
-
-        // Attributes are read from a Django-escaped data attribute.
-        // Build nodes with textContent instead of injecting HTML.
-        const attributesContainer = document.getElementById("detail-attributes");
-        const noAttributes = document.getElementById("detail-no-attributes");
-        attributesContainer.replaceChildren();
-
-        let attributes = {};
-        try {
-            attributes = JSON.parse(button.dataset.entityAttributes || "{}");
-        } catch (error) {
-            attributes = {};
-        }
-
-        let attributeCount = 0;
-
-        if (attributes && typeof attributes === "object" && !Array.isArray(attributes)) {
-            Object.entries(attributes).forEach(([key, value]) => {
-                if (value === null || value === undefined || String(value).trim() === "") return;
-
-                const row = document.createElement("div");
-                row.className = "rounded-xl border border-slate-200 bg-white p-3";
-
-                const label = document.createElement("p");
-                label.className = "text-[10px] font-extrabold uppercase tracking-wider text-slate-500";
-                label.textContent = key;
-
-                const content = document.createElement("p");
-                content.className = "mt-1 break-words text-sm leading-6 text-slate-700";
-                content.textContent = String(value);
-
-                row.append(label, content);
-                attributesContainer.appendChild(row);
-                attributeCount++;
-            });
-        }
-
-        noAttributes.classList.toggle("hidden", attributeCount > 0);
-
-        try { updateEntityMap(button); } catch (error) { console.error("Entity map error:", error); }
-    }
-
-    function closeModal() {
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
-        document.body.classList.remove("modal-open");
-
-        activeCategoryId = null;
-
-        if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
-            lastFocusedElement.focus();
-        }
-    }
-
-    document.getElementById("modal-close").addEventListener("click", closeModal);
-
-    modal.addEventListener("click", event => {
-        if (event.target === modal) closeModal();
-    });
-
-    document.addEventListener("keydown", event => {
-        if (event.key === "Escape" && !modal.classList.contains("hidden")) {
-            closeModal();
-        }
-    });
 </script>
+
+<script src="{% static 'pages/map.js' %}"></script>
+<script src="{% static 'pages/home.js' %}"></script>
 
 </body>
 </html>

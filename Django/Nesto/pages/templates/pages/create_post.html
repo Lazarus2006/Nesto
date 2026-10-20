@@ -229,6 +229,7 @@
 </div>
 
 <script>
+    const MAPBOX_TOKEN = "pk.eyJ1IjoibGF6YXJ1czIwMDYiLCJhIjoiY212Z3N6dTQ5MDEydTJ3cXkxMnkzaXFqdiJ9.ViOLzHLA4n6acyNk4EyFPg";
     const categoriesData = {{ categories_json|safe }};
 
     let locationMap = null;
@@ -408,23 +409,20 @@
         if (!locationMap) {
             locationMap = L.map(mapElement).setView([22.7196, 75.8577], 5);
 
-            L.tileLayer(
-                'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                {
-                    maxZoom: 19,
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>'
-                }
-            )
+            L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`, {
+                tileSize: 512,
+                zoomOffset: -1,
+                maxZoom: 20,
+                attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            })
             .on('tileerror', function () {
-                status.textContent =
-                    'Some map tiles could not load. You can still try selecting a location.';
+                status.textContent = 'Some map tiles could not load. You can still try selecting a location.';
             })
             .addTo(locationMap);
 
             locationMap.on('click', function (event) {
                 const lat = event.latlng.lat;
                 const lng = event.latlng.lng;
-
                 if (locationMarker) {
                     locationMarker.setLatLng(event.latlng);
                 } else {
