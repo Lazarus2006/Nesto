@@ -103,6 +103,24 @@
                 scroll-behavior: auto !important;
             }
         }
+
+        @keyframes ui-enter {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-ui-enter {
+            animation: ui-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes tile-enter {
+            from { opacity: 0; transform: translateY(6px) scale(0.99); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .entity-card:not(.hidden) {
+            animation: tile-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
     </style>
 </head>
 
@@ -433,7 +451,7 @@
                 </section>
 
 
-                <section class="flex min-h-[300px] min-w-0 flex-col p-4 sm:p-6">
+                <section class="flex min-h-[300px] min-w-0 flex-col p-4 sm:p-6 animate-ui-enter">
                     <div class="mb-4 flex items-end justify-between gap-3">
                         <div>
                             <h3 class="text-sm font-extrabold text-slate-900">Places & services</h3>
@@ -520,7 +538,12 @@
         <div id="entity-state" class="hidden min-h-0 flex-1 flex-col overflow-y-auto lg:overflow-hidden">
             <div class="grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-[1.1fr_.9fr]">
                 <section class="border-b border-slate-200 p-4 sm:p-6 lg:border-b-0 lg:border-r flex flex-col">
-                    <div class="mb-3 flex items-center justify-between gap-3 shrink-0">
+                    <div id="entity-map-header" class="mb-3 flex items-center justify-between gap-3 shrink-0 animate-ui-enter transition-opacity duration-300">
+                        <div>
+                            <h3 class="text-sm font-extrabold text-slate-900">Listing location</h3>
+                            <p class="mt-1 text-xs text-slate-500">Exact coordinates on the map.</p>
+                        </div>
+                        <span class="rounded-full bg-teal-50 px-2.5 py-1 text-[10px] font-bold text-teal-800">LIVE MAP</span>
                     </div>
                 
                     <div id="entity-map" class="nesto-map flex-1 min-h-[220px]" role="region" aria-label="Map of the selected listing"></div>
@@ -535,7 +558,7 @@
                     </a>
                 </section>
 
-                <section class="min-w-0 p-4 sm:p-6">
+                <section id="entity-text-panel" class="min-w-0 p-4 sm:p-6 animate-ui-enter transition-opacity duration-300">
                     <div id="detail-image-wrap" class="mb-5 hidden overflow-hidden rounded-2xl border border-slate-100">
                         <img id="detail-image" src="" alt="" class="max-h-64 w-full object-cover">
                     </div>

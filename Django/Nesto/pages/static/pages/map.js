@@ -298,10 +298,24 @@ const NestoMap = (() => {
             return;
         }
 
-        view.observer = new ResizeObserver(() => {
+        let lastWidth = 0;
+        let lastHeight = 0;
+
+        view.observer = new ResizeObserver((entries) => {
             if (!isVisible(element) || !view.map) {
                 return;
             }
+
+            const entry = entries[0];
+            const newWidth = entry.contentRect.width;
+            const newHeight = entry.contentRect.height;
+            
+            if (Math.abs(newWidth - lastWidth) < 5 && Math.abs(newHeight - lastHeight) < 5) {
+                return;
+            }
+
+            lastWidth = newWidth;
+            lastHeight = newHeight;
 
             view.map.invalidateSize({ animate: false });
 
@@ -312,7 +326,6 @@ const NestoMap = (() => {
                 job();
             }
         });
-
         view.observer.observe(element);
     }
 
@@ -465,6 +478,9 @@ const NestoMap = (() => {
         const view = views.entity;
         const map = view.map;
 
+        if (views.category.map && !prefersReducedMotion()) {
+            map.setView(views.category.map.getCenter(), views.category.map.getZoom(), { animate: false });
+        }
         if (view.marker) {
             map.removeLayer(view.marker);
             view.marker = null;
@@ -581,6 +597,11 @@ const NestoMap = (() => {
                 duration: 1.2
             });
             activeMap.closePopup();
+            setTimeout(() => {
+                if (views.category.map) {
+                    views.category.map.setView(defaultCityCenter, defaultCityZoom, { animate: false });
+                }
+            }, 1200);
         }
     }
 

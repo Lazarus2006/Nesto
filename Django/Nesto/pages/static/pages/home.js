@@ -212,6 +212,12 @@ document.addEventListener("keydown", event => {
 });
 
 function handleBackClick() {
+    const entityPanel = document.getElementById("entity-text-panel");
+    const entityMapHeader = document.getElementById("entity-map-header");
+
+    if (entityPanel) entityPanel.classList.add("opacity-0");
+    if (entityMapHeader) entityMapHeader.classList.add("opacity-0");
+
     try {
         NestoMap.zoomOutToCity();
     } catch (error) {
@@ -219,5 +225,7 @@ function handleBackClick() {
     }
     setTimeout(() => {
         showCategoryState();
+        if (entityPanel) entityPanel.classList.remove("opacity-0");
+        if (entityMapHeader) entityMapHeader.classList.remove("opacity-0");
     }, 1200); 
 }
