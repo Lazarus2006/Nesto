@@ -107,8 +107,10 @@ def create_post(request):
             new_entity_name = request.POST.get('new_entity')
             location = request.POST.get('location')
             price = request.POST.get('price')
-            latitude = request.POST.get('latitude')
-            longitude = request.POST.get('longitude')
+            raw_lat = request.POST.get('latitude')
+            raw_lng = request.POST.get('longitude')
+            latitude = float(raw_lat) if raw_lat else None
+            longitude = float(raw_lng) if raw_lng else None
 
             category = None
             if category_id == 'new' and new_category_name:
@@ -145,6 +147,8 @@ def create_post(request):
                         category = category,
                         name = new_entity_name.strip(),
                         location = location,
+                        latitude = latitude,
+                        longitude = longitude,
                         price = price,
                         image = image,
                         attributes = custom_attributes
@@ -155,6 +159,8 @@ def create_post(request):
                         entity.attributes.update(custom_attributes)
                         if location: entity.location = location
                         if price: entity.price = price
+                        if latitude is not None: entity.latitude = latitude
+                        if longitude is not None: entity.longitude = longitude
                         entity.save()
 
             Post.objects.create(
@@ -185,6 +191,8 @@ def create_post(request):
                     'name': ent.name,
                     'location': ent.location or '',
                     'price': ent.price or '',
+                    'latitude': str(ent.latitude) if ent.latitude else '',
+                    'longitude': str(ent.longitude) if ent.longitude else '',
                     'attributes': ent.attributes or {}
                 }
                 for ent in cat.entities.filter(is_approved=True)

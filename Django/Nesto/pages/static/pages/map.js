@@ -38,6 +38,7 @@ const NestoMap = (() => {
             observer: null,
             generation: 0
         },
+
         entity: {
             elementId: "entity-map",
             statusId: "entity-map-status",
@@ -48,6 +49,9 @@ const NestoMap = (() => {
             generation: 0
         }
     };
+
+    let defaultCityCenter = null;
+    let defaultCityZoom = null;
 
     function validCoordinates(latitude, longitude) {
         if (
@@ -405,6 +409,11 @@ const NestoMap = (() => {
             resetView(map);
         }
 
+        setTimeout(() => {
+            defaultCityCenter = map.getCenter();
+            defaultCityZoom = map.getZoom();
+        }, 200);
+
         setStatus(
             view.statusId,
             points.length
@@ -561,10 +570,25 @@ const NestoMap = (() => {
         });
     }
 
+    function zoomOutToCity() {
+        const activeMap = isVisible(document.getElementById(views.entity.elementId)) 
+            ? views.entity.map 
+            : views.category.map;
+
+        if (activeMap && defaultCityCenter && defaultCityZoom) {
+            activeMap.flyTo(defaultCityCenter, defaultCityZoom, {
+                animate: true,
+                duration: 1.2
+            });
+            activeMap.closePopup();
+        }
+    }
+
     return {
         initMap,
         setCity,
         showCategory,
-        focusEntity
+        focusEntity,
+        zoomOutToCity
     };
 })();

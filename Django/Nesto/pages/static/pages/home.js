@@ -210,3 +210,14 @@ document.addEventListener("keydown", event => {
         closeModal();
     }
 });
+
+function handleBackClick() {
+    try {
+        NestoMap.zoomOutToCity();
+    } catch (error) {
+        console.error("Map zoom out error:", error);
+    }
+    setTimeout(() => {
+        showCategoryState();
+    }, 1200); 
+}
