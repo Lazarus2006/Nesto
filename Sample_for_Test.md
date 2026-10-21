@@ -3,7 +3,7 @@
 Use the following credentials to sign in to the deployed application and explore Nesto's features.
 
 - **Username:** `penguin710`
-- **Password:** [your demo account password]
+- **Password:** dhruv2006@
 
 **Live application:** https://nesto-01xb.onrender.com/
 
