@@ -12,7 +12,10 @@ const noEntities = document.getElementById("no-entities");
 let activeCategoryId = null;
 let lastFocusedElement = null;
 
-NestoMap.setCity({ name: cityName });
+NestoMap.setCity({ 
+    name: cityName,
+    center: typeof cityCenter !== 'undefined' ? cityCenter : null
+});
 
 function switchView(view) {
     const explore = view === "explore";

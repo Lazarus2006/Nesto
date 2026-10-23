@@ -620,6 +620,10 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
     const cityName = "{{ city.name|escapejs }}";
+    const latStr = "{{ city.latitude|default_if_none:'' }}";
+    const lngStr = "{{ city.longitude|default_if_none:'' }}";
+    
+    const cityCenter = (latStr && lngStr) ? [parseFloat(latStr), parseFloat(lngStr)] : null;
 </script>
 
 <script src="{% static 'pages/map.js' %}"></script>

@@ -406,19 +406,19 @@
             return;
         }
 
-        if (!locationMap) {
-            locationMap = L.map(mapElement).setView([22.7196, 75.8577], 5);
+        if (typeof locationMap === 'undefined' || !locationMap) {
+            const latStr = "{{ user.profile.city.latitude|default_if_none:'' }}";
+            const lngStr = "{{ user.profile.city.longitude|default_if_none:'' }}";
+            const defaultLat = latStr ? parseFloat(latStr) : 20.5937;
+            const defaultLng = lngStr ? parseFloat(lngStr) : 78.9629;
+            const defaultZoom = latStr ? 12 : 5;
+            window.locationMap = L.map(mapElement).setView([defaultLat, defaultLng], defaultZoom);
 
             L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`, {
-                tileSize: 512,
-                zoomOffset: -1,
-                maxZoom: 20,
-                attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            })
-            .on('tileerror', function () {
-                status.textContent = 'Some map tiles could not load. You can still try selecting a location.';
-            })
-            .addTo(locationMap);
+                maxZoom: 19,
+                attribution: '© Mapbox'
+            }).addTo(window.locationMap);
+        }
 
             locationMap.on('click', function (event) {
                 const lat = event.latlng.lat;

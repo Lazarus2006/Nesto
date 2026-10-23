@@ -1,10 +1,5 @@
 const MAPBOX_TOKEN = "pk.eyJ1IjoibGF6YXJ1czIwMDYiLCJhIjoiY212Z3N6dTQ5MDEydTJ3cXkxMnkzaXFqdiJ9.ViOLzHLA4n6acyNk4EyFPg";
-const DEV_CITY_CENTERS = {
-        "Indore": [22.7196, 75.8577],
-        "Kota": [25.1825, 75.8391],
-        "New Delhi": [28.6139, 77.2090],
-        "Rewa": [24.5362, 81.3037]
-    };
+
 
 const NestoMap = (() => {
     "use strict";
@@ -248,9 +243,10 @@ const NestoMap = (() => {
         const bounds = cityBounds();
         const maxZoom = city.maxZoom !== null ? city.maxZoom : DEFAULT_MAX_ZOOM;
         map.setMaxZoom(maxZoom);
+        
         if (!bounds) {
             map.setMaxBounds(null);
-            const safeMinZoom = city.center || DEV_CITY_CENTERS[city.name] ? 10 : 4;
+            const safeMinZoom = city.center ? 10 : 4;
             map.setMinZoom(city.minZoom !== null ? Math.min(city.minZoom, maxZoom) : safeMinZoom);
             return;
         }
@@ -268,11 +264,8 @@ const NestoMap = (() => {
         if (bounds) {
             map.fitBounds(bounds, { padding: [24, 24], maxZoom: 15, animate: false });
         } else {
-            const fallbackCenter = DEV_CITY_CENTERS[city.name];
             if (city.center) {
                 map.setView(city.center, city.zoom !== null ? city.zoom : 12, { animate: false });
-            } else if (fallbackCenter) {
-                map.setView(fallbackCenter, 12, { animate: false });
             } else {
                 map.setView([20.5937, 78.9629], 5, { animate: false }); // Fallback to country view
             }

@@ -4,9 +4,8 @@ from .models import City, Profile, Category, Entity, Post, Comment
 
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
-    list_display = ("name", "slug")
+    list_display = ("name", "slug", "latitude", "longitude")
     prepopulated_fields = {"slug": ("name",)}
-
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
