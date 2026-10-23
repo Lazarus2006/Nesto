@@ -172,8 +172,13 @@
     <div class="space-y-8">
         {% if search_results.profiles %}
             <section>
-                <h2 class="text-lg font-bold text-slate-700 mb-3 border-b pb-2">Profiles</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <button onclick="toggleSearchSection('section-profiles', 'icon-profiles')" class="flex items-center justify-between w-full text-left mb-3 border-b border-slate-200 pb-2 hover:opacity-80 transition-opacity focus:outline-none">
+                    <h2 class="text-lg font-bold text-slate-700">Profiles</h2>
+                    <svg id="icon-profiles" class="w-5 h-5 text-slate-500 transform transition-transform duration-200 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="section-profiles" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 block">
                     {% for profile in search_results.profiles %}
                         <a href="{% url 'public_profile' profile.user.username %}" class="flex items-center gap-3 p-4 bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-teal-300 transition block">
                             {% if profile.profile_picture %}
@@ -195,8 +200,13 @@
 
         {% if search_results.cities or search_results.categories %}
             <section>
-                <h2 class="text-lg font-bold text-slate-700 mb-3 border-b pb-2">Places & Categories</h2>
-                <div class="flex flex-wrap gap-2">
+                <button onclick="toggleSearchSection('section-categories', 'icon-categories')" class="flex items-center justify-between w-full text-left mb-3 border-b border-slate-200 pb-2 hover:opacity-80 transition-opacity focus:outline-none">
+                    <h2 class="text-lg font-bold text-slate-700">Places & Categories</h2>
+                    <svg id="icon-categories" class="w-5 h-5 text-slate-500 transform transition-transform duration-200 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="section-categories" class="flex flex-wrap gap-2 block">
                     {% for search_city in search_results.cities %}
                         <span class="px-3 py-1.5 bg-blue-50 text-blue-700 border border-blue-100 rounded-lg text-sm font-bold">📍 City: {{ search_city.name }}</span>
                     {% endfor %}
@@ -211,9 +221,13 @@
 
         {% if search_results.entities %}
             <section>
-                <h2 class="text-lg font-bold text-slate-700 mb-3 border-b pb-2">Places / Entities</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {% for entity in search_results.entities %}
+                <button onclick="toggleSearchSection('section-entities', 'icon-entities')" class="flex items-center justify-between w-full text-left mb-3 border-b border-slate-200 pb-2 hover:opacity-80 transition-opacity focus:outline-none">
+                    <h2 class="text-lg font-bold text-slate-700">Places / Entities</h2>
+                    <svg id="icon-entities" class="w-5 h-5 text-slate-500 transform transition-transform duration-200 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="section-entities" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 block">                    {% for entity in search_results.entities %}
                         <a href="{% url 'entity_detail' entity.id %}" class="block p-4 bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-teal-300 transition">
                             <h3 class="font-bold text-slate-900">{{ entity.name }}</h3>
                             <p class="text-xs text-slate-500 mt-1">📁 {{ entity.category.name }}</p>
@@ -228,8 +242,13 @@
 
         {% if search_results.posts %}
             <section>
-                <h2 class="text-lg font-bold text-slate-700 mb-3 border-b pb-2">Community Posts</h2>
-                <div class="space-y-4">
+                <button onclick="toggleSearchSection('section-posts', 'icon-posts')" class="flex items-center justify-between w-full text-left mb-3 border-b border-slate-200 pb-2 hover:opacity-80 transition-opacity focus:outline-none">
+                    <h2 class="text-lg font-bold text-slate-700">Community Posts</h2>
+                    <svg id="icon-posts" class="w-5 h-5 text-slate-500 transform transition-transform duration-200 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div id="section-posts" class="space-y-4 block">
                     {% for post in search_results.posts %}
                         <article class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
                             <h3 class="font-extrabold text-slate-900">{{ post.title }}</h3>
@@ -605,6 +624,20 @@
 
 <script src="{% static 'pages/map.js' %}"></script>
 <script src="{% static 'pages/home.js' %}"></script>
+
+<script>
+function toggleSearchSection(sectionId, iconId) {
+    const section = document.getElementById(sectionId);
+    const icon = document.getElementById(iconId);
+    if (section.classList.contains('hidden')) {
+        section.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+    } else {
+        section.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+    }
+}
+</script>
 
 </body>
 </html>
