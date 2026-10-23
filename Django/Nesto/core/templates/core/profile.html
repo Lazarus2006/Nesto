@@ -39,6 +39,16 @@
             </a>
 
             <div class="flex items-center gap-4 relative">
+                <a href="{% url 'choose_city' %}"
+                    title="Change city"
+                    aria-label="Change city: {{ profile.city.name|default:'no city selected' }}"
+                    class="flex max-w-[140px] items-center gap-1.5 rounded-xl px-2.5 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">
+                    <svg class="h-4 w-4 shrink-0 text-teal-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                        <circle cx="12" cy="10" r="2.5"/>
+                    </svg>
+                    <span class="truncate">{{ profile.city.name|default:"Choose city" }}</span>
+                </a>
                 <a href="{% url 'home' %}" class="text-sm font-semibold text-slate-600 hover:text-slate-900">Home</a>
                 <a href="{% url 'create_post' %}" class="text-sm font-semibold text-slate-600 hover:text-slate-900">Create Post</a>
                 
