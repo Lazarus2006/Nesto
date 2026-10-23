@@ -60,7 +60,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             get_or_create_profile(user)
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect("home")
     else:
         form = SignUpForm()

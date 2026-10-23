@@ -22,7 +22,7 @@
         <article class="bg-white border border-slate-200 rounded-3xl shadow-xl shadow-slate-200/60 p-6 sm:p-8 mt-5">
             <p class="text-sm text-slate-500">
                 <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-700 mr-1">{{ post.get_post_type_display }}</span>
-                {% if post.author %} · <span class="font-semibold text-slate-700">{{ post.author.username }}</span>{% endif %}
+                {% if post.author %} · <a href="{% url 'public_profile' post.author.username %}" class="font-semibold text-slate-700 hover:text-teal-600 hover:underline">{{ post.author.username }}</a>{% endif %}
                 · {{ post.created_at|date:"d M Y, H:i" }}
             </p>
 
@@ -48,7 +48,7 @@
                         {{ comment.author.username|make_list|first|upper }}
                     </div>
                     <div class="min-w-0">
-                        <p class="font-semibold text-slate-900 text-sm">{{ comment.author.username }}</p>
+                        <p class="font-semibold text-slate-900 text-sm"><a href="{% url 'public_profile' comment.author.username %}" class="hover:text-teal-600 hover:underline">{{ comment.author.username }}</a></p>
                         <p class="text-xs text-slate-500">
                             {{ comment.created_at|date:"d M Y, H:i" }}
                         </p>

@@ -79,7 +79,13 @@
                         <div class="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center text-xs font-bold text-teal-700">
                             {% if post.author %}{{ post.author.username|make_list|first|upper }}{% else %}A{% endif %}
                         </div>
-                        <span class="text-sm font-semibold text-slate-900">{% if post.author %}{{ post.author.username }}{% else %}Anonymous{% endif %}</span>
+                        <span class="text-sm font-semibold text-slate-900">
+                            {% if post.author %}
+                                <a href="{% url 'public_profile' post.author.username %}" class="hover:text-teal-600 hover:underline">{{ post.author.username }}</a>
+                            {% else %}
+                                Anonymous
+                            {% endif %}
+                        </span>
                         <span class="text-xs text-slate-500">• {{ post.created_at|timesince }} ago</span>
                     </div>
                     <h3 class="font-bold text-slate-900 text-base mb-1">{{ post.title }}</h3>

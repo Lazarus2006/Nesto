@@ -1,10 +1,11 @@
 from django.contrib import messages
-from .models import Post, Category, Entity, City, Comment, get_or_create_profile
+from .models import Post, Category, Entity, City, Comment, get_or_create_profile , Profile
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PostForm , CommentForm
 import json
 from django.contrib.auth.decorators import login_required
-from django.db.models import Prefetch
+from django.db.models import Prefetch , Q
+from django.contrib.auth.models import User
 
 @login_required
 def home(request):
@@ -13,17 +14,43 @@ def home(request):
         return redirect("choose_city")
     
     city = profile.city
+    query = request.GET.get('q', '').strip()
+    search_results = {}
+
+    if query:
+        search_results['profiles'] = Profile.objects.filter(
+            Q(display_name__icontains=query) | Q(user__username__icontains=query),
+            city=city
+        ).distinct()
+        
+        search_results['cities'] = City.objects.filter(
+            name__icontains=query
+        ).distinct()
+        
+        search_results['categories'] = Category.objects.filter(
+            name__icontains=query,
+            city=city.name
+        ).distinct()
+        
+        search_results['entities'] = Entity.objects.filter(
+            Q(name__icontains=query) | Q(location__icontains=query),
+            category__city=city.name
+        ).distinct()
+        
+        search_results['posts'] = Post.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query),
+            city=city
+        ).distinct()
+
     posts = (
         Post.objects
-        .filter(city = city)
+        .filter(city=city)
         .select_related("author", "category", "entity")
-        .order_by("-created_at"))
+        .order_by("-created_at")
+    )
     categories = (
         Category.objects
-        .filter(
-            city = city.name,
-            is_approved = True,
-        )
+        .filter(city=city.name, is_approved=True)
         .prefetch_related("entities")
     )
 
@@ -31,13 +58,11 @@ def home(request):
         "posts": posts,
         "categories": categories,
         "city": city,
+        "query": query,
+        "search_results": search_results,
     }
 
-    return render(
-        request,
-        "pages/home.html",
-        context
-    )
+    return render(request, "pages/home.html", context)
 
 
 @login_required
@@ -252,3 +277,21 @@ def post_detail(request, pk):
         "comments": comments,
         "comment_form": CommentForm(),
     })
+
+
+@login_required
+def public_profile(request, username):
+    target_user = get_object_or_404(User, username=username)
+    target_profile = get_object_or_404(Profile, user=target_user)
+    
+    viewer_profile = get_or_create_profile(request.user)
+    posts = Post.objects.filter(
+        author=target_user, 
+        city=viewer_profile.city
+    ).order_by("-created_at")
+
+    context = {
+        "target_profile": target_profile,
+        "posts": posts,
+    }
+    return render(request, "pages/public_profile.html", context)

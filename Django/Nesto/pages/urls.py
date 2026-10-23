@@ -9,4 +9,5 @@ urlpatterns = [
     path("city/select/",views.choose_city,name="choose_city",),
     path("post/<int:pk>/comment/",views.add_comment,name="add_comment",),
     path("post/<int:pk>/", views.post_detail, name="post_detail"),
+    path('user/<str:username>/', views.public_profile, name='public_profile'),
 ]
