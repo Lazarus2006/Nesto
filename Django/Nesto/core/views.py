@@ -1,16 +1,58 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login , authenticate , logout
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm
-from pages.models import get_or_create_profile
+from pages.models import get_or_create_profile, Post
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 @login_required
 def profile(request):
+    profile_obj = get_or_create_profile(request.user)
+
+    if request.method == "POST":
+        display_name = request.POST.get("display_name")
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        profile_picture = request.FILES.get("profile_picture")
+
+        if username:
+            request.user.username = username
+        if email:
+            request.user.email = email
+        request.user.save()
+
+        if display_name:
+            profile_obj.display_name = display_name
+        if profile_picture:
+            profile_obj.profile_picture = profile_picture
+        profile_obj.save()
+
+        messages.success(request, "Profile updated successfully!")
+        return redirect("profile")
+
     return render(request, "core/profile.html", {
-        "profile": get_or_create_profile(request.user),
+        "profile": profile_obj,
         "posts": request.user.posts.all().order_by("-created_at"),
     })
+
+@login_required
+def edit_post(request, pk):
+    post = get_object_or_404(Post, pk=pk, author=request.user)
+    if request.method == "POST":
+        post.title = request.POST.get("title", post.title)
+        post.content = request.POST.get("content", post.content)
+        post.save()
+        messages.success(request, "Post updated successfully!")
+    return redirect("profile")
+
+@login_required
+def delete_post(request, pk):
+    post = get_object_or_404(Post, pk=pk, author=request.user)
+    if request.method == "POST":
+        post.delete()
+        messages.success(request, "Post deleted successfully!")
+    return redirect("profile")
 
 def signup(request):
     if request.method == "POST":
@@ -54,3 +96,15 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect("login")
+
+@login_required
+def delete_account(request):
+    if request.method == "POST":
+        user = request.user
+        Post.objects.filter(author=user).delete()
+        logout(request)
+        user.delete()
+        messages.success(request, "Your account and all associated data have been permanently deleted.")
+        return redirect("home") # Redirect to your landing/home page
+        
+    return redirect("profile")
