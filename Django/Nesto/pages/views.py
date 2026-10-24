@@ -295,3 +295,26 @@ def public_profile(request, username):
         "posts": posts,
     }
     return render(request, "pages/public_profile.html", context)
+
+
+@login_required
+def edit_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk, author=request.user)
+    if request.method == "POST":
+        content = request.POST.get("content", "").strip()
+        if content:
+            comment.content = content
+            comment.save()
+            messages.success(request, "Comment updated successfully.")
+        else:
+            messages.error(request, "Comment cannot be empty.")
+    return redirect("post_detail", pk=comment.post.pk)
+
+@login_required
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk, author=request.user)
+    post_pk = comment.post.pk
+    if request.method == "POST":
+        comment.delete()
+        messages.success(request, "Comment deleted successfully.")
+    return redirect("post_detail", pk=post_pk)
