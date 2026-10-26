@@ -206,7 +206,7 @@
                         <label class="text-sm font-semibold text-slate-700">
                             Custom Attributes
                         </label>
-                        <button type="button" onclick="addAttributeRow('', '')"
+                        <button type="button" id="add_attr_btn" onclick="addAttributeRow('', '')"
                                 class="text-xs text-teal-700 hover:text-teal-900 font-semibold bg-teal-50 hover:bg-teal-100 px-2.5 py-1 rounded-lg transition">
                             + Add Attribute
                         </button>
@@ -330,6 +330,10 @@
         const mapPicker = document.getElementById('map_picker_box');
         const catId = document.getElementById('category_select').value;
         const container = document.getElementById('attributes_container');
+        
+        const priceInput = document.getElementById('price_input');
+        const locInput = document.getElementById('location_input');
+        const addAttrBtn = document.getElementById('add_attr_btn');
 
         if (!entityVal) {
             detailsBox.classList.add('hidden');
@@ -345,13 +349,17 @@
             newEntityNameBox.classList.remove('hidden');
             newEntityInput.disabled = false;
 
-            document.getElementById('price_input').value = '';
-            document.getElementById('location_input').value = '';
+            priceInput.value = '';
+            locInput.value = '';
+            priceInput.readOnly = false;
+            locInput.readOnly = false;
+            priceInput.classList.remove('bg-slate-100', 'text-slate-500');
+            locInput.classList.remove('bg-slate-100', 'text-slate-500');
+            if(addAttrBtn) addAttrBtn.classList.remove('hidden');
+            
             container.innerHTML = '';
-
             resetMapSelection();
             mapPicker.classList.remove('hidden');
-
             initializeLocationMap();
             return;
         }
@@ -359,6 +367,12 @@
         newEntityNameBox.classList.add('hidden');
         newEntityInput.disabled = true;
         mapPicker.classList.add('hidden');
+        
+        priceInput.readOnly = true;
+        locInput.readOnly = true;
+        priceInput.classList.add('bg-slate-100', 'text-slate-500');
+        locInput.classList.add('bg-slate-100', 'text-slate-500');
+        if(addAttrBtn) addAttrBtn.classList.add('hidden');
 
         const catData = categoriesData[catId];
         if (!catData) return;
@@ -369,16 +383,61 @@
 
         if (!entity) return;
 
-        document.getElementById('price_input').value = entity.price || '';
-        document.getElementById('location_input').value = entity.location || '';
-
+        priceInput.value = entity.price || '';
+        locInput.value = entity.location || '';
         container.innerHTML = '';
 
         if (entity.attributes) {
             Object.entries(entity.attributes).forEach(([key, value]) => {
-                addAttributeRow(key, value);
+                addAttributeRow(key, value, true); 
             });
         }
+    }
+
+    function addAttributeRow(key = '', val = '', isReadOnly = false) {
+        const container = document.getElementById('attributes_container');
+        const row = document.createElement('div');
+
+        row.className = 'flex gap-2 items-center';
+
+        const keyInput = document.createElement('input');
+        keyInput.type = 'text';
+        keyInput.name = 'attr_keys[]';
+        keyInput.placeholder = 'Attribute (e.g. Timings)';
+        keyInput.value = key;
+        keyInput.readOnly = isReadOnly;
+        keyInput.className =
+            'w-1/2 bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition';
+
+        const valueInput = document.createElement('input');
+        valueInput.type = 'text';
+        valueInput.name = 'attr_values[]';
+        valueInput.placeholder = 'Value (e.g. 9 AM - 10 PM)';
+        valueInput.value = val;
+        valueInput.readOnly = isReadOnly;
+        valueInput.className =
+            'w-1/2 bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition';
+
+        if (isReadOnly) {
+            keyInput.classList.add('bg-slate-100', 'text-slate-500');
+            valueInput.classList.add('bg-slate-100', 'text-slate-500');
+        }
+
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.textContent = '✕';
+        removeButton.setAttribute('aria-label', 'Remove attribute');
+        removeButton.className =
+            'text-slate-400 hover:text-red-600 font-bold text-sm px-1.5 transition';
+            
+        if (isReadOnly) {
+            removeButton.classList.add('hidden');
+        } else {
+            removeButton.addEventListener('click', () => row.remove());
+        }
+
+        row.append(keyInput, valueInput, removeButton);
+        container.appendChild(row);
     }
 
     function resetMapSelection() {
@@ -401,42 +460,37 @@
         if (!mapElement) return;
 
         if (typeof L === 'undefined') {
-            status.textContent =
-                'Leaflet could not load. Check your internet connection or script blocker.';
+            status.textContent = 'Leaflet could not load. Check your internet connection or script blocker.';
             return;
         }
 
-        if (typeof locationMap === 'undefined' || !locationMap) {
+        if (!locationMap) {
             const latStr = "{{ user.profile.city.latitude|default_if_none:'' }}";
             const lngStr = "{{ user.profile.city.longitude|default_if_none:'' }}";
             const defaultLat = latStr ? parseFloat(latStr) : 20.5937;
             const defaultLng = lngStr ? parseFloat(lngStr) : 78.9629;
             const defaultZoom = latStr ? 12 : 5;
-            window.locationMap = L.map(mapElement).setView([defaultLat, defaultLng], defaultZoom);
+            
+            locationMap = L.map(mapElement).setView([defaultLat, defaultLng], defaultZoom);
 
             L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`, {
                 maxZoom: 19,
                 attribution: '© Mapbox'
-            }).addTo(window.locationMap);
-        }
-
+            }).addTo(locationMap);
+            
             locationMap.on('click', function (event) {
                 const lat = event.latlng.lat;
                 const lng = event.latlng.lng;
+                
                 if (locationMarker) {
                     locationMarker.setLatLng(event.latlng);
                 } else {
                     locationMarker = L.marker(event.latlng).addTo(locationMap);
                 }
 
-                document.getElementById('latitude_input').value =
-                    lat.toFixed(6);
-
-                document.getElementById('longitude_input').value =
-                    lng.toFixed(6);
-
-                document.getElementById('map-coordinates').textContent =
-                    `Selected: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                document.getElementById('latitude_input').value = lat.toFixed(6);
+                document.getElementById('longitude_input').value = lng.toFixed(6);
+                document.getElementById('map-coordinates').textContent = `Selected: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
             });
         }
 
@@ -447,41 +501,29 @@
                 locationMap.invalidateSize();
             }
         });
-
-    function addAttributeRow(key = '', val = '') {
-        const container = document.getElementById('attributes_container');
-        const row = document.createElement('div');
-
-        row.className = 'flex gap-2 items-center';
-
-        const keyInput = document.createElement('input');
-        keyInput.type = 'text';
-        keyInput.name = 'attr_keys[]';
-        keyInput.placeholder = 'Attribute (e.g. Timings)';
-        keyInput.value = key;
-        keyInput.className =
-            'w-1/2 bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition';
-
-        const valueInput = document.createElement('input');
-        valueInput.type = 'text';
-        valueInput.name = 'attr_values[]';
-        valueInput.placeholder = 'Value (e.g. 9 AM - 10 PM)';
-        valueInput.value = val;
-        valueInput.className =
-            'w-1/2 bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition';
-
-        const removeButton = document.createElement('button');
-        removeButton.type = 'button';
-        removeButton.textContent = '✕';
-        removeButton.setAttribute('aria-label', 'Remove attribute');
-        removeButton.className =
-            'text-slate-400 hover:text-red-600 font-bold text-sm px-1.5 transition';
-        removeButton.addEventListener('click', () => row.remove());
-
-        row.append(keyInput, valueInput, removeButton);
-        container.appendChild(row);
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const prefillType = "{{ prefill_type }}";
+        const prefillCategory = "{{ prefill_category }}";
+        const prefillEntity = "{{ prefill_entity }}";
+        
+        if (prefillType === 'guide') {
+            switchTab('guide');
+            if (prefillCategory) {
+                const catSelect = document.getElementById('category_select');
+                catSelect.value = prefillCategory;
+                handleCategoryChange();
+                if (prefillEntity) {
+                    const entitySelect = document.getElementById('entity_select');
+                    entitySelect.value = prefillEntity;
+                    handleEntityChange(); 
+                }
+            }
+        }
+    });
 </script>
+
 
 </body>
 </html>

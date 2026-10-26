@@ -68,7 +68,7 @@
         <div class="space-y-4">
             <div class="flex justify-between items-center gap-3 mb-4">
                 <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Posts & Reviews about {{ entity.name }}</h2>
-                <a href="{% url 'create_post' %}" class="shrink-0 text-xs bg-teal-600 hover:bg-teal-700 text-white font-semibold px-3.5 py-2 rounded-lg transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2">
+                <a href="{% url 'create_post' %}?type=guide&category={{ entity.category.id }}&entity={{ entity.id }}" class="shrink-0 text-xs bg-teal-600 hover:bg-teal-700 text-white font-semibold px-3.5 py-2 rounded-lg transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2">
                     + Write Review
                 </a>
             </div>

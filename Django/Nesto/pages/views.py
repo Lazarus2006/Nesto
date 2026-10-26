@@ -227,6 +227,9 @@ def create_post(request):
     context = {
         'categories': categories,
         'categories_json': json.dumps(categories_json),
+        'prefill_type': request.GET.get('type', ''),
+        'prefill_category': request.GET.get('category', ''),
+        'prefill_entity': request.GET.get('entity', ''),
     }
     return render(request, 'pages/create_post.html', context)
 
