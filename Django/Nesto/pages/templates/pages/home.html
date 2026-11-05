@@ -1,490 +1,286 @@
+{% extends "pages/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f8fafc">
 
-    <title>Nesto | Explore {{ city.name }}</title>
+{% block title %}Nesto | {{ city.name }}{% endblock %}
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+{% block head_extra %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+    .view-tab { color: #475569; transition: background .18s ease, color .18s ease; }
+    .view-tab[aria-selected="true"] { background: #0b3f3d; color: #fff; }
+    .view-tab[aria-selected="true"] .tab-hint { color: #a8e0d9; }
+    .category-card { transition: border-color .18s ease, box-shadow .18s ease; }
+    .category-card:hover { border-color: #3fb5a9; box-shadow: 0 8px 22px #0b3f3d14; }
+    .category-card:focus-visible, .entity-card:focus-visible, .view-tab:focus-visible { outline: 3px solid #3fb5a9; outline-offset: 3px; }
+    .nesto-map { width: 100%; overflow: hidden; border-radius: 1rem; border: 1px solid #dbe6e9; background: #e6eeef; z-index: 0; }
+    .map-status { margin-top: .65rem; font-size: .75rem; line-height: 1.25rem; color: #64748b; }
+    .modal-shell { animation: modal-in .18s ease-out; }
+    @keyframes modal-in { from { opacity: 0; transform: translateY(10px) scale(.99); } to { opacity: 1; transform: none; } }
+    @keyframes ui-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .animate-ui-enter { animation: ui-enter .4s cubic-bezier(.16,1,.3,1) forwards; }
+    .entity-card:not(.hidden) { animation: ui-enter .35s cubic-bezier(.16,1,.3,1) forwards; }
+</style>
+{% endblock %}
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+{% block content %}
+<main class="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
 
-    <style>
-        :root {
-            --nesto: #0f9b8e;
-            --nesto-dark: #087d73;
-            --ink: #102a2a;
-        }
+{% if query %}
+    <h1 class="font-display text-2xl font-bold tracking-tight sm:text-3xl">Results for “{{ query }}” in {{ city.name }}</h1>
 
-        * { box-sizing: border-box; }
-
-        body {
-            font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-            background: #f8fafc;
-            color: #334155;
-        }
-
-        button, a { -webkit-tap-highlight-color: transparent; }
-
-        .no-scrollbar {
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-
-        .view-tab {
-            color: #64748b;
-            transition: background .18s ease, color .18s ease;
-        }
-
-        .view-tab[aria-selected="true"] {
-            background: #0f9b8e;
-            color: white;
-            box-shadow: 0 3px 8px #0f766e20;
-        }
-
-        .category-card {
-            transition: transform .18s ease, border-color .18s ease,
-                        box-shadow .18s ease;
-        }
-
-        .category-card:hover {
-            transform: translateY(-3px);
-            border-color: #8bd6ce;
-            box-shadow: 0 12px 28px #0f766e0d;
-        }
-
-        .category-card:focus-visible,
-        .entity-card:focus-visible,
-        .view-tab:focus-visible {
-            outline: 3px solid #5eead4;
-            outline-offset: 3px;
-        }
-
-        .nesto-map {
-            width: 100%;
-            overflow: hidden;
-            border-radius: 1rem;
-            border: 1px solid #d1fae5;
-            background: #eaf2eb;
-            z-index: 0;
-        }
-
-        .map-status {
-            margin-top: .65rem;
-            font-size: .75rem;
-            line-height: 1.25rem;
-            color: #64748b;
-        }
-
-        .modal-shell {
-            animation: modal-in .18s ease-out;
-        }
-
-        @keyframes modal-in {
-            from { opacity: 0; transform: translateY(10px) scale(.99); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        body.modal-open { overflow: hidden; }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: .01ms !important;
-                transition-duration: .01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-
-        @keyframes ui-enter {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-ui-enter {
-            animation: ui-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes tile-enter {
-            from { opacity: 0; transform: translateY(6px) scale(0.99); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .entity-card:not(.hidden) {
-            animation: tile-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-    </style>
-</head>
-
-<body class="min-h-screen antialiased">
-
-<nav class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
-    <div class="mx-auto flex min-h-[68px] max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
-
-        <!-- Logo , maybe i'll change it later 🥱  -->
-        <a href="{% url 'home' %}" class="flex shrink-0 items-center gap-2.5">
-            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-lg font-extrabold text-white shadow-sm shadow-teal-900/10">N</span>
-            <span class="hidden md:block text-xl font-extrabold tracking-tight text-slate-900">Nesto</span>
-        </a>
-
-        <div class="flex-1 max-w-lg mx-2 sm:mx-6">
-            <form method="GET" action="{% url 'home' %}" class="relative flex items-center">
-                <svg class="absolute left-3 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                <input type="text" name="q" value="{{ query }}" placeholder="Search places, profiles, posts..." class="w-full bg-slate-100 border border-transparent rounded-xl pl-9 pr-8 py-2 text-sm text-slate-900 focus:bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 outline-none transition-all">
-                {% if query %}
-                    <a href="{% url 'home' %}" class="absolute right-3 text-slate-400 hover:text-slate-700 text-lg leading-none font-bold" title="Clear Search">&times;</a>
-                {% endif %}
-            </form>
-        </div>
-
-        <div class="flex min-w-0 items-center gap-1 sm:gap-2">
-            <a href="{% url 'choose_city' %}" title="Change city" class="hidden sm:flex max-w-[140px] items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">
-                <svg class="h-4 w-4 shrink-0 text-teal-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-                <span class="truncate">{{ city.name }}</span>
-            </a>
-            <a href="{% url 'create_post' %}" class="hidden sm:flex h-10 items-center gap-2 rounded-xl bg-teal-600 px-4 text-sm font-bold text-white transition hover:bg-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2">
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-                <span>Create post</span>
-            </a>
-            <a href="{% url 'profile' %}" aria-label="Your profile" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white font-bold text-teal-800 transition hover:bg-teal-50">
-                {{ user.profile.display_name|first|upper }}
-            </a>
-        </div>
-    </div>
-</nav>
-
-<main class="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10">
-
-    {% if query %}
-    <!-- SEARCH RESULTS VIEW -->
-    <div class="mb-8">
-        <h1 class="text-2xl font-extrabold text-slate-900">Search results for "<span class="text-teal-600">{{ query }}</span>"</h1>
-    </div>
-
-    <div class="space-y-8">
-        {% if search_results.profiles %}
-            <section>
-                <button onclick="toggleSearchSection('section-profiles', 'icon-profiles')" class="flex items-center justify-between w-full text-left mb-3 border-b border-slate-200 pb-2 hover:opacity-80 transition-opacity focus:outline-none">
-                    <h2 class="text-lg font-bold text-slate-700">Profiles</h2>
-                    <svg id="icon-profiles" class="w-5 h-5 text-slate-500 transform transition-transform duration-200 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
-                <div id="section-profiles" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 block">
-                    {% for profile in search_results.profiles %}
-                        <a href="{% url 'public_profile' profile.user.username %}" class="flex items-center gap-3 p-4 bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-teal-300 transition block">
-                            {% if profile.profile_picture %}
-                                <img src="{{ profile.profile_picture.url }}" class="w-12 h-12 rounded-full object-cover">
-                            {% else %}
-                                <div class="w-12 h-12 rounded-full bg-teal-100 flex items-center justify-center font-bold text-teal-700 shrink-0">
-                                    {{ profile.display_name|first|upper }}
-                                </div>
-                            {% endif %}
-                            <div>
-                                <h3 class="font-bold text-slate-900">{{ profile.display_name }}</h3>
-                                <p class="text-xs text-slate-500">@{{ profile.user.username }}</p>
-                            </div>
-                        </a>
-                    {% endfor %}
-                </div>
-            </section>
-        {% endif %}
-
-        {% if search_results.cities or search_results.categories %}
-            <section>
-                <button onclick="toggleSearchSection('section-categories', 'icon-categories')" class="flex items-center justify-between w-full text-left mb-3 border-b border-slate-200 pb-2 hover:opacity-80 transition-opacity focus:outline-none">
-                    <h2 class="text-lg font-bold text-slate-700">Places & Categories</h2>
-                    <svg id="icon-categories" class="w-5 h-5 text-slate-500 transform transition-transform duration-200 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
-                <div id="section-categories" class="flex flex-wrap gap-2 block">
-                    {% for search_city in search_results.cities %}
-                        <span class="px-3 py-1.5 bg-blue-50 text-blue-700 border border-blue-100 rounded-lg text-sm font-bold">📍 City: {{ search_city.name }}</span>
-                    {% endfor %}
-                    {% for search_category in search_results.categories %}
-                        <button type="button" onclick="openCategory('{{ search_category.id }}')" data-category-id="{{ search_category.id }}" data-category-name="{{ search_category.name }}" class="category-card px-3 py-1.5 bg-purple-50 text-purple-700 border border-purple-100 rounded-lg text-sm font-bold hover:bg-purple-100 transition">
-                            🏷️ Category: {{ search_category.name }}
-                        </button>
-                    {% endfor %}
-                </div>
-            </section>
+    <div class="mt-8 space-y-10">
+        {% if search_results.categories %}
+        <section>
+            <h2 class="mb-3 font-display text-lg font-semibold">Guide categories</h2>
+            <div class="flex flex-wrap gap-2">
+                {% for search_category in search_results.categories %}
+                <button type="button" onclick="openCategory('{{ search_category.id }}')" data-category-id="{{ search_category.id }}" data-category-name="{{ search_category.name }}" class="category-card rounded-xl border border-line bg-white px-4 py-2 text-sm font-semibold text-nest-800">{{ search_category.name }}</button>
+                {% endfor %}
+            </div>
+        </section>
         {% endif %}
 
         {% if search_results.entities %}
-            <section>
-                <button onclick="toggleSearchSection('section-entities', 'icon-entities')" class="flex items-center justify-between w-full text-left mb-3 border-b border-slate-200 pb-2 hover:opacity-80 transition-opacity focus:outline-none">
-                    <h2 class="text-lg font-bold text-slate-700">Places / Entities</h2>
-                    <svg id="icon-entities" class="w-5 h-5 text-slate-500 transform transition-transform duration-200 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
-                <div id="section-entities" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 block">                    {% for entity in search_results.entities %}
-                        <a href="{% url 'entity_detail' entity.id %}" class="block p-4 bg-white border border-slate-200 rounded-2xl shadow-sm hover:border-teal-300 transition">
-                            <h3 class="font-bold text-slate-900">{{ entity.name }}</h3>
-                            <p class="text-xs text-slate-500 mt-1">📁 {{ entity.category.name }}</p>
-                            {% if entity.location %}
-                                <p class="text-sm text-slate-600 mt-2 truncate">📍 {{ entity.location }}</p>
-                            {% endif %}
-                        </a>
-                    {% endfor %}
-                </div>
-            </section>
+        <section>
+            <h2 class="mb-3 font-display text-lg font-semibold">Places</h2>
+            <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {% for entity in search_results.entities %}
+                <a href="{% url 'entity_detail' entity.id %}" class="panel block p-4 transition hover:border-nest-400">
+                    <p class="text-xs font-semibold text-nest-700">{{ entity.category.name }}</p>
+                    <h3 class="mt-1 font-display text-base font-semibold">{{ entity.name }}</h3>
+                    {% if entity.location %}<p class="mt-1.5 truncate text-sm text-slate-500">{{ entity.location }}</p>{% endif %}
+                </a>
+                {% endfor %}
+            </div>
+        </section>
         {% endif %}
 
         {% if search_results.posts %}
-            <section>
-                <button onclick="toggleSearchSection('section-posts', 'icon-posts')" class="flex items-center justify-between w-full text-left mb-3 border-b border-slate-200 pb-2 hover:opacity-80 transition-opacity focus:outline-none">
-                    <h2 class="text-lg font-bold text-slate-700">Community Posts</h2>
-                    <svg id="icon-posts" class="w-5 h-5 text-slate-500 transform transition-transform duration-200 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
-                <div id="section-posts" class="space-y-4 block">
-                    {% for post in search_results.posts %}
-                        <article class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-                            <h3 class="font-extrabold text-slate-900">{{ post.title }}</h3>
-                            <p class="text-sm text-slate-600 mt-2 line-clamp-2">{{ post.content }}</p>
-                            <div class="mt-4 flex items-center justify-between">
-                                <div class="text-xs font-medium text-slate-500">
-                                    By {% if post.author %}<a href="{% url 'public_profile' post.author.username %}" class="hover:text-teal-600 hover:underline">{{ post.author.username }}</a>{% else %}Anonymous{% endif %}
-                                </div>
-                                <a href="{% url 'post_detail' post.pk %}" class="text-xs font-bold text-teal-600 hover:text-teal-800">View Post →</a>
-                            </div>
-                        </article>
-                    {% endfor %}
-                </div>
-            </section>
+        <section>
+            <h2 class="mb-3 font-display text-lg font-semibold">Posts</h2>
+            <div class="space-y-3">
+                {% for post in search_results.posts %}
+                <article class="panel p-5">
+                    <h3 class="font-display text-base font-semibold"><a href="{% url 'post_detail' post.pk %}" class="hover:text-nest-700">{{ post.title }}</a></h3>
+                    <p class="mt-1.5 line-clamp-2 text-sm leading-6 text-slate-600">{{ post.content }}</p>
+                    <p class="mt-3 text-xs text-slate-500">
+                        {% if post.author %}by <a href="{% url 'public_profile' post.author.username %}" class="font-semibold hover:text-nest-700 hover:underline">{{ post.author.username }}</a>{% else %}by Anonymous{% endif %}
+                    </p>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
         {% endif %}
 
-        {% if not search_results.profiles and not search_results.cities and not search_results.categories and not search_results.entities and not search_results.posts %}
-            <div class="text-center py-16 bg-white border border-dashed border-slate-300 rounded-3xl">
-                <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-2xl">🔍</div>
-                <h3 class="text-lg font-extrabold text-slate-900">No results found</h3>
-                <p class="mt-2 text-sm text-slate-500">We couldn't find anything matching "<span class="font-semibold">{{ query }}</span>". Try different keywords.</p>
-                <a href="{% url 'home' %}" class="mt-5 inline-block text-sm font-bold text-teal-600 hover:text-teal-800">Clear Search</a>
+        {% if search_results.profiles %}
+        <section>
+            <h2 class="mb-3 font-display text-lg font-semibold">People</h2>
+            <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {% for profile in search_results.profiles %}
+                <a href="{% url 'public_profile' profile.user.username %}" class="panel flex items-center gap-3 p-4 transition hover:border-nest-400">
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" alt="" class="h-11 w-11 rounded-full object-cover">
+                    {% else %}
+                        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-nest-100 font-bold text-nest-900">{{ profile.display_name|first|upper }}</span>
+                    {% endif %}
+                    <span class="min-w-0"><span class="block truncate font-semibold">{{ profile.display_name }}</span><span class="block truncate text-xs text-slate-500">@{{ profile.user.username }}</span></span>
+                </a>
+                {% endfor %}
             </div>
+        </section>
+        {% endif %}
+
+        {% if not search_results.profiles and not search_results.categories and not search_results.entities and not search_results.posts %}
+        <div class="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
+            <h3 class="font-display text-lg font-semibold">Nothing matches “{{ query }}”</h3>
+            <p class="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-600">Try a shorter word, or a neighbourhood name. If the place isn’t in the guide yet, you can add it.</p>
+            <div class="mt-5 flex justify-center gap-3">
+                <a href="{% url 'home' %}" class="btn-quiet">Clear search</a>
+                <a href="{% url 'create_post' %}?type=guide" class="btn-primary">Add it to the guide</a>
+            </div>
+        </div>
         {% endif %}
     </div>
 
 {% else %}
-    <div class="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div>
-            <p class="mb-2 text-xs font-extrabold uppercase tracking-[.18em] text-teal-700">
-                Your city, made easier
+            <p class="flex items-center gap-1.5 text-sm font-semibold text-nest-700">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                {{ city.name }}
             </p>
-            <h1 id="page-heading" class="text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-                Find your Nest.
-            </h1>
-            <p id="page-subheading" class="mt-2 max-w-xl text-sm leading-6 text-slate-500 sm:text-base">
-                Discover places, everyday services, and local knowledge in {{ city.name }}.
-            </p>
+            <h1 id="page-heading" class="mt-1 font-display text-4xl font-bold tracking-tight sm:text-5xl">Find your place.</h1>
+            <p id="page-subheading" class="mt-3 max-w-xl text-base leading-7 text-slate-600">Discover places, everyday services, and local knowledge in {{ city.name }}.</p>
         </div>
 
-        <div role="tablist" aria-label="Nesto sections" class="flex w-full rounded-2xl border border-slate-200 bg-white p-1 shadow-sm sm:w-auto">
-            <button type="button" role="tab" id="explore-tab" aria-selected="true" aria-controls="explore-view" class="view-tab flex flex-1 items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold sm:flex-none" onclick="switchView('explore')">
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4M11 7v4l3 2"/></svg>
-                Explore
+        <div role="tablist" aria-label="Nesto sections" class="grid w-full grid-cols-2 gap-1 rounded-2xl border border-line bg-white p-1 lg:w-[400px]">
+            <button type="button" role="tab" id="explore-tab" aria-selected="true" aria-controls="explore-view" onclick="switchView('explore')" class="view-tab rounded-xl px-4 py-3 text-left">
+                <span class="block text-sm font-bold">City Guide</span>
+                <span class="tab-hint block text-xs text-slate-500">Places reviewed by residents</span>
             </button>
-            <button type="button" role="tab" id="community-tab" aria-selected="false" aria-controls="community-view" class="view-tab flex flex-1 items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold sm:flex-none" onclick="switchView('community')">
-                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5Z"/></svg>
-                Community
+            <button type="button" role="tab" id="community-tab" aria-selected="false" aria-controls="community-view" onclick="switchView('community')" class="view-tab rounded-xl px-4 py-3 text-left">
+                <span class="block text-sm font-bold">Community</span>
+                <span class="tab-hint block text-xs text-slate-500">Questions and discussion</span>
             </button>
         </div>
     </div>
 
-    <section id="explore-view" role="tabpanel" aria-labelledby="explore-tab">
-        <div class="mb-5 flex items-end justify-between gap-3">
-            <div>
-                <h2 class="text-xl font-extrabold tracking-tight text-slate-900 sm:text-2xl">Explore {{ city.name }}</h2>
-                <p class="mt-1 text-sm text-slate-500">What are you looking for today?</p>
+    <section id="explore-view" role="tabpanel" aria-labelledby="explore-tab" class="mt-8">
+
+        <div id="intro" class="mb-8 hidden rounded-2xl border border-nest-200 bg-nest-50 p-5 sm:p-6">
+            <div class="flex items-start justify-between gap-4">
+                <h2 class="font-display text-lg font-semibold text-nest-900">How Nesto works</h2>
+                <button type="button" id="intro-dismiss" class="shrink-0 rounded-lg px-2 py-1 text-sm font-semibold text-nest-800 hover:bg-nest-100">Got it</button>
             </div>
+            <ol class="mt-4 grid gap-4 sm:grid-cols-3">
+                <li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-nest-800 text-sm font-bold text-white">1</span><p class="text-sm leading-6 text-nest-900"><strong>Residents share.</strong> Someone posts a room, a tiffin service or a study spot they know.</p></li>
+                <li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-nest-800 text-sm font-bold text-white">2</span><p class="text-sm leading-6 text-nest-900"><strong>Others review.</strong> More people add what it’s really like: price, landlord, hidden costs.</p></li>
+                <li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-nest-800 text-sm font-bold text-white">3</span><p class="text-sm leading-6 text-nest-900"><strong>The guide grows.</strong> Places land in the City Guide, so you can browse instead of asking again.</p></li>
+            </ol>
+        </div>
+
+        <div class="mb-5">
+            <h2 class="font-display text-2xl font-semibold tracking-tight">What are you looking for?</h2>
+            <p class="mt-1 text-sm text-slate-600">Pick a category to see places on a map and read what residents say.</p>
         </div>
 
         {% if categories %}
-        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-4">
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
             {% for category in categories %}
-            <button type="button" class="category-card group min-h-[165px] rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm sm:min-h-[190px] sm:p-5" data-category-id="{{ category.id }}" data-category-name="{{ category.name }}" onclick="openCategory('{{ category.id }}')">
-                <div class="mb-5 flex items-start justify-between gap-2">
-                    <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 transition group-hover:bg-teal-100">
-                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s8-4.5 8-11a8 8 0 1 0-16 0c0 6.5 8 11 8 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-                    </span>
-                </div>
-                <h3 class="break-words text-base font-extrabold text-slate-900 sm:text-lg">{{ category.name }}</h3>
-                <p class="mt-1.5 text-xs leading-5 text-slate-500 sm:text-sm">Explore places and services</p>
+            <button type="button" class="category-card group flex min-h-[140px] flex-col justify-between rounded-2xl border border-line bg-white p-4 text-left sm:p-5" data-category-id="{{ category.id }}" data-category-name="{{ category.name }}" onclick="openCategory('{{ category.id }}')">
+                <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-nest-100 font-display text-xl font-bold text-nest-800 transition group-hover:bg-nest-700 group-hover:text-white">{{ category.name|first|upper }}</span>
+                <span>
+                    <span class="block break-words font-display text-lg font-semibold leading-tight">{{ category.name }}</span>
+                    <span class="mt-1 block text-sm text-slate-500" data-count-for="{{ category.id }}">&nbsp;</span>
+                </span>
             </button>
             {% endfor %}
         </div>
         {% else %}
-        <div class="rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-16 text-center">
-            <h3 class="text-lg font-extrabold text-slate-900">Your city guide is just getting started</h3>
-            <p class="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500">Categories and local knowledge will appear here as the community builds the guide.</p>
+        <div class="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
+            <h3 class="font-display text-lg font-semibold">The {{ city.name }} guide is empty so far</h3>
+            <p class="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-600">Add the first place and pick a category for it. Categories you create become part of the guide.</p>
+            <a href="{% url 'create_post' %}?type=guide" class="btn-primary mt-5">Add the first place</a>
         </div>
         {% endif %}
 
-        <div class="mt-8 flex flex-col gap-4 rounded-2xl border border-teal-100 bg-teal-50/70 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+        <div class="mt-8 flex flex-col gap-4 rounded-2xl bg-nest-900 p-6 text-white sm:flex-row sm:items-center sm:justify-between">
             <div>
-                <p class="text-sm font-extrabold text-slate-900">Know a useful place in {{ city.name }}?</p>
-                <p class="mt-1 text-sm leading-6 text-slate-600">Help another student settle in by sharing what you know.</p>
+                <p class="font-display text-lg font-semibold">Know a place the guide is missing?</p>
+                <p class="mt-1 text-sm leading-6 text-nest-100">Add it once and every student after you can find it.</p>
             </div>
-            <a href="{% url 'create_post' %}" class="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-teal-700 px-4 py-3 text-sm font-bold text-white transition hover:bg-teal-800">
-                Share with the community <span aria-hidden="true">→</span>
-            </a>
+            <a href="{% url 'create_post' %}?type=guide" class="inline-flex shrink-0 items-center justify-center rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-nest-900 transition hover:bg-nest-100">Add a place</a>
         </div>
     </section>
 
-    <section id="community-view" role="tabpanel" aria-labelledby="community-tab" hidden>
-        <div class="mx-auto max-w-3xl space-y-4">
-            {% for post in posts %}
-            <article class="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-slate-300 sm:p-6">
-                <div class="mb-4 flex items-start justify-between gap-3">
-                    <div class="flex min-w-0 items-center gap-3">
-                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-100 text-sm font-extrabold text-teal-800">
-                            {% if post.author %}{{ post.author.username|first|upper }}{% else %}A{% endif %}
-                        </div>
-                        <div class="min-w-0">
-                            <p class="truncate text-sm font-bold text-slate-900">
-                                {% if post.author %}
-                                    <a href="{% url 'public_profile' post.author.username %}" class="hover:text-teal-600 hover:underline">{{ post.author.username }}</a>
-                                {% else %}
-                                    Anonymous
-                                {% endif %}
+    <section id="community-view" role="tabpanel" aria-labelledby="community-tab" hidden class="mt-8">
+        <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px]">
+            <div class="min-w-0 space-y-4">
+                {% for post in posts %}
+                <article class="panel min-w-0 p-5 sm:p-6">
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="flex min-w-0 items-center gap-3">
+                            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-nest-100 text-sm font-bold text-nest-900">{% if post.author %}{{ post.author.username|first|upper }}{% else %}A{% endif %}</span>
+                            <p class="min-w-0 truncate text-sm">
+                                {% if post.author %}<a href="{% url 'public_profile' post.author.username %}" class="font-semibold hover:text-nest-700 hover:underline">{{ post.author.username }}</a>{% else %}<span class="font-semibold">Anonymous</span>{% endif %}
+                                <span class="text-slate-500">· {{ post.created_at|timesince }} ago</span>
                             </p>
-                            <p class="mt-0.5 text-xs text-slate-500">{{ post.created_at|timesince }} ago</p>
                         </div>
+                        {% if post.post_type == 'guide' %}<span class="tag-guide shrink-0">Guide entry</span>{% else %}<span class="tag-talk shrink-0">Discussion</span>{% endif %}
                     </div>
-                    {% if post.post_type == 'guide' %}
-                        <span class="shrink-0 rounded-full border border-teal-100 bg-teal-50 px-2.5 py-1 text-xs font-bold text-teal-800">Guide</span>
-                    {% else %}
-                        <span class="shrink-0 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-semibold text-slate-600">Discussion</span>
+
+                    <h3 class="mt-4 break-words font-display text-xl font-semibold leading-snug"><a href="{% url 'post_detail' post.pk %}" class="hover:text-nest-700">{{ post.title }}</a></h3>
+                    <p class="mt-2 whitespace-pre-line break-words text-[15px] leading-7 text-slate-600">{{ post.content|truncatechars:300 }}</p>
+
+                    {% if post.image %}
+                    <div class="mt-4 overflow-hidden rounded-xl border border-line"><img src="{{ post.image.url }}" alt="{{ post.title }}" loading="lazy" class="max-h-[420px] w-full object-cover"></div>
                     {% endif %}
-                </div>
 
-                <h3 class="break-words text-lg font-extrabold leading-snug text-slate-900">{{ post.title }}</h3>
-                <p class="mt-2 whitespace-pre-line break-words text-sm leading-7 text-slate-600">{{ post.content|truncatechars:300 }}</p>
-
-                {% if post.image %}
-                <div class="mt-4 overflow-hidden rounded-xl border border-slate-100">
-                    <img src="{{ post.image.url }}" alt="{{ post.title }}" loading="lazy" class="max-h-[460px] w-full object-cover">
-                </div>
-                {% endif %}
-
-                {% if post.category or post.entity %}
-                <div class="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-3.5">
-                    {% if post.category %}
-                        <p class="text-xs font-medium text-slate-500">Category: <span class="font-bold text-teal-800">{{ post.category.name }}</span></p>
-                    {% endif %}
                     {% if post.entity %}
-                    <a href="{% url 'entity_detail' post.entity.id %}" class="mt-2 block">
-                        <span class="text-sm font-bold text-slate-900 hover:text-teal-700">📍 {{ post.entity.name }}</span>
-                        {% if post.entity.location %}
-                        <span class="mt-1 block break-words text-xs text-slate-500">{{ post.entity.location }}</span>
-                        {% endif %}
+                    <a href="{% url 'entity_detail' post.entity.id %}" class="mt-4 flex items-center gap-3 rounded-xl border border-nest-200 bg-nest-50 px-4 py-3 transition hover:border-nest-400">
+                        <svg class="h-5 w-5 shrink-0 text-nest-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                        <span class="min-w-0">
+                            <span class="block truncate text-sm font-semibold text-nest-900">{{ post.entity.name }}</span>
+                            <span class="block truncate text-xs text-nest-800">{% if post.category %}{{ post.category.name }}{% endif %}{% if post.entity.location %} · {{ post.entity.location }}{% endif %}</span>
+                        </span>
                     </a>
+                    {% elif post.category %}
+                    <p class="mt-4 text-xs font-semibold text-nest-700">In {{ post.category.name }}</p>
                     {% endif %}
-                </div>
-                {% endif %}
 
-                <div class="mt-5 border-t border-slate-100 pt-4">
-                    <a href="{% url 'post_detail' post.pk %}" class="text-sm font-bold text-teal-700 transition hover:text-teal-900">
-                        View post and comments <span aria-hidden="true">→</span>
-                    </a>
+                    <div class="mt-4 border-t border-line pt-3">
+                        <a href="{% url 'post_detail' post.pk %}" class="text-sm font-semibold text-nest-700 hover:text-nest-900">Read and comment</a>
+                    </div>
+                </article>
+                {% empty %}
+                <div class="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
+                    <h3 class="font-display text-lg font-semibold">No posts in {{ city.name }} yet</h3>
+                    <p class="mt-2 text-sm leading-6 text-slate-600">Ask a question or share something useful. Newcomers will find it.</p>
+                    <a href="{% url 'create_post' %}" class="btn-primary mt-5">Write the first post</a>
                 </div>
-            </article>
-            {% empty %}
-            <div class="rounded-3xl border border-dashed border-slate-300 bg-white px-6 py-16 text-center">
-                <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-2xl">💬</div>
-                <h3 class="text-lg font-extrabold text-slate-900">It's quiet around here</h3>
-                <p class="mt-2 text-sm leading-6 text-slate-500">Start a conversation and help your city's community grow.</p>
-                <a href="{% url 'create_post' %}" class="mt-5 inline-flex items-center gap-2 rounded-xl bg-teal-600 px-5 py-3 text-sm font-bold text-white hover:bg-teal-700">
-                    Create the first post
-                </a>
+                {% endfor %}
             </div>
-            {% endfor %}
+
+            <aside class="hidden lg:block">
+                <div class="panel sticky top-24 p-5">
+                    <h2 class="font-display text-base font-semibold">What goes where</h2>
+                    <dl class="mt-4 space-y-4 text-sm leading-6">
+                        <div><dt><span class="tag-talk">Discussion</span></dt><dd class="mt-1.5 text-slate-600">Questions, advice, anything about life in {{ city.name }}.</dd></div>
+                        <div><dt><span class="tag-guide">Guide entry</span></dt><dd class="mt-1.5 text-slate-600">A specific place, with price, location and your honest review.</dd></div>
+                    </dl>
+                    <a href="{% url 'create_post' %}" class="btn-primary mt-5 w-full">Write a post</a>
+                </div>
+            </aside>
         </div>
     </section>
 {% endif %}
 
 </main>
 
-
-<div id="discovery-modal"
-    class="fixed inset-0 z-[60] hidden items-center justify-center bg-slate-950/55 p-0 backdrop-blur-sm sm:p-5"
-    role="dialog" aria-modal="true" aria-labelledby="modal-title">
-
+<div id="discovery-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-ink/60 p-0 backdrop-blur-sm sm:p-5" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-shell flex h-full w-full flex-col overflow-hidden bg-white shadow-2xl sm:h-[min(88vh,850px)] sm:max-w-5xl sm:rounded-3xl">
 
-        <header class="flex shrink-0 items-center gap-3 border-b border-slate-200 px-4 py-4 sm:px-6">
-            <button id="modal-back" type="button" onclick="handleBackClick()"
-                    class="hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition hover:bg-slate-100"
-                    aria-label="Back to category">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="m15 18-6-6 6-6"/>
-                </svg>
+        <header class="flex shrink-0 items-center gap-3 border-b border-line px-4 py-4 sm:px-6">
+            <button id="modal-back" type="button" onclick="handleBackClick()" class="hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-line text-slate-600 transition hover:bg-frost" aria-label="Back to category">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
             </button>
-
             <div class="min-w-0 flex-1">
-                <p id="modal-eyebrow" class="text-[10px] font-extrabold uppercase tracking-[.17em] text-teal-700">CITY GUIDE</p>
-                <h2 id="modal-title" class="mt-0.5 truncate text-lg font-extrabold text-slate-900 sm:text-xl">Explore</h2>
-                <p id="modal-subtitle" class="mt-0.5 text-xs text-slate-500">Discover useful places in {{ city.name }}</p>
+                <p id="modal-eyebrow" class="text-xs font-semibold text-nest-700">CITY GUIDE</p>
+                <h2 id="modal-title" class="truncate font-display text-xl font-semibold">Explore</h2>
+                <p id="modal-subtitle" class="text-xs text-slate-500">Discover useful places in {{ city.name }}</p>
             </div>
-
-            <button id="modal-close" type="button"
-                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-600 transition hover:bg-slate-200"
-                    aria-label="Close discovery window">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="m18 6-12 12M6 6l12 12"/>
-                </svg>
+            <button id="modal-close" type="button" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-frost text-slate-600 transition hover:bg-line" aria-label="Close">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 6-12 12M6 6l12 12"/></svg>
             </button>
         </header>
 
-
-        <div id="category-state" class="min-h-0 flex-1 flex-col flex overflow-y-auto lg:overflow-hidden">
+        <div id="category-state" class="flex min-h-0 flex-1 flex-col overflow-y-auto lg:overflow-hidden">
             <div class="grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-[1.1fr_.9fr]">
-                <section class="border-b border-slate-200 p-4 sm:p-6 lg:border-b-0 lg:border-r flex flex-col">
-                    <div class="mb-3 flex items-center justify-between gap-3 shrink-0">
-                        <div>
-                            <h3 class="text-sm font-extrabold text-slate-900">Explore on the map</h3>
-                            <p class="mt-1 text-xs text-slate-500">Listings with coordinates appear as pins.</p>
-                        </div>
-                        <span class="rounded-full bg-teal-50 px-2.5 py-1 text-[10px] font-bold text-teal-800">LIVE MAP</span>
+                <section class="flex flex-col border-b border-line p-4 sm:p-6 lg:border-b-0 lg:border-r">
+                    <div class="mb-3 shrink-0">
+                        <h3 class="text-sm font-bold">On the map</h3>
+                        <p class="mt-0.5 text-xs text-slate-500">Places with a pinned location show up here.</p>
                     </div>
-                        <div id="category-map" class="nesto-map flex-1 min-h-[220px]" role="region" aria-label="Map of listings in this category"></div>
-                        <p id="category-map-status" class="map-status shrink-0">Loading map…</p>
-                    <div class="mt-3 flex items-start gap-2 text-xs leading-5 text-slate-500">
-                        <svg class="mt-0.5 h-4 w-4 shrink-0 text-teal-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-                            <circle cx="12" cy="12" r="9"/>
-                            <path d="M12 11v5m0-8h.01"/>
-                        </svg>
-                        Places without a provided location will still appear in the list.
-                    </div>
+                    <div id="category-map" class="nesto-map min-h-[220px] flex-1" role="region" aria-label="Map of places in this category"></div>
+                    <p id="category-map-status" class="map-status shrink-0">Loading map…</p>
                 </section>
 
-
-                <section class="flex min-h-[300px] min-w-0 flex-col p-4 sm:p-6 animate-ui-enter">
+                <section class="animate-ui-enter flex min-h-[300px] min-w-0 flex-col p-4 sm:p-6">
                     <div class="mb-4 flex items-end justify-between gap-3">
                         <div>
-                            <h3 class="text-sm font-extrabold text-slate-900">Places & services</h3>
-                            <p class="mt-1 text-xs text-slate-500">Select a listing to learn more.</p>
+                            <h3 class="text-sm font-bold">Places and services</h3>
+                            <p class="mt-0.5 text-xs text-slate-500">Tap one for details and reviews.</p>
                         </div>
-                        <span id="entity-count" class="shrink-0 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-600">0 places</span>
+                        <span id="entity-count" class="shrink-0 rounded-full bg-frost px-2.5 py-1 text-xs font-semibold text-slate-600">0 places</span>
                     </div>
 
                     <div id="entity-list" class="no-scrollbar min-h-0 flex-1 space-y-3 overflow-y-auto pb-2">
-
                         {% for category in categories %}
                             {% for entity in category.entities.all %}
                                 {% if entity.is_approved %}
                                 <button type="button"
-                                        class="entity-card hidden w-full rounded-2xl border border-slate-200 bg-white p-3 text-left transition hover:border-teal-300 hover:bg-teal-50/30"
+                                        class="entity-card hidden w-full rounded-2xl border border-line bg-white p-3 text-left transition hover:border-nest-400"
                                         data-category-id="{{ category.id }}"
                                         data-entity-id="{{ entity.id }}"
                                         data-entity-name="{{ entity.name }}"
@@ -496,40 +292,22 @@
                                         data-entity-longitude="{{ entity.longitude|default_if_none:'' }}"
                                         data-entity-url="{% url 'entity_detail' entity.id %}"
                                         onclick="showEntityState(this)">
-
                                     <div class="flex items-start gap-3">
                                         {% if entity.image %}
-                                        <img src="{{ entity.image.url }}" alt="" loading="lazy" class="h-[76px] w-[76px] shrink-0 rounded-xl border border-slate-100 object-cover">
+                                        <img src="{{ entity.image.url }}" alt="" loading="lazy" class="h-[72px] w-[72px] shrink-0 rounded-xl border border-line object-cover">
                                         {% else %}
-                                        <div class="flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-xl bg-teal-50 text-teal-700">
-                                            <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                                                <path d="M3 7 12 3l9 4v13H3V7Z"/>
-                                                <path d="M8 20v-7h8v7M7 10h.01M17 10h.01"/>
-                                            </svg>
-                                        </div>
+                                        <span class="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-xl bg-nest-50 font-display text-2xl font-bold text-nest-700">{{ entity.name|first|upper }}</span>
                                         {% endif %}
-
                                         <div class="min-w-0 flex-1">
                                             <div class="flex items-start justify-between gap-2">
-                                                <h4 class="break-words text-sm font-extrabold text-slate-900">{{ entity.name }}</h4>
-                                                {% if entity.price %}
-                                                <span class="shrink-0 rounded-lg bg-amber-50 px-2 py-1 text-[10px] font-bold text-amber-800">{{ entity.price }}</span>
-                                                {% endif %}
+                                                <h4 class="break-words font-display text-base font-semibold leading-snug">{{ entity.name }}</h4>
+                                                {% if entity.price %}<span class="shrink-0 rounded-lg bg-sun-100 px-2 py-1 text-xs font-semibold text-sun-800">{{ entity.price }}</span>{% endif %}
                                             </div>
-
                                             {% if entity.location %}
-                                            <p class="mt-1.5 flex items-start gap-1.5 break-words text-xs leading-5 text-slate-500">
-                                                <svg class="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-                                                    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/>
-                                                    <circle cx="12" cy="10" r="2.5"/>
-                                                </svg>
-                                                {{ entity.location }}
-                                            </p>
+                                            <p class="mt-1 break-words text-xs leading-5 text-slate-500">{{ entity.location }}</p>
                                             {% else %}
-                                            <p class="mt-1.5 text-xs text-slate-400">Location not provided</p>
+                                            <p class="mt-1 text-xs text-slate-400">No address yet</p>
                                             {% endif %}
-
-                                            <p class="mt-2 text-xs font-bold text-teal-700">View details →</p>
                                         </div>
                                     </div>
                                 </button>
@@ -538,110 +316,84 @@
                         {% endfor %}
 
                         <div id="no-entities" class="hidden rounded-2xl border border-dashed border-slate-300 px-5 py-10 text-center">
-                            <div class="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-500">
-                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-                                    <circle cx="11" cy="11" r="7"/>
-                                    <path d="m16 16 4 4"/>
-                                </svg>
-                            </div>
-                            <h4 class="text-sm font-extrabold text-slate-900">Nothing here yet</h4>
-                            <p class="mt-1 text-xs leading-5 text-slate-500">No approved listings have been added to this category yet.</p>
+                            <h4 class="font-display text-base font-semibold">Nothing here yet</h4>
+                            <p class="mt-1 text-sm leading-6 text-slate-600">Be the first to add a place to this category.</p>
+                            <a href="{% url 'create_post' %}?type=guide" class="btn-primary mt-4">Add a place</a>
                         </div>
                     </div>
                 </section>
             </div>
         </div>
-
 
         <div id="entity-state" class="hidden min-h-0 flex-1 flex-col overflow-y-auto lg:overflow-hidden">
             <div class="grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-[1.1fr_.9fr]">
-                <section class="border-b border-slate-200 p-4 sm:p-6 lg:border-b-0 lg:border-r flex flex-col">
-                    <div id="entity-map-header" class="mb-3 flex items-center justify-between gap-3 shrink-0 animate-ui-enter transition-opacity duration-300">
-                        <div>
-                            <h3 class="text-sm font-extrabold text-slate-900">Listing location</h3>
-                            <p class="mt-1 text-xs text-slate-500">Exact coordinates on the map.</p>
-                        </div>
-                        <span class="rounded-full bg-teal-50 px-2.5 py-1 text-[10px] font-bold text-teal-800">LIVE MAP</span>
+                <section class="flex flex-col border-b border-line p-4 sm:p-6 lg:border-b-0 lg:border-r">
+                    <div id="entity-map-header" class="animate-ui-enter mb-3 shrink-0 transition-opacity duration-300">
+                        <h3 class="text-sm font-bold">Location</h3>
+                        <p class="mt-0.5 text-xs text-slate-500">Where this place is on the map.</p>
                     </div>
-                
-                    <div id="entity-map" class="nesto-map flex-1 min-h-[220px]" role="region" aria-label="Map of the selected listing"></div>
-                    <p id="entity-map-status" class="map-status shrink-0">Select a listing to view its location.</p>
-                    <a id="directions-link" href="#" target="_blank" rel="noopener noreferrer"
-                        class="mt-4 hidden w-full items-center justify-center gap-2 rounded-xl bg-teal-700 px-4 py-3 text-sm font-bold text-white transition hover:bg-teal-800">
-                        Open directions in Google Maps
-                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 3h7v7m0-7L10 14"/>
-                            <path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/>
-                        </svg>
-                    </a>
+                    <div id="entity-map" class="nesto-map min-h-[220px] flex-1" role="region" aria-label="Map of the selected place"></div>
+                    <p id="entity-map-status" class="map-status shrink-0">Select a place to see its location.</p>
+                    <a id="directions-link" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary mt-4 hidden w-full">Open in Google Maps</a>
                 </section>
 
-                <section id="entity-text-panel" class="min-w-0 p-4 sm:p-6 animate-ui-enter transition-opacity duration-300">
-                    <div id="detail-image-wrap" class="mb-5 hidden overflow-hidden rounded-2xl border border-slate-100">
+                <section id="entity-text-panel" class="animate-ui-enter min-w-0 p-4 transition-opacity duration-300 sm:p-6 lg:overflow-y-auto">
+                    <div id="detail-image-wrap" class="mb-5 hidden overflow-hidden rounded-2xl border border-line">
                         <img id="detail-image" src="" alt="" class="max-h-64 w-full object-cover">
                     </div>
-
                     <div class="mb-5">
-                        <p class="text-[10px] font-extrabold uppercase tracking-[.17em] text-teal-700">CITY GUIDE LISTING</p>
-                        <h3 id="detail-name" class="mt-2 break-words text-2xl font-extrabold tracking-tight text-slate-950">Place name</h3>
-                        <p id="detail-price" class="mt-2 hidden text-sm font-bold text-amber-800"></p>
+                        <h3 id="detail-name" class="break-words font-display text-2xl font-bold tracking-tight">Place name</h3>
+                        <p id="detail-price" class="mt-2 hidden text-sm font-semibold text-sun-800"></p>
                     </div>
-
-                    <div id="detail-location-wrap" class="mb-5 hidden rounded-xl border border-slate-200 bg-slate-50 p-3.5">
-                        <p class="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Address / location</p>
-                        <p id="detail-location" class="mt-1.5 break-words text-sm leading-6 text-slate-700"></p>
+                    <div id="detail-location-wrap" class="mb-5 hidden rounded-xl border border-line bg-frost p-3.5">
+                        <p class="text-xs font-semibold text-slate-500">Address</p>
+                        <p id="detail-location" class="mt-1 break-words text-sm leading-6"></p>
                     </div>
-
                     <div>
-                        <h4 class="text-sm font-extrabold text-slate-900">More information</h4>
+                        <h4 class="text-sm font-bold">Details</h4>
                         <div id="detail-attributes" class="mt-3 space-y-2"></div>
-                        <p id="detail-no-attributes" class="mt-2 text-sm leading-6 text-slate-500">
-                            No additional details have been added yet.
-                        </p>
+                        <p id="detail-no-attributes" class="mt-2 text-sm leading-6 text-slate-500">No extra details yet.</p>
                     </div>
-
-                    <a id="full-entity-link" href="#" class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-700 transition hover:border-teal-300 hover:bg-teal-50 hover:text-teal-800">
-                        Open full listing
-                        <span aria-hidden="true">→</span>
-                    </a>
-
-                    <p class="mt-4 text-xs leading-5 text-slate-400">
-                        Listing information is community-contributed. Confirm important details with the provider.
-                    </p>
+                    <a id="full-entity-link" href="#" class="btn-primary mt-6 w-full">Read reviews and write one</a>
+                    <p class="mt-4 text-xs leading-5 text-slate-400">Written by residents. Check prices and timings with the provider before you commit.</p>
                 </section>
             </div>
         </div>
-
     </div>
 </div>
+{% endblock %}
 
+{% block fab %}{% endblock %}
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+{% block scripts %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
     const cityName = "{{ city.name|escapejs }}";
     const latStr = "{{ city.latitude|default_if_none:'' }}";
     const lngStr = "{{ city.longitude|default_if_none:'' }}";
-    
     const cityCenter = (latStr && lngStr) ? [parseFloat(latStr), parseFloat(lngStr)] : null;
 </script>
-
 <script src="{% static 'pages/map.js' %}"></script>
 <script src="{% static 'pages/home.js' %}"></script>
-
 <script>
-function toggleSearchSection(sectionId, iconId) {
-    const section = document.getElementById(sectionId);
-    const icon = document.getElementById(iconId);
-    if (section.classList.contains('hidden')) {
-        section.classList.remove('hidden');
-        icon.classList.add('rotate-180');
-    } else {
-        section.classList.add('hidden');
-        icon.classList.remove('rotate-180');
-    }
-}
-</script>
+    document.querySelectorAll('[data-count-for]').forEach(function (el) {
+        var n = document.querySelectorAll('.entity-card[data-category-id="' + el.dataset.countFor + '"]').length;
+        el.textContent = n + (n === 1 ? ' place' : ' places');
+    });
 
-</body>
-</html>
+    (function () {
+        var intro = document.getElementById('intro');
+        var btn = document.getElementById('intro-dismiss');
+        if (!intro) return;
+        var seen = false;
+        try { seen = localStorage.getItem('nesto-intro-v1') === '1'; } catch (e) {}
+        if (!seen) intro.classList.remove('hidden');
+        btn.addEventListener('click', function () {
+            intro.classList.add('hidden');
+            try { localStorage.setItem('nesto-intro-v1', '1'); } catch (e) {}
+        });
+    })();
+
+    if (location.hash === '#community' && document.getElementById('community-view')) switchView('community');
+</script>
+{% endblock %}

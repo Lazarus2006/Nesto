@@ -1,182 +1,54 @@
-{% load static %}
+{% extends "pages/base.html" %}
+{% block title %}Choose your city | Nesto{% endblock %}
+{% block nav %}{% endblock %}
+{% block fab %}{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block content %}
+<main class="mx-auto grid min-h-screen max-w-6xl items-center gap-10 px-5 py-10 lg:grid-cols-2 lg:gap-16">
+    {% include "pages/_pitch.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div class="panel w-full max-w-md justify-self-center p-6 shadow-xl shadow-nest-900/5 sm:p-8 lg:justify-self-end">
+        <h1 class="font-display text-2xl font-bold tracking-tight">Which city are you in?</h1>
+        <p class="mt-2 text-sm leading-6 text-slate-600">Every city has its own guide and community. You can switch any time from the top bar.</p>
 
-    <title>Choose City - Nesto</title>
+        <form method="POST" class="mt-6">
+            {% csrf_token %}
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+            {% if cities|length > 6 %}
+            <input type="search" id="city-filter" placeholder="Search cities" aria-label="Search cities" class="field mb-3">
+            {% endif %}
 
-    <style>
-        body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
-        @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
-    </style>
-</head>
-
-<body class="bg-slate-50 text-slate-700 min-h-screen antialiased">
-
-    <main class="min-h-screen flex items-center justify-center px-5 py-10">
-
-        <div class="w-full max-w-md">
-
-            <div class="text-center mb-8">
-
-                <a href="{% url 'home' %}"
-                class="inline-flex items-center gap-2">
-                    <span class="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center text-lg font-extrabold">N</span>
-                    <span class="text-3xl font-extrabold text-slate-900 tracking-tight">Nesto</span>
-                </a>
-
-                <p class="text-slate-500 text-sm mt-3">
-                    A community that helps you make a new city feel like home.
-                </p>
-
-            </div>
-
-            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/60">
-
-                <div class="mb-6">
-
-                    <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">
-                        Choose your city
-                    </h1>
-
-                    <p class="text-sm text-slate-500 mt-2">
-                        Select the city you want to explore on Nesto.
-                    </p>
-
+            <div class="max-h-[46vh] space-y-2.5 overflow-y-auto pr-1" id="city-list">
+                {% for city in cities %}
+                <label class="city-option block cursor-pointer" data-name="{{ city.name|lower }}">
+                    <input type="radio" name="city" value="{{ city.id }}" class="peer sr-only" required>
+                    <span class="flex items-center justify-between gap-3 rounded-2xl border border-line bg-white px-4 py-3.5 transition hover:bg-frost peer-checked:border-nest-600 peer-checked:bg-nest-50 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-nest-600 peer-checked:[&_.dot]:border-nest-600 peer-checked:[&_.dot>span]:bg-nest-600">
+                        <span class="font-display text-base font-semibold">{{ city.name }}</span>
+                        <span class="dot flex h-5 w-5 items-center justify-center rounded-full border-2 border-slate-300"><span class="h-2.5 w-2.5 rounded-full bg-transparent"></span></span>
+                    </span>
+                </label>
+                {% empty %}
+                <div class="py-8 text-center">
+                    <p class="font-display text-base font-semibold">No cities yet</p>
+                    <p class="mt-1 text-sm text-slate-600">Cities appear here once an admin adds them.</p>
                 </div>
-
-                <form method="POST">
-
-                    {% csrf_token %}
-
-                    <div class="space-y-3">
-
-                        {% for city in cities %}
-
-                        <label class="block cursor-pointer">
-
-                            <input
-                                type="radio"
-                                name="city"
-                                value="{{ city.id }}"
-                                class="peer sr-only"
-                                required>
-
-                            <div class="flex items-center justify-between
-                                        px-4 py-4
-                                        rounded-2xl
-                                        border border-slate-200
-                                        bg-white
-                                        text-slate-700
-                                        transition
-                                        hover:border-slate-300 hover:bg-slate-50
-                                        peer-focus-visible:ring-2 peer-focus-visible:ring-teal-500 peer-focus-visible:ring-offset-2
-                                        peer-checked:border-teal-600
-                                        peer-checked:bg-teal-50
-                                        peer-checked:text-slate-900
-                                        peer-checked:[&_.radio-ring]:border-teal-600
-                                        peer-checked:[&_.radio-dot]:bg-teal-600">
-
-                                <div class="flex items-center gap-3">
-
-                                    <div class="w-10 h-10 rounded-xl
-                                                bg-slate-100
-                                                flex items-center justify-center
-                                                text-lg">
-                                        📍
-                                    </div>
-
-                                    <div>
-
-                                        <p class="text-sm font-semibold">
-                                            {{ city.name }}
-                                        </p>
-
-                                        <p class="text-xs text-slate-500 mt-0.5">
-                                            Explore the community
-                                        </p>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="radio-ring w-5 h-5 rounded-full
-                                            border-2 border-slate-300
-                                            flex items-center justify-center">
-
-                                    <div class="radio-dot w-2.5 h-2.5 rounded-full
-                                                bg-transparent">
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </label>
-
-                        {% empty %}
-
-                        <div class="text-center py-8">
-
-                            <div class="text-4xl mb-3">
-                                🏙️
-                            </div>
-
-                            <p class="text-sm text-slate-700 font-medium">
-                                No cities are available yet.
-                            </p>
-
-                            <p class="text-xs text-slate-500 mt-1">
-                                Cities will appear here once they are added.
-                            </p>
-
-                        </div>
-
-                        {% endfor %}
-
-                    </div>
-
-                    {% if cities %}
-
-                    <button
-                        type="submit"
-                        class="w-full mt-6
-                            bg-teal-600
-                            hover:bg-teal-700
-                            text-white
-                            font-semibold
-                            text-sm
-                            py-3.5
-                            rounded-2xl
-                            transition
-                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2">
-
-                        Continue to Nesto
-
-                    </button>
-
-                    {% endif %}
-
-                </form>
-
+                {% endfor %}
             </div>
 
-            <p class="text-center text-xs text-slate-500 mt-5">
-                You can change your city later from the navigation bar.
-            </p>
+            {% if cities %}
+            <button type="submit" class="btn-primary mt-6 w-full py-3.5">Continue</button>
+            {% endif %}
+        </form>
+    </div>
+</main>
 
-        </div>
-
-    </main>
-
-</body>
-</html>
+<script>
+    var filter = document.getElementById('city-filter');
+    if (filter) filter.addEventListener('input', function () {
+        var q = filter.value.trim().toLowerCase();
+        document.querySelectorAll('.city-option').forEach(function (el) {
+            el.classList.toggle('hidden', q && el.dataset.name.indexOf(q) === -1);
+        });
+    });
+</script>
+{% endblock %}
