@@ -6,6 +6,7 @@ import json
 from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch , Q
 from django.contrib.auth.models import User
+from django.conf import settings
 
 @login_required
 def home(request):
@@ -60,6 +61,7 @@ def home(request):
         "city": city,
         "query": query,
         "search_results": search_results,
+        "mapbox_token": settings.MAPBOX_TOKEN,
     }
 
     return render(request, "pages/home.html", context)
@@ -230,6 +232,7 @@ def create_post(request):
         'prefill_type': request.GET.get('type', ''),
         'prefill_category': request.GET.get('category', ''),
         'prefill_entity': request.GET.get('entity', ''),
+        'mapbox_token': settings.MAPBOX_TOKEN,
     }
     return render(request, 'pages/create_post.html', context)
 

@@ -1,6 +1,3 @@
-const MAPBOX_TOKEN = "pk.eyJ1IjoibGF6YXJ1czIwMDYiLCJhIjoiY212Z3N6dTQ5MDEydTJ3cXkxMnkzaXFqdiJ9.ViOLzHLA4n6acyNk4EyFPg";
-
-
 const NestoMap = (() => {
     "use strict";
 
@@ -277,12 +274,19 @@ const NestoMap = (() => {
             maxBoundsViscosity: 0.85
         }).setView(WORLD_VIEW, WORLD_ZOOM);
 
-        L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`, {
-            tileSize: 512,
-            zoomOffset: -1,
-            maxZoom: 20,
-            attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+        const mapboxToken = window.MAPBOX_TOKEN || "";
+        const tileLayer = mapboxToken
+            ? L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/{z}/{x}/{y}?access_token=${mapboxToken}`, {
+                tileSize: 512,
+                zoomOffset: -1,
+                maxZoom: 20,
+                attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            })
+            : L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            });
+        tileLayer.addTo(map);
         return map;
     }
 

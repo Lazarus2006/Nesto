@@ -372,6 +372,7 @@
     const latStr = "{{ city.latitude|default_if_none:'' }}";
     const lngStr = "{{ city.longitude|default_if_none:'' }}";
     const cityCenter = (latStr && lngStr) ? [parseFloat(latStr), parseFloat(lngStr)] : null;
+    window.MAPBOX_TOKEN = "{{ mapbox_token|escapejs }}";
 </script>
 <script src="{% static 'pages/map.js' %}"></script>
 <script src="{% static 'pages/home.js' %}"></script>
