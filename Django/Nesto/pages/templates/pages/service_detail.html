@@ -1,0 +1,109 @@
+{% extends "pages/base.html" %}
+{% block title %}{{ service_request.title }} | Nesto Services{% endblock %}
+
+{% block content %}
+<main class="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+    <nav aria-label="Breadcrumb" class="mb-5 text-sm text-slate-500">
+        <a href="{% url 'service_list' %}" class="font-semibold text-nest-700 hover:text-nest-900">Nesto Services</a>
+        <span class="mx-1.5">/</span>{{ service_request.city.name }}
+    </nav>
+
+    <article class="panel p-6 sm:p-8">
+        <div class="flex flex-wrap items-center gap-2 text-xs">
+            <span class="rounded-full px-2.5 py-1 font-semibold {% if service_request.status == 'open' %}bg-nest-100 text-nest-800{% elif service_request.status == 'in_progress' %}bg-sun-100 text-sun-800{% else %}bg-slate-100 text-slate-700{% endif %}">{{ service_request.get_status_display }}</span>
+            {% if service_request.category %}<span class="rounded-full bg-slate-100 px-2.5 py-1 font-semibold text-slate-700">{{ service_request.category }}</span>{% endif %}
+            <span class="text-slate-500">by {{ service_request.requester.username }} · {{ service_request.created_at|date:"d M Y, H:i" }}</span>
+        </div>
+        <h1 class="mt-4 break-words font-display text-3xl font-bold tracking-tight">{{ service_request.title }}</h1>
+        <p class="mt-4 whitespace-pre-line break-words text-base leading-7 text-slate-700">{{ service_request.description }}</p>
+        <dl class="mt-6 grid gap-4 border-t border-line pt-5 sm:grid-cols-2">
+            {% if service_request.location %}<div><dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Area</dt><dd class="mt-1 text-sm">{{ service_request.location }}</dd></div>{% endif %}
+            {% if service_request.budget %}<div><dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Budget</dt><dd class="mt-1 text-sm">{{ service_request.budget }}</dd></div>{% endif %}
+        </dl>
+        {% if is_requester and service_request.status == 'open' or is_requester and service_request.status == 'in_progress' %}
+        <div class="mt-6 flex flex-wrap gap-3 border-t border-line pt-5">
+            {% if service_request.status == 'in_progress' %}
+            <form method="post" action="{% url 'service_update_status' service_request.pk %}">
+                {% csrf_token %}<input type="hidden" name="status" value="completed">
+                <button type="submit" class="btn-primary">Mark completed</button>
+            </form>
+            {% endif %}
+            <form method="post" action="{% url 'service_update_status' service_request.pk %}">
+                {% csrf_token %}<input type="hidden" name="status" value="cancelled">
+                <button type="submit" class="btn-quiet">Cancel request</button>
+            </form>
+        </div>
+        {% endif %}
+    </article>
+
+    <section id="responses" class="panel mt-6 p-6 sm:p-8">
+        <h2 class="font-display text-xl font-semibold">Suggestions and offers <span class="text-slate-400">({{ responses|length }})</span></h2>
+        <div class="mt-3 divide-y divide-line">
+            {% for service_response in responses %}
+            <article class="py-4">
+                <div class="flex flex-wrap items-center gap-2 text-sm">
+                    <span class="rounded-full px-2.5 py-1 text-xs font-semibold {% if service_response.kind == 'offer' %}bg-nest-100 text-nest-800{% else %}bg-sky-100 text-sky-800{% endif %}">{{ service_response.get_kind_display }}</span>
+                    <a href="{% url 'public_profile' service_response.responder.username %}" class="font-semibold hover:text-nest-700 hover:underline">{{ service_response.responder.username }}</a>
+                    <span class="text-slate-500">· {{ service_response.created_at|timesince }} ago</span>
+                    {% if service_request.accepted_response_id == service_response.id %}<span class="rounded-full bg-sun-100 px-2.5 py-1 text-xs font-semibold text-sun-800">Chosen</span>{% endif %}
+                </div>
+                <p class="mt-2 whitespace-pre-line break-words text-sm leading-6 text-slate-700">{{ service_response.content }}</p>
+                {% if is_requester and service_request.status == 'open' and service_response.kind == 'offer' %}
+                <form method="post" action="{% url 'service_accept' service_request.pk service_response.pk %}" class="mt-3">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-primary">Accept offer</button>
+                </form>
+                {% endif %}
+            </article>
+            {% empty %}
+            <p class="py-6 text-center text-sm text-slate-600">No responses yet. You can be the first to suggest an option or offer help.</p>
+            {% endfor %}
+        </div>
+
+        {% if service_request.status == 'open' and not is_requester %}
+        <form method="post" action="{% url 'service_respond' service_request.pk %}" class="mt-5 border-t border-line pt-5">
+            {% csrf_token %}
+            <h3 class="font-display text-lg font-semibold">Respond to this request</h3>
+            <div class="mt-3 space-y-4">
+                {% for field in response_form %}
+                <div><label for="{{ field.id_for_label }}" class="label">{{ field.label }}</label>{{ field }}{% if field.errors %}<p role="alert" class="mt-1 text-sm text-red-700">{{ field.errors|join:", " }}</p>{% endif %}</div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn-primary mt-4">Send response</button>
+        </form>
+        {% elif service_request.status == 'open' and is_requester %}
+        <p class="mt-5 border-t border-line pt-5 text-sm text-slate-600">You’ll be able to review responses here. Accept an offer to start a private conversation.</p>
+        {% endif %}
+    </section>
+
+    {% if can_message %}
+    <section class="panel mt-6 p-6 sm:p-8">
+        <h2 class="font-display text-xl font-semibold">Private conversation</h2>
+        <p class="mt-1 text-sm text-slate-600">Only you and {{ other_participant.username }} can see these messages.</p>
+        <div class="mt-4 max-h-96 space-y-3 overflow-y-auto">
+            {% for message in messages_thread %}
+            <article class="rounded-xl p-3 {% if message.sender == request.user %}ml-6 bg-nest-50{% else %}mr-6 bg-frost{% endif %}">
+                <p class="text-xs font-semibold">{{ message.sender.username }} <span class="font-normal text-slate-500">· {{ message.created_at|date:"d M Y, H:i" }}</span></p>
+                <p class="mt-1 whitespace-pre-line break-words text-sm leading-6">{{ message.content }}</p>
+            </article>
+            {% empty %}
+            <p class="text-sm text-slate-500">No messages yet. Coordinate the details here.</p>
+            {% endfor %}
+        </div>
+        <form method="post" action="{% url 'service_message' service_request.pk %}" class="mt-5 border-t border-line pt-5">
+            {% csrf_token %}
+            <label for="{{ message_form.content.id_for_label }}" class="label">Send a private message</label>
+            {{ message_form.content }}
+            <button type="submit" class="btn-primary mt-3">Send message</button>
+        </form>
+    </section>
+    {% endif %}
+</main>
+{% endblock %}
+
+{% block head_extra %}
+<style>
+    select, textarea { width: 100%; border: 1px solid #cbd5e1; border-radius: .75rem; background: white; padding: .625rem 1rem; color: #0d2b33; outline: none; }
+    select:focus, textarea:focus { border-color: #0f8f84; box-shadow: 0 0 0 2px rgb(15 143 132 / 20%); }
+</style>
+{% endblock %}

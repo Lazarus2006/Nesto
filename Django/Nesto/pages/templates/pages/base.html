@@ -66,6 +66,7 @@
         </form>
 
         <div class="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
+            <a href="{% url 'service_list' %}" class="rounded-xl px-2.5 py-2 text-sm font-semibold text-slate-700 transition hover:bg-frost hover:text-nest-800">Services</a>
             <a href="{% url 'choose_city' %}" title="Change city" class="flex max-w-[120px] items-center gap-1.5 rounded-xl px-2.5 py-2 text-sm font-semibold text-slate-700 transition hover:bg-frost sm:max-w-[160px]">
                 <svg class="h-4 w-4 shrink-0 text-nest-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
                 <span class="truncate">{{ user.profile.city.name|default:"Pick city" }}</span>

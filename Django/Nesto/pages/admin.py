@@ -1,5 +1,15 @@
 from django.contrib import admin
-from .models import City, Profile, Category, Entity, Post, Comment
+from .models import (
+    City,
+    Profile,
+    Category,
+    Entity,
+    Post,
+    Comment,
+    ServiceRequest,
+    ServiceResponse,
+    ServiceMessage,
+)
 
 
 @admin.register(City)
@@ -40,3 +50,23 @@ class PostAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ("post", "author", "created_at")
     search_fields = ("content", "author__username", "post__title")
+
+
+@admin.register(ServiceRequest)
+class ServiceRequestAdmin(admin.ModelAdmin):
+    list_display = ("title", "city", "requester", "status", "created_at")
+    list_filter = ("city", "status", "category")
+    search_fields = ("title", "description", "requester__username")
+
+
+@admin.register(ServiceResponse)
+class ServiceResponseAdmin(admin.ModelAdmin):
+    list_display = ("service_request", "responder", "kind", "created_at")
+    list_filter = ("kind",)
+    search_fields = ("content", "responder__username", "service_request__title")
+
+
+@admin.register(ServiceMessage)
+class ServiceMessageAdmin(admin.ModelAdmin):
+    list_display = ("service_request", "sender", "created_at")
+    search_fields = ("content", "sender__username", "service_request__title")

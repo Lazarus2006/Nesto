@@ -4,6 +4,7 @@ from .forms import SignUpForm
 from pages.models import get_or_create_profile, Post
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.views.decorators.http import require_POST
 
 
 @login_required
@@ -93,6 +94,7 @@ def user_login(request):
     return render(request, "core/login.html")
 
 
+@require_POST
 def user_logout(request):
     logout(request)
     return redirect("login")

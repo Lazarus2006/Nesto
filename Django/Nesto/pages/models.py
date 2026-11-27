@@ -101,6 +101,13 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
         related_name="comments",
     )
+    parent = models.ForeignKey(
+        "self",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="replies",
+    )
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -110,3 +117,81 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.author.username}: {self.content[:40]}"
+
+
+class ServiceRequest(models.Model):
+    class Status(models.TextChoices):
+        OPEN = "open", "Open"
+        IN_PROGRESS = "in_progress", "In progress"
+        COMPLETED = "completed", "Completed"
+        CANCELLED = "cancelled", "Cancelled"
+
+    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name="service_requests")
+    requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name="service_requests")
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    category = models.CharField(max_length=100, blank=True)
+    location = models.CharField(max_length=255, blank=True)
+    budget = models.CharField(max_length=100, blank=True)
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.OPEN)
+    accepted_response = models.ForeignKey(
+        "ServiceResponse",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="accepted_for",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [models.Index(fields=["city", "status", "-created_at"])]
+
+    def __str__(self):
+        return self.title
+
+
+class ServiceResponse(models.Model):
+    class Kind(models.TextChoices):
+        SUGGESTION = "suggestion", "Suggestion"
+        OFFER = "offer", "Offer to help"
+
+    service_request = models.ForeignKey(
+        ServiceRequest,
+        on_delete=models.CASCADE,
+        related_name="responses",
+    )
+    responder = models.ForeignKey(User, on_delete=models.CASCADE, related_name="service_responses")
+    kind = models.CharField(max_length=12, choices=Kind.choices)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["created_at"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["service_request", "responder", "kind"],
+                name="unique_service_response_per_kind",
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.get_kind_display()} on {self.service_request}"
+
+
+class ServiceMessage(models.Model):
+    service_request = models.ForeignKey(
+        ServiceRequest,
+        on_delete=models.CASCADE,
+        related_name="messages",
+    )
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="service_messages")
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["created_at"]
+
+    def __str__(self):
+        return f"Message on {self.service_request} from {self.sender}"

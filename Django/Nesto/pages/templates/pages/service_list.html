@@ -1,0 +1,44 @@
+{% extends "pages/base.html" %}
+{% block title %}Nesto Services | {{ city.name }}{% endblock %}
+
+{% block content %}
+<main class="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
+    <header class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+            <p class="text-sm font-semibold text-nest-700">{{ city.name }}</p>
+            <h1 class="mt-1 font-display text-3xl font-bold tracking-tight sm:text-4xl">Nesto Services</h1>
+            <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">Need a hand with a task? Post what you need, get local suggestions, or choose someone to help.</p>
+        </div>
+        <a href="{% url 'service_create' %}" class="btn-primary shrink-0">Post a service request</a>
+    </header>
+
+    <section class="mt-8 space-y-4" aria-label="Service requests">
+        {% for service_request in service_requests %}
+        <article class="panel p-5 sm:p-6">
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+                <span class="rounded-full px-2.5 py-1 font-semibold {% if service_request.status == 'open' %}bg-nest-100 text-nest-800{% elif service_request.status == 'in_progress' %}bg-sun-100 text-sun-800{% else %}bg-slate-100 text-slate-700{% endif %}">{{ service_request.get_status_display }}</span>
+                {% if service_request.category %}<span class="rounded-full bg-slate-100 px-2.5 py-1 font-semibold text-slate-700">{{ service_request.category }}</span>{% endif %}
+                <span class="text-slate-500">Posted by {{ service_request.requester.username }} · {{ service_request.created_at|timesince }} ago</span>
+            </div>
+            <h2 class="mt-3 font-display text-xl font-semibold">
+                <a href="{% url 'service_detail' service_request.pk %}" class="hover:text-nest-700">{{ service_request.title }}</a>
+            </h2>
+            <p class="mt-2 whitespace-pre-line break-words text-sm leading-6 text-slate-600">{{ service_request.description|truncatechars:280 }}</p>
+            <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-3 text-sm">
+                <span class="text-slate-500">
+                    {% if service_request.location %}{{ service_request.location }}{% endif %}
+                    {% if service_request.budget %}{% if service_request.location %} · {% endif %}Budget: {{ service_request.budget }}{% endif %}
+                </span>
+                <a href="{% url 'service_detail' service_request.pk %}" class="font-semibold text-nest-700 hover:text-nest-900">{{ service_request.responses.count }} response{{ service_request.responses.count|pluralize }} · View request</a>
+            </div>
+        </article>
+        {% empty %}
+        <div class="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
+            <h2 class="font-display text-xl font-semibold">No service requests in {{ city.name }} yet</h2>
+            <p class="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-600">Be the first to ask for local help. Add the task, where it’s needed, and an optional budget.</p>
+            <a href="{% url 'service_create' %}" class="btn-primary mt-5">Post a request</a>
+        </div>
+        {% endfor %}
+    </section>
+</main>
+{% endblock %}
