@@ -1,268 +1,166 @@
+{% extends "pages/base.html" %}
+{% block title %}Share something | Nesto{% endblock %}
+{% block fab %}{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <title>Create Post - Nesto</title>
+{% block head_extra %}
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+    #location-map { height: 280px; width: 100%; z-index: 0; }
+    .type-card { border: 1.5px solid #dbe6e9; background: #fff; transition: border-color .15s ease, background .15s ease; }
+    .type-card:hover { border-color: #3fb5a9; }
+    .type-card[aria-pressed="true"] { border-color: #0b7168; background: #eef9f7; }
+    .type-card[aria-pressed="true"] .type-radio { border-color: #0b7168; }
+    .type-card[aria-pressed="true"] .type-radio::after { background: #0b7168; }
+    .type-radio { width: 1.25rem; height: 1.25rem; border: 2px solid #cbd5e1; border-radius: 9999px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .type-radio::after { content: ""; width: .6rem; height: .6rem; border-radius: 9999px; background: transparent; }
+    .type-card:focus-visible { outline: 3px solid #3fb5a9; outline-offset: 2px; }
+</style>
+{% endblock %}
 
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <link rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <style>
-        body {
-            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-        }
-
-        #location-map {
-            height: 280px;
-            width: 100%;
-            z-index: 0;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                transition: none !important;
-            }
-        }
-    </style>
-</head>
-
-<body class="bg-slate-50 text-slate-700 min-h-screen py-10 px-4 antialiased">
-
-<div class="max-w-2xl mx-auto bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/60">
-
-    <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
-        <h1 class="text-xl font-extrabold text-slate-900 tracking-tight">
-            Create a Post
-        </h1>
-        <a href="{% url 'home' %}"
-        class="text-sm font-medium text-slate-500 hover:text-slate-900 transition">
-            ✕ Cancel
-        </a>
+{% block content %}
+<main class="mx-auto max-w-2xl px-4 py-8 sm:px-6">
+    <div class="mb-6 flex items-start justify-between gap-4">
+        <div>
+            <h1 class="font-display text-3xl font-bold tracking-tight">Share something</h1>
+            <p class="mt-1 text-sm text-slate-600">What would you like to post?</p>
+        </div>
+        <a href="{% url 'home' %}" class="btn-quiet shrink-0">Cancel</a>
     </div>
 
-    <div class="flex bg-slate-100 rounded-xl p-1 mb-6">
-        <button id="tab-community" type="button"
-                onclick="switchTab('community')"
-                class="flex-1 py-2.5 text-sm font-semibold rounded-lg bg-white text-teal-700 shadow-sm transition">
-            💬 Community Discussion
+    <div class="grid gap-3 sm:grid-cols-2" role="group" aria-label="Type of post">
+        <button id="tab-community" type="button" onclick="switchTab('community')" aria-pressed="true" class="type-card rounded-2xl p-4 text-left">
+            <span class="flex items-start justify-between gap-3">
+                <span>
+                    <span class="block font-display text-base font-semibold">Ask or discuss</span>
+                    <span class="mt-1 block text-sm leading-6 text-slate-600">A question, advice or anything about life in your city.</span>
+                </span>
+                <span class="type-radio mt-1" aria-hidden="true"></span>
+            </span>
         </button>
-
-        <button id="tab-guide" type="button"
-                onclick="switchTab('guide')"
-                class="flex-1 py-2.5 text-sm font-semibold rounded-lg text-slate-500 hover:text-slate-900 transition">
-            🗺️ City Guide Entry
+        <button id="tab-guide" type="button" onclick="switchTab('guide')" aria-pressed="false" class="type-card rounded-2xl p-4 text-left">
+            <span class="flex items-start justify-between gap-3">
+                <span>
+                    <span class="block font-display text-base font-semibold">Add to the City Guide</span>
+                    <span class="mt-1 block text-sm leading-6 text-slate-600">Add a place, or review one that’s already listed.</span>
+                </span>
+                <span class="type-radio mt-1" aria-hidden="true"></span>
+            </span>
         </button>
     </div>
 
-    <form method="POST" enctype="multipart/form-data" class="space-y-5">
+    <form method="POST" enctype="multipart/form-data" class="panel mt-6 space-y-5 p-5 sm:p-7">
         {% csrf_token %}
         <input type="hidden" name="post_type" id="post_type_input" value="community">
 
-        <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-1.5">
-                Title *
-            </label>
-            <input type="text" name="title" required
-                placeholder="Give your post a descriptive title..."
-                class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
-        </div>
-
-        <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-1.5">
-                Content / Body *
-            </label>
-            <textarea name="content" rows="4" required
-                    placeholder="Write details here..."
-                    class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition"></textarea>
-        </div>
-
-        <div>
-            <label class="block text-sm font-semibold text-slate-700 mb-1.5">
-                Attachment / Photo
-            </label>
-            <input type="file" name="image" accept="image/*"
-                class="w-full text-sm text-slate-500 border border-dashed border-slate-300 rounded-xl p-2.5 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100">
-        </div>
-
-        <div id="guide-fields" class="hidden space-y-5 pt-5 border-t border-slate-100">
-            <h3 class="text-base font-bold text-teal-700">
-                City Guide Settings
-            </h3>
+        <div id="guide-fields" class="hidden space-y-5 border-b border-line pb-6">
+            <div>
+                <h2 class="font-display text-lg font-semibold">Which place?</h2>
+                <p class="mt-1 text-sm leading-6 text-slate-600">Choose a category, then pick a listed place to review or add a new one.</p>
+            </div>
 
             <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">
-                    Category *
-                </label>
-                <select name="category" id="category_select"
-                        onchange="handleCategoryChange()"
-                        class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
-                    <option value="">-- Select a Category --</option>
-
+                <label for="category_select" class="label">Category</label>
+                <select name="category" id="category_select" onchange="handleCategoryChange()" class="field">
+                    <option value="">Select a category</option>
                     {% for cat in categories %}
                     <option value="{{ cat.id }}">{{ cat.name }}</option>
                     {% endfor %}
-
-                    <option value="new">+ Create New Category</option>
+                    <option value="new">+ Create a new category</option>
                 </select>
             </div>
 
             <div id="new_category_box" class="hidden">
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">
-                    New Category Name *
-                </label>
-                <input type="text" name="new_category" id="new_category_input"
-                        placeholder="e.g. Parks, PG & Homes, Cafes"
-                        disabled
-                        class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
+                <label for="new_category_input" class="label">New category name</label>
+                <input type="text" name="new_category" id="new_category_input" placeholder="e.g. Sunset points, PG and homes, Cafes" disabled class="field">
             </div>
 
             <div id="entity_box" class="hidden">
-                <label class="block text-sm font-semibold text-slate-700 mb-1.5">
-                    Entity / Spot *
-                </label>
-                <select name="entity" id="entity_select"
-                        onchange="handleEntityChange()"
-                        disabled
-                        class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
-                    <option value="">-- Select an Entity --</option>
-                    <option value="new">+ Add New Entity</option>
+                <label for="entity_select" class="label">Place</label>
+                <select name="entity" id="entity_select" onchange="handleEntityChange()" disabled class="field">
+                    <option value="">Select a place</option>
+                    <option value="new">+ Add a new place</option>
                 </select>
             </div>
 
-            <div id="entity_details_box"
-                class="hidden space-y-4 bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200">
-
+            <div id="entity_details_box" class="hidden space-y-4 rounded-2xl border border-line bg-frost p-4 sm:p-5">
                 <div id="new_entity_name_box" class="hidden">
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">
-                        Entity Name *
-                    </label>
-                    <input type="text" name="new_entity" id="new_entity_input"
-                        placeholder="e.g. Room 101, Central Park, Blue Tokai Cafe"
-                        disabled
-                        class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
+                    <label for="new_entity_input" class="label">Place name</label>
+                    <input type="text" name="new_entity" id="new_entity_input" placeholder="e.g. Room 101, Central Park, Blue Tokai Cafe" disabled class="field">
                 </div>
 
                 <div id="map_picker_box" class="hidden space-y-2">
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">
-                            Pin the Location on Map
-                        </label>
-                        <p class="text-xs text-slate-500 mb-3">
-                            Click the map to place a pin. You can move it by clicking again.
-                        </p>
+                        <p class="label mb-0.5">Pin it on the map</p>
+                        <p class="mb-2 text-xs text-slate-500">Tap the map to drop a pin. Tap again to move it.</p>
                     </div>
-
-                    <div id="location-map"
-                        class="rounded-xl border border-slate-300 overflow-hidden">
-                    </div>
-
-                    <p id="map-status" role="status"
-                        class="text-xs text-slate-500">
-                        Loading map...
-                    </p>
-
-                    <p id="map-coordinates" class="text-xs text-slate-500">
-                        No location selected yet.
-                    </p>
-
+                    <div id="location-map" class="overflow-hidden rounded-xl border border-slate-300"></div>
+                    <p id="map-status" role="status" class="text-xs text-slate-500">Loading map…</p>
+                    <p id="map-coordinates" class="text-xs text-slate-500">No location selected yet.</p>
                     <input type="hidden" name="latitude" id="latitude_input">
                     <input type="hidden" name="longitude" id="longitude_input">
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid gap-4 md:grid-cols-2">
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">
-                            Price / Fee
-                        </label>
-                        <input type="text" name="price" id="price_input"
-                            placeholder="e.g. ₹8,000/mo or Free"
-                            class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
+                        <label for="price_input" class="label">Price or fee</label>
+                        <input type="text" name="price" id="price_input" placeholder="e.g. ₹8,000/mo or Free" class="field">
                     </div>
-
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">
-                            Location / Address
-                        </label>
-                        <input type="text" name="location" id="location_input"
-                            placeholder="e.g. Sector 62, Noida"
-                            class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition">
+                        <label for="location_input" class="label">Address</label>
+                        <input type="text" name="location" id="location_input" placeholder="e.g. Sector 62, Noida" class="field">
                     </div>
                 </div>
 
                 <div>
-                    <div class="flex justify-between items-center mb-2">
-                        <label class="text-sm font-semibold text-slate-700">
-                            Custom Attributes
-                        </label>
-                        <button type="button" id="add_attr_btn" onclick="addAttributeRow('', '')"
-                                class="text-xs text-teal-700 hover:text-teal-900 font-semibold bg-teal-50 hover:bg-teal-100 px-2.5 py-1 rounded-lg transition">
-                            + Add Attribute
-                        </button>
+                    <div class="mb-1 flex items-center justify-between">
+                        <span class="label mb-0">Extra details</span>
+                        <button type="button" id="add_attr_btn" onclick="addAttributeRow('', '')" class="rounded-lg bg-nest-100 px-2.5 py-1 text-xs font-semibold text-nest-800 transition hover:bg-nest-200">+ Add detail</button>
                     </div>
-
-                    <p class="text-xs text-slate-500 mb-3">
-                        Add details like Opening Hours, Wifi, Parking, Sharing, etc.
-                    </p>
-
+                    <p class="mb-3 text-xs text-slate-500">Things like opening hours, Wi-Fi, parking or sharing.</p>
                     <div id="attributes_container" class="space-y-2"></div>
                 </div>
             </div>
         </div>
 
-        <button type="submit"
-                class="w-full py-3.5 bg-teal-600 hover:bg-teal-700 font-bold rounded-xl text-white transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2">
-            Publish Post
-        </button>
+        <div>
+            <label for="title" class="label">Title</label>
+            <input type="text" id="title" name="title" required placeholder="What’s this about?" class="field">
+        </div>
+        <div>
+            <label for="content" class="label">Details</label>
+            <textarea id="content" name="content" rows="5" required placeholder="Share what you know. Specifics help most: prices, timings, what surprised you." class="field"></textarea>
+        </div>
+        <div>
+            <label for="image" class="label">Photo <span class="font-normal text-slate-500">(optional)</span></label>
+            <input type="file" id="image" name="image" accept="image/*" class="w-full rounded-xl border border-dashed border-slate-300 p-2.5 text-sm text-slate-500 file:mr-4 file:rounded-lg file:border-0 file:bg-nest-100 file:px-4 file:py-2 file:text-xs file:font-semibold file:text-nest-800 hover:file:bg-nest-200">
+        </div>
+
+        <button type="submit" class="btn-primary w-full py-3.5">Publish</button>
     </form>
-</div>
+</main>
+{% endblock %}
 
+{% block scripts %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    const MAPBOX_TOKEN = "pk.eyJ1IjoibGF6YXJ1czIwMDYiLCJhIjoiY212Z3N6dTQ5MDEydTJ3cXkxMnkzaXFqdiJ9.ViOLzHLA4n6acyNk4EyFPg";
+    window.MAPBOX_TOKEN = "{{ mapbox_token|escapejs }}";
     const categoriesData = {{ categories_json|safe }};
-
     let locationMap = null;
     let locationMarker = null;
 
+    const FIELD_CLASS = 'rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-ink outline-none transition placeholder:text-slate-400 focus:border-nest-600 focus:ring-2 focus:ring-nest-600/20';
+
     function switchTab(type) {
         document.getElementById('post_type_input').value = type;
-
-        const tabComm = document.getElementById('tab-community');
-        const tabGuide = document.getElementById('tab-guide');
-        const guideFields = document.getElementById('guide-fields');
-
-        if (type === 'community') {
-            tabComm.className =
-                'flex-1 py-2.5 text-sm font-semibold rounded-lg bg-white text-teal-700 shadow-sm transition';
-            tabGuide.className =
-                'flex-1 py-2.5 text-sm font-semibold rounded-lg text-slate-500 hover:text-slate-900 transition';
-
-            guideFields.classList.add('hidden');
-        } else {
-            tabGuide.className =
-                'flex-1 py-2.5 text-sm font-semibold rounded-lg bg-white text-teal-700 shadow-sm transition';
-            tabComm.className =
-                'flex-1 py-2.5 text-sm font-semibold rounded-lg text-slate-500 hover:text-slate-900 transition';
-
-            guideFields.classList.remove('hidden');
-        }
+        document.getElementById('tab-community').setAttribute('aria-pressed', String(type === 'community'));
+        document.getElementById('tab-guide').setAttribute('aria-pressed', String(type === 'guide'));
+        document.getElementById('guide-fields').classList.toggle('hidden', type === 'community');
     }
 
     function handleCategoryChange() {
         const catSelect = document.getElementById('category_select');
         const catId = catSelect.value;
-
         const newCatBox = document.getElementById('new_category_box');
         const newCatInput = document.getElementById('new_category_input');
         const entityBox = document.getElementById('entity_box');
@@ -271,7 +169,6 @@
 
         container.innerHTML = '';
         resetMapSelection();
-
         document.getElementById('entity_details_box').classList.add('hidden');
         document.getElementById('new_entity_name_box').classList.add('hidden');
 
@@ -281,10 +178,7 @@
         if (catId === 'new') {
             newCatBox.classList.remove('hidden');
             entityBox.classList.remove('hidden');
-
-            entitySelect.innerHTML =
-                '<option value="new" selected>+ Add New Entity</option>';
-
+            entitySelect.innerHTML = '<option value="new" selected>+ Add a new place</option>';
             handleEntityChange();
             return;
         }
@@ -294,8 +188,7 @@
             entityBox.classList.remove('hidden');
 
             const catData = categoriesData[catId];
-            let options = '<option value="">-- Select an Entity --</option>';
-
+            let options = '<option value="">Select a place</option>';
             if (catData && catData.entities) {
                 catData.entities.forEach(ent => {
                     const option = document.createElement('option');
@@ -304,8 +197,7 @@
                     options += option.outerHTML;
                 });
             }
-
-            options += '<option value="new">+ Add New Entity</option>';
+            options += '<option value="new">+ Add a new place</option>';
             entitySelect.innerHTML = options;
 
             if (catData && catData.default_attributes) {
@@ -313,7 +205,6 @@
                     addAttributeRow(attrName, '');
                 });
             }
-
             return;
         }
 
@@ -330,7 +221,6 @@
         const mapPicker = document.getElementById('map_picker_box');
         const catId = document.getElementById('category_select').value;
         const container = document.getElementById('attributes_container');
-        
         const priceInput = document.getElementById('price_input');
         const locInput = document.getElementById('location_input');
         const addAttrBtn = document.getElementById('add_attr_btn');
@@ -348,15 +238,13 @@
         if (entityVal === 'new') {
             newEntityNameBox.classList.remove('hidden');
             newEntityInput.disabled = false;
-
             priceInput.value = '';
             locInput.value = '';
             priceInput.readOnly = false;
             locInput.readOnly = false;
             priceInput.classList.remove('bg-slate-100', 'text-slate-500');
             locInput.classList.remove('bg-slate-100', 'text-slate-500');
-            if(addAttrBtn) addAttrBtn.classList.remove('hidden');
-            
+            if (addAttrBtn) addAttrBtn.classList.remove('hidden');
             container.innerHTML = '';
             resetMapSelection();
             mapPicker.classList.remove('hidden');
@@ -367,29 +255,23 @@
         newEntityNameBox.classList.add('hidden');
         newEntityInput.disabled = true;
         mapPicker.classList.add('hidden');
-        
         priceInput.readOnly = true;
         locInput.readOnly = true;
         priceInput.classList.add('bg-slate-100', 'text-slate-500');
         locInput.classList.add('bg-slate-100', 'text-slate-500');
-        if(addAttrBtn) addAttrBtn.classList.add('hidden');
+        if (addAttrBtn) addAttrBtn.classList.add('hidden');
 
         const catData = categoriesData[catId];
         if (!catData) return;
-
-        const entity = catData.entities.find(
-            item => String(item.id) === String(entityVal)
-        );
-
+        const entity = catData.entities.find(item => String(item.id) === String(entityVal));
         if (!entity) return;
 
         priceInput.value = entity.price || '';
         locInput.value = entity.location || '';
         container.innerHTML = '';
-
         if (entity.attributes) {
             Object.entries(entity.attributes).forEach(([key, value]) => {
-                addAttributeRow(key, value, true); 
+                addAttributeRow(key, value, true);
             });
         }
     }
@@ -397,17 +279,15 @@
     function addAttributeRow(key = '', val = '', isReadOnly = false) {
         const container = document.getElementById('attributes_container');
         const row = document.createElement('div');
-
-        row.className = 'flex gap-2 items-center';
+        row.className = 'flex items-center gap-2';
 
         const keyInput = document.createElement('input');
         keyInput.type = 'text';
         keyInput.name = 'attr_keys[]';
-        keyInput.placeholder = 'Attribute (e.g. Timings)';
+        keyInput.placeholder = 'Detail (e.g. Timings)';
         keyInput.value = key;
         keyInput.readOnly = isReadOnly;
-        keyInput.className =
-            'w-1/2 bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition';
+        keyInput.className = 'w-1/2 ' + FIELD_CLASS;
 
         const valueInput = document.createElement('input');
         valueInput.type = 'text';
@@ -415,8 +295,7 @@
         valueInput.placeholder = 'Value (e.g. 9 AM - 10 PM)';
         valueInput.value = val;
         valueInput.readOnly = isReadOnly;
-        valueInput.className =
-            'w-1/2 bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition';
+        valueInput.className = 'w-1/2 ' + FIELD_CLASS;
 
         if (isReadOnly) {
             keyInput.classList.add('bg-slate-100', 'text-slate-500');
@@ -426,10 +305,8 @@
         const removeButton = document.createElement('button');
         removeButton.type = 'button';
         removeButton.textContent = '✕';
-        removeButton.setAttribute('aria-label', 'Remove attribute');
-        removeButton.className =
-            'text-slate-400 hover:text-red-600 font-bold text-sm px-1.5 transition';
-            
+        removeButton.setAttribute('aria-label', 'Remove detail');
+        removeButton.className = 'px-1.5 text-sm font-bold text-slate-400 transition hover:text-red-600';
         if (isReadOnly) {
             removeButton.classList.add('hidden');
         } else {
@@ -443,10 +320,7 @@
     function resetMapSelection() {
         document.getElementById('latitude_input').value = '';
         document.getElementById('longitude_input').value = '';
-
-        document.getElementById('map-coordinates').textContent =
-            'No location selected yet.';
-
+        document.getElementById('map-coordinates').textContent = 'No location selected yet.';
         if (locationMarker && locationMap) {
             locationMap.removeLayer(locationMarker);
             locationMarker = null;
@@ -456,11 +330,10 @@
     function initializeLocationMap() {
         const mapElement = document.getElementById('location-map');
         const status = document.getElementById('map-status');
-
         if (!mapElement) return;
 
         if (typeof L === 'undefined') {
-            status.textContent = 'Leaflet could not load. Check your internet connection or script blocker.';
+            status.textContent = 'The map could not load. Check your connection or script blocker.';
             return;
         }
 
@@ -470,36 +343,37 @@
             const defaultLat = latStr ? parseFloat(latStr) : 20.5937;
             const defaultLng = lngStr ? parseFloat(lngStr) : 78.9629;
             const defaultZoom = latStr ? 12 : 5;
-            
-            locationMap = L.map(mapElement).setView([defaultLat, defaultLng], defaultZoom);
 
-            L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`, {
-                maxZoom: 19,
-                attribution: '© Mapbox'
-            }).addTo(locationMap);
-            
+            locationMap = L.map(mapElement).setView([defaultLat, defaultLng], defaultZoom);
+            const mapboxToken = window.MAPBOX_TOKEN || "";
+            const tileLayer = mapboxToken
+                ? L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/{z}/{x}/{y}?access_token=${mapboxToken}`, {
+                    maxZoom: 19,
+                    attribution: '© Mapbox'
+                })
+                : L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                    maxZoom: 19,
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                });
+            tileLayer.addTo(locationMap);
+
             locationMap.on('click', function (event) {
                 const lat = event.latlng.lat;
                 const lng = event.latlng.lng;
-                
                 if (locationMarker) {
                     locationMarker.setLatLng(event.latlng);
                 } else {
                     locationMarker = L.marker(event.latlng).addTo(locationMap);
                 }
-
                 document.getElementById('latitude_input').value = lat.toFixed(6);
                 document.getElementById('longitude_input').value = lng.toFixed(6);
-                document.getElementById('map-coordinates').textContent = `Selected: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                document.getElementById('map-coordinates').textContent = `Pinned at ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
             });
         }
 
-        status.textContent = 'Click the map to place a pin.';
-
+        status.textContent = 'Tap the map to drop a pin.';
         requestAnimationFrame(() => {
-            if (locationMap) {
-                locationMap.invalidateSize();
-            }
+            if (locationMap) locationMap.invalidateSize();
         });
     }
 
@@ -507,7 +381,7 @@
         const prefillType = "{{ prefill_type }}";
         const prefillCategory = "{{ prefill_category }}";
         const prefillEntity = "{{ prefill_entity }}";
-        
+
         if (prefillType === 'guide') {
             switchTab('guide');
             if (prefillCategory) {
@@ -517,13 +391,10 @@
                 if (prefillEntity) {
                     const entitySelect = document.getElementById('entity_select');
                     entitySelect.value = prefillEntity;
-                    handleEntityChange(); 
+                    handleEntityChange();
                 }
             }
         }
     });
 </script>
-
-
-</body>
-</html>
+{% endblock %}

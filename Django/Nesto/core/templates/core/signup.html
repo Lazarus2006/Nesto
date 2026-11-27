@@ -1,122 +1,76 @@
-{% load static %}
+{% extends "pages/base.html" %}
 {% load socialaccount %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}Create account | Nesto{% endblock %}
+{% block nav %}{% endblock %}
+{% block fab %}{% endblock %}
 
-    <title>Nesto - Sign Up</title>
+{% block content %}
+{% get_providers as socialaccount_providers %}
+<main class="mx-auto grid min-h-screen max-w-6xl items-center gap-10 px-5 py-10 lg:grid-cols-2 lg:gap-16">
+    {% include "pages/_pitch.html" %}
 
-    <link rel="stylesheet" href="{% static 'core/signup.css' %}">
-</head>
+    <div class="panel w-full max-w-md justify-self-center p-6 shadow-xl shadow-nest-900/5 sm:p-8 lg:justify-self-end">
+        <h1 class="font-display text-2xl font-bold tracking-tight">Create your account</h1>
+        <p class="mt-1 text-sm text-slate-600">It takes a minute. You’ll pick your city next.</p>
 
-<body>
-
-    <div class="signup-container">
-
-        <h1>Nesto</h1>
-        <p class="welcome">Create your account</p>
-
-        <!-- Google Sign Up via django-allauth -->
-        <a href="{% provider_login_url 'google' %}" class="google-btn">
-            <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
-                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
-                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.19v3.15C3.17 21.32 7.23 24 12 24z"/>
-                <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.19C.43 8.1 0 9.8 0 12s.43 3.9 1.19 5.42l4.09-3.15z"/>
-                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.68 1.19 6.58l4.09 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
-            </svg>
-            <span>Continue with Google</span>
+        {% if socialaccount_providers %}
+        {% with provider=socialaccount_providers|first %}
+        {% if provider.id == "google" %}
+        <a href="{% provider_login_url provider %}" class="btn-quiet mt-6 w-full py-3">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.19v3.15C3.17 21.32 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.19C.43 8.1 0 9.8 0 12s.43 3.9 1.19 5.42l4.09-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.68 1.19 6.58l4.09 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+            Continue with Google
         </a>
+        {% endif %}
+        {% endwith %}
+        {% endif %}
 
-        <div class="divider">
-            <span>OR</span>
-        </div>
+        {% if socialaccount_providers %}<div class="my-6 flex items-center gap-3 text-xs text-slate-500"><span class="h-px flex-1 bg-line"></span>or sign up with email<span class="h-px flex-1 bg-line"></span></div>{% endif %}
 
-        <form method="POST" action="{% url 'signup' %}">
-
+        <form method="POST" action="{% url 'signup' %}" class="space-y-4">
             {% csrf_token %}
-
-            <div class="input-group">
-                <label for="id_username">Username</label>
-                <input
-                    type="text"
-                    name="username"
-                    id="id_username"
-                    placeholder="Choose a username"
-                    required
-                >
+            <div>
+                <label for="id_username" class="label">Username</label>
+                <input type="text" name="username" id="id_username" autocomplete="username" required class="field">
             </div>
-
-            <div class="input-group">
-                <label for="id_email">Email</label>
-                <input
-                    type="email"
-                    name="email"
-                    id="id_email"
-                    placeholder="Enter your email"
-                    required
-                >
+            <div>
+                <label for="id_email" class="label">Email</label>
+                <input type="email" name="email" id="id_email" autocomplete="email" required class="field">
             </div>
-
-            <div class="input-group">
-                <label for="id_password1">Password</label>
-                <div class="password-field">
-                    <input
-                        type="password"
-                        name="password1"
-                        id="id_password1"
-                        placeholder="Create a password"
-                        required
-                    >
-                    <button type="button" class="password-toggle" data-toggle-password="id_password1" aria-controls="id_password1" aria-pressed="false">Show</button>
+            <div>
+                <label for="id_password1" class="label">Password</label>
+                <div class="relative">
+                    <input type="password" name="password1" id="id_password1" autocomplete="new-password" required class="field pr-16">
+                    <button type="button" data-toggle-password="id_password1" aria-controls="id_password1" aria-pressed="false" class="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg px-2.5 py-1 text-xs font-semibold text-nest-700 hover:bg-nest-50">Show</button>
                 </div>
             </div>
-
-            <div class="input-group">
-                <label for="id_password2">Confirm Password</label>
-                <div class="password-field">
-                    <input
-                        type="password"
-                        name="password2"
-                        id="id_password2"
-                        placeholder="Confirm your password"
-                        required
-                    >
-                    <button type="button" class="password-toggle" data-toggle-password="id_password2" aria-controls="id_password2" aria-pressed="false">Show</button>
+            <div>
+                <label for="id_password2" class="label">Confirm password</label>
+                <div class="relative">
+                    <input type="password" name="password2" id="id_password2" autocomplete="new-password" required class="field pr-16">
+                    <button type="button" data-toggle-password="id_password2" aria-controls="id_password2" aria-pressed="false" class="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg px-2.5 py-1 text-xs font-semibold text-nest-700 hover:bg-nest-50">Show</button>
                 </div>
             </div>
-
             {% if form.errors %}
-                <div class="form-errors">
-                    {{ form.errors }}
-                </div>
+            <div role="alert" class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-800 [&_ul]:m-0 [&_ul]:list-none [&_ul]:p-0 [&_li]:py-0.5">{{ form.errors }}</div>
             {% endif %}
-
-            <button type="submit" class="signup-btn">
-                Create Account
-            </button>
-
+            <button type="submit" class="btn-primary w-full py-3">Create account</button>
         </form>
 
-        <p class="signin-text">
-            Already have an account?
-            <a href="{% url 'login' %}">Sign In</a>
-        </p>
-
+        <p class="mt-6 text-center text-sm text-slate-600">Already have an account? <a href="{% url 'login' %}" class="font-semibold text-nest-700 hover:underline">Log in</a></p>
     </div>
+</main>
+{% endblock %}
 
-    <script>
-        document.querySelectorAll("[data-toggle-password]").forEach((button) => {
-            button.addEventListener("click", () => {
-                const input = document.getElementById(button.dataset.togglePassword);
-                const isVisible = input.type === "text";
-                input.type = isVisible ? "password" : "text";
-                button.textContent = isVisible ? "Show" : "Hide";
-                button.setAttribute("aria-pressed", String(!isVisible));
-            });
+{% block scripts %}
+<script>
+    document.querySelectorAll("[data-toggle-password]").forEach((button) => {
+        button.addEventListener("click", () => {
+            const input = document.getElementById(button.dataset.togglePassword);
+            const isVisible = input.type === "text";
+            input.type = isVisible ? "password" : "text";
+            button.textContent = isVisible ? "Show" : "Hide";
+            button.setAttribute("aria-pressed", String(!isVisible));
         });
-    </script>
-
-</body>
-</html>
+    });
+</script>
+{% endblock %}

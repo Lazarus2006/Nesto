@@ -1,0 +1,32 @@
+<div class="max-w-md">
+    <a href="{% url 'home' %}" class="inline-flex items-center gap-2.5">
+        {% include "pages/_logo.html" %}
+        <span class="font-display text-2xl font-bold tracking-tight">Nesto</span>
+    </a>
+    <h2 class="mt-8 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+        Moving somewhere new? Someone has already figured it out.
+    </h2>
+    <p class="mt-4 text-base leading-7 text-slate-600">
+        Nesto is a guide to your city, written by the students who live there. Find rooms, tiffins, study spots and safe routes, then ask the people who know.
+    </p>
+    <dl class="mt-8 hidden space-y-5 sm:block">
+        <div class="flex gap-4">
+            <span class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-nest-100 text-nest-800">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s8-4.5 8-11a8 8 0 1 0-16 0c0 6.5 8 11 8 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </span>
+            <div>
+                <dt class="font-semibold">City Guide</dt>
+                <dd class="text-sm leading-6 text-slate-600">Rooms, food, services and hangouts, organised by category and reviewed by residents.</dd>
+            </div>
+        </div>
+        <div class="flex gap-4">
+            <span class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-sky-100 text-sky-800">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5Z"/></svg>
+            </span>
+            <div>
+                <dt class="font-semibold">Community</dt>
+                <dd class="text-sm leading-6 text-slate-600">Ask questions and swap experiences with people in your city.</dd>
+            </div>
+        </div>
+    </dl>
+</div>
