@@ -11,3 +11,5 @@ Django/Nesto/post_images/
 .env
 context.txt
 Django/Nesto/media/
+DEPLOYMENT.md
+staticfiles/
