@@ -28,6 +28,7 @@ def env_bool(name, default=False):
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
 
 MAPBOX_TOKEN = os.environ.get('MAPBOX_TOKEN', '')
 
@@ -38,15 +39,15 @@ MAPBOX_TOKEN = os.environ.get('MAPBOX_TOKEN', '')
 SECRET_KEY = os.getenv("SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env_bool("DEBUG", default=False)
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 if not SECRET_KEY:
     raise ImproperlyConfigured("Set SECRET_KEY in the environment.")
 
-ALLOWED_HOSTS = [
-    host.strip()
-    for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1 , .run.app").split(",")
-    if host.strip()
-]
+ALLOWED_HOSTS = os.environ.get(
+    "ALLOWED_HOSTS",
+    "localhost,127.0.0.1"
+).split(",")
+
 CSRF_TRUSTED_ORIGINS = [
     origin.strip()
     for origin in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
@@ -110,18 +111,8 @@ WSGI_APPLICATION = 'Nesto.wsgi.application'
 
 DATABASES = {
     "default": dj_database_url.config(
-        default=(
-            os.getenv("DATABASE_URL")
-            or (
-                f"postgresql://{os.getenv('DB_USER', '')}:"
-                f"{os.getenv('DB_PASSWORD', '')}@"
-                f"{os.getenv('DB_HOST', 'localhost')}:"
-                f"{os.getenv('DB_PORT', '5432')}/"
-                f"{os.getenv('DB_NAME', 'nesto_db')}"
-            )
-        ),
-        conn_max_age=600,
-        conn_health_checks=True,
+        default=os.getenv("DATABASE_URL"),
+        conn_max_age=0,
     )
 }
 
